@@ -1,10 +1,21 @@
-import React from 'react';
-import {View, Text} from 'react-native';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {RootStackParamList} from '../navigation/types'; // adjust path if needed
+import {useNavigation} from '@react-navigation/native';
+import {Button} from 'react-native';
 
-export default function ListsScreen() {
+type NavigationProp = StackNavigationProp<RootStackParamList, 'Count'>;
+
+const ListsScreen = () => {
+  const navigation = useNavigation<NavigationProp>();
+
+  const goToCount = (id: number) => {
+    navigation.navigate('Count', {unionId: id});
+  };
+
   return (
-    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <Text>Lists Screen</Text>
-    </View>
+    // your UI
+    <Button title="Go to Count" onPress={() => goToCount(42)} />
   );
-}
+};
+
+export default ListsScreen;

@@ -8,13 +8,7 @@ import NewScreen from './src/screens/NewScreen';
 import PrivacyPolicyScreen from './src/screens/PrivacyPolicyScreen';
 import CountScreen from './src/screens/CountScreen';
 import AddNewItemScreen from './src/screens/AddNewItemScreen';
-
-// Define type-safe navigation params
-export type RootStackParamList = {
-  Tabs: undefined;
-  Count: {unionId: number};
-  AddNewItem: {serializedItemType: string};
-};
+import {RootStackParamList} from './src/navigation/types';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator<RootStackParamList>();
