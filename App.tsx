@@ -11,6 +11,7 @@ import PrivacyPolicyScreen from './src/screens/PrivacyPolicyScreen';
 import CountScreen from './src/screens/CountScreen';
 import AddNewItemScreen from './src/screens/AddNewItemScreen';
 import {RootStackParamList} from './src/navigation/types';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -19,7 +20,22 @@ function TabNavigator() {
   const {t} = useTranslation();
 
   return (
-    <Tab.Navigator>
+    <Tab.Navigator
+      screenOptions={({route}) => ({
+        tabBarIcon: ({color, size}) => {
+          let iconName = '';
+
+          if (route.name === 'Lists') {
+            iconName = 'folder-check-outline';
+          } else if (route.name === 'New') {
+            iconName = 'plus-box-outline';
+          } else if (route.name === 'Privacy') {
+            iconName = 'shield-lock-outline';
+          }
+
+          return <Icon name={iconName} size={size} color={color} />;
+        },
+      })}>
       <Tab.Screen
         name="Lists"
         component={ListsScreen}
