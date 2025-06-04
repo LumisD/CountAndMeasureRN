@@ -1,17 +1,18 @@
-import React from 'react';
-import './src/locales/i18n';
-import {NavigationContainer} from '@react-navigation/native';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {useTranslation} from 'react-i18next';
+import React from "react";
+import "./src/locales/i18n";
+import {NavigationContainer} from "@react-navigation/native";
+import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
+import {createNativeStackNavigator} from "@react-navigation/native-stack";
+import {useTranslation} from "react-i18next";
+import {ThemeProvider} from "./src/theme/ThemeContext";
 
-import ListsScreen from './src/screens/ListsScreen';
-import NewScreen from './src/screens/NewScreen';
-import PrivacyPolicyScreen from './src/screens/PrivacyPolicyScreen';
-import CountScreen from './src/screens/CountScreen';
-import AddNewItemScreen from './src/screens/AddNewItemScreen';
-import {RootStackParamList} from './src/navigation/types';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import ListsScreen from "./src/screens/ListsScreen";
+import NewScreen from "./src/screens/NewScreen";
+import PrivacyPolicyScreen from "./src/screens/PrivacyPolicyScreen";
+import CountScreen from "./src/screens/CountScreen";
+import AddNewItemScreen from "./src/screens/AddNewItemScreen";
+import {RootStackParamList} from "./src/navigation/types";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -23,14 +24,14 @@ function TabNavigator() {
     <Tab.Navigator
       screenOptions={({route}) => ({
         tabBarIcon: ({color, size}) => {
-          let iconName = '';
+          let iconName = "";
 
-          if (route.name === 'Lists') {
-            iconName = 'folder-check-outline';
-          } else if (route.name === 'New') {
-            iconName = 'plus-box-outline';
-          } else if (route.name === 'Privacy') {
-            iconName = 'shield-lock-outline';
+          if (route.name === "Lists") {
+            iconName = "folder-check-outline";
+          } else if (route.name === "New") {
+            iconName = "plus-box-outline";
+          } else if (route.name === "Privacy") {
+            iconName = "shield-lock-outline";
           }
 
           return <Icon name={iconName} size={size} color={color} />;
@@ -39,17 +40,17 @@ function TabNavigator() {
       <Tab.Screen
         name="Lists"
         component={ListsScreen}
-        options={{title: t('lists')}}
+        options={{title: t("lists")}}
       />
       <Tab.Screen
         name="New"
         component={NewScreen}
-        options={{title: t('_new')}}
+        options={{title: t("_new")}}
       />
       <Tab.Screen
         name="Privacy"
         component={PrivacyPolicyScreen}
-        options={{title: t('privacy')}}
+        options={{title: t("privacy")}}
       />
     </Tab.Navigator>
   );
@@ -57,16 +58,18 @@ function TabNavigator() {
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="Tabs"
-          component={TabNavigator}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen name="Count" component={CountScreen} />
-        <Stack.Screen name="AddNewItem" component={AddNewItemScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <ThemeProvider>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen
+            name="Tabs"
+            component={TabNavigator}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen name="Count" component={CountScreen} />
+          <Stack.Screen name="AddNewItem" component={AddNewItemScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </ThemeProvider>
   );
 }
