@@ -15,6 +15,7 @@ export const Typography = StyleSheet.create({
     color: PrimaryBlue,
   },
   titleLarge: {
+    textAlign: "center",
     fontFamily: "monospace",
     fontWeight: "700",
     fontSize: 20,

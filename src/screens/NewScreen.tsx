@@ -1,31 +1,145 @@
-import React from "react";
-import {View, Button} from "react-native";
-import {useNavigation} from "@react-navigation/native";
+import React, {useLayoutEffect} from "react";
+import {
+  View,
+  Text,
+  FlatList,
+  Pressable,
+  StyleSheet,
+  SafeAreaView,
+} from "react-native";
+import {NavigationProp, useNavigation} from "@react-navigation/native";
 import {StackNavigationProp} from "@react-navigation/stack";
 import {RootStackParamList} from "../navigation/types";
 import {NewScreenType} from "./models/NewScreenType";
+import {useTranslation} from "react-i18next";
+import {defaultScreenTypes} from "./common/screenData";
+import {UpArrowIcon, XIcon} from "./common/UiElements";
+import {Typography} from "../theme/typography";
+import {Gray, MainBg, Transparent} from "../theme/colors";
 
-type NavigationProp = StackNavigationProp<RootStackParamList, "AddNewItem">;
+type NewScreenProps = {
+  navigation: StackNavigationProp<RootStackParamList, "AddNewItem">;
+};
 
-const NewScreen = () => {
-  const navigation = useNavigation<NavigationProp>();
-
-  const goToAddNewItem = () => {
-    const item: NewScreenType = {
-      hasColor: true,
-      directionColumn: 2,
-      columnNames: ["1", "2", "3"],
-    };
-
-    const serializedItemType = JSON.stringify(item);
-    navigation.navigate("AddNewItem", {serializedItemType});
-  };
-
+const NewScreen = ({navigation}: NewScreenProps) => {
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      header: () => <TopBar />,
+    });
+  }, [navigation]);
   return (
-    <View>
-      <Button title="Go to AddNewItem" onPress={goToAddNewItem} />
-    </View>
+    <SafeAreaView style={styles.safeArea}>
+      {/* important to set background color for the screen */}
+      <View style={styles.container}>
+        <ListOfNewScreenTypes />
+      </View>
+    </SafeAreaView>
   );
 };
+
+function TopBar() {
+  const {t} = useTranslation();
+  return (
+    <SafeAreaView style={styles.topBar}>
+      {/* important to set background color for the topBar */}
+      <Text style={Typography.titleLarge}>
+        {t("choose_type_of_measurement")}
+      </Text>
+    </SafeAreaView>
+  );
+}
+
+function ListOfNewScreenTypes() {
+  const navigation =
+    useNavigation<StackNavigationProp<RootStackParamList, "AddNewItem">>();
+
+  return (
+    <FlatList
+      data={defaultScreenTypes}
+      keyExtractor={(_, index) => index.toString()}
+      renderItem={({item, index}) => (
+        <View>
+          <ListItem
+            item={item}
+            onPress={() => {
+              const serializedItemType = JSON.stringify(item);
+              navigation.navigate("AddNewItem", {serializedItemType});
+            }}
+          />
+          {index < defaultScreenTypes.length - 1 && (
+            <View style={styles.divider} />
+          )}
+        </View>
+      )}
+    />
+  );
+}
+
+type ListItemProps = {
+  item: NewScreenType;
+  onPress: () => void;
+};
+
+function ListItem({item, onPress}: ListItemProps) {
+  return (
+    <Pressable onPress={onPress} style={styles.itemRow}>
+      <MiddleContent type={item} />
+    </Pressable>
+  );
+}
+
+type MiddleContentProps = {
+  type: NewScreenType;
+};
+
+function MiddleContent({type}: MiddleContentProps) {
+  const {t} = useTranslation();
+  const {columnNames, directionColumn, hasColor} = type;
+
+  return (
+    <View style={styles.middleRow}>
+      {columnNames.map((name, index) => (
+        <React.Fragment key={index}>
+          {directionColumn === index + 1 && <UpArrowIcon />}
+          <Text style={Typography.bodyNormal}>{t(name)}</Text>
+          {(index < columnNames.length - 1 || hasColor) && <XIcon />}
+          {index === columnNames.length - 1 && hasColor && (
+            <Text style={Typography.bodyNormal}>{t("color_column")}</Text>
+          )}
+        </React.Fragment>
+      ))}
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    backgroundColor: MainBg,
+  },
+  container: {
+    flex: 1,
+    padding: 16,
+    backgroundColor: Transparent,
+  },
+  topBar: {
+    paddingVertical: 16,
+    backgroundColor: MainBg,
+  },
+  divider: {
+    height: 2,
+    backgroundColor: Gray,
+  },
+  itemRow: {
+    paddingVertical: 16,
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  middleRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    flexWrap: "wrap",
+  },
+});
 
 export default NewScreen;

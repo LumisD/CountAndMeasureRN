@@ -23,7 +23,7 @@ export const UpArrowIcon: React.FC<{
   size?: number;
   color?: string;
 }> = ({style, size = DEFAULT_ICON_SIZE, color = Black}) => (
-  <Icon name="arrow-upward" style={style} size={size} color={color} />
+  <Icon name="arrow-up" style={style} size={size} color={color} />
 );
 
 // XIcon

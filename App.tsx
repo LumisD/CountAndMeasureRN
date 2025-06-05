@@ -13,6 +13,8 @@ import CountScreen from "./src/screens/CountScreen";
 import AddNewItemScreen from "./src/screens/AddNewItemScreen";
 import {RootStackParamList} from "./src/navigation/types";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import {StatusBar} from "react-native";
+import {MainBg} from "./src/theme/colors";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -36,6 +38,7 @@ function TabNavigator() {
 
           return <Icon name={iconName} size={size} color={color} />;
         },
+        tabBarStyle: {backgroundColor: MainBg}, //important to set background color for the tab bar
       })}>
       <Tab.Screen
         name="Lists"
@@ -58,18 +61,22 @@ function TabNavigator() {
 
 export default function App() {
   return (
-    <ThemeProvider>
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen
-            name="Tabs"
-            component={TabNavigator}
-            options={{headerShown: false}}
-          />
-          <Stack.Screen name="Count" component={CountScreen} />
-          <Stack.Screen name="AddNewItem" component={AddNewItemScreen} />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </ThemeProvider>
+    <>
+      {/* important to set background color for the StatusBar */}
+      <StatusBar backgroundColor={MainBg} barStyle="dark-content" />
+      <ThemeProvider>
+        <NavigationContainer>
+          <Stack.Navigator>
+            <Stack.Screen
+              name="Tabs"
+              component={TabNavigator}
+              options={{headerShown: false}}
+            />
+            <Stack.Screen name="Count" component={CountScreen} />
+            <Stack.Screen name="AddNewItem" component={AddNewItemScreen} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </ThemeProvider>
+    </>
   );
 }

@@ -10,6 +10,7 @@ export const Black = "#000000";
 export const ButtonBlue = "#3578e5";
 export const White = "#ffffff";
 export const DisabledGray = "#aaa";
+export const Transparent = "transparent";
 
 export const Red = "#FF0000";
 export const Green = "#00FF00";
@@ -17,7 +18,7 @@ export const Blue = "#0000FF";
 export const Yellow = "#FFFF00";
 export const Cyan = "#00FFFF";
 export const Magenta = "#FF00FF";
-export const Gray = "#808080";
+export const Gray = "#888888";
 export const DarkGray = "#A9A9A9";
 export const LightGray = "#D3D3D3";
 export const Orange = "#FF9800";
