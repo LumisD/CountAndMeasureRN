@@ -10,7 +10,7 @@ import ListsScreen from "./src/screens/ListsScreen";
 import NewScreen from "./src/screens/NewScreen";
 import PrivacyPolicyScreen from "./src/screens/PrivacyPolicyScreen";
 import CountScreen from "./src/screens/CountScreen";
-import AddNewItemScreen from "./src/screens/AddNewItemScreen";
+import AddNewItemScreen from "./src/screens/addnewitem/AddNewItemScreen";
 import {RootStackParamList} from "./src/navigation/types";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import {StatusBar} from "react-native";
