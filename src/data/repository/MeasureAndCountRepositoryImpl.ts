@@ -12,10 +12,13 @@ import {
 } from "../db/schemas/Chipboard";
 import {ChipboardDao} from "../db/dao/ChipboardDao";
 import {UnionOfChipboardsDao} from "../db/dao/UnionOfChipboardsDao";
+import {MeasureAndCountRepository} from "./MeasureAndCountRepository";
 
 type Unsubscribe = () => void;
 
-export class MeasureAndCountRepositoryImpl {
+export class MeasureAndCountRepositoryImpl
+  implements MeasureAndCountRepository
+{
   private chipboardDao: ChipboardDao;
   private unionDao: UnionOfChipboardsDao;
 
