@@ -15,6 +15,7 @@ import {RootStackParamList} from "./src/navigation/types";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import {StatusBar} from "react-native";
 import {MainBg} from "./src/theme/colors";
+import {RealmProvider} from "./src/data/db/RealmContext";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -62,20 +63,21 @@ function TabNavigator() {
 export default function App() {
   return (
     <>
-      {/* important to set background color for the StatusBar */}
       <StatusBar backgroundColor={MainBg} barStyle="dark-content" />
       <ThemeProvider>
-        <NavigationContainer>
-          <Stack.Navigator>
-            <Stack.Screen
-              name="Tabs"
-              component={TabNavigator}
-              options={{headerShown: false}}
-            />
-            <Stack.Screen name="Count" component={CountScreen} />
-            <Stack.Screen name="AddNewItem" component={AddNewItemScreen} />
-          </Stack.Navigator>
-        </NavigationContainer>
+        <RealmProvider>
+          <NavigationContainer>
+            <Stack.Navigator>
+              <Stack.Screen
+                name="Tabs"
+                component={TabNavigator}
+                options={{headerShown: false}}
+              />
+              <Stack.Screen name="Count" component={CountScreen} />
+              <Stack.Screen name="AddNewItem" component={AddNewItemScreen} />
+            </Stack.Navigator>
+          </NavigationContainer>
+        </RealmProvider>
       </ThemeProvider>
     </>
   );

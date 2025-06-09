@@ -22,9 +22,9 @@ export class MeasureAndCountRepositoryImpl
   private chipboardDao: ChipboardDao;
   private unionDao: UnionOfChipboardsDao;
 
-  constructor(realm: Realm) {
-    this.chipboardDao = new ChipboardDao(realm);
-    this.unionDao = new UnionOfChipboardsDao(realm);
+  constructor(chipboardDao: ChipboardDao, unionDao: UnionOfChipboardsDao) {
+    this.chipboardDao = chipboardDao;
+    this.unionDao = unionDao;
   }
 
   async insertUnionOfChipboards(
