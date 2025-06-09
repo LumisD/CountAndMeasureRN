@@ -1,19 +1,31 @@
 import Realm from "realm";
 import {ObjectId} from "bson";
-import {
-  UnionOfChipboardsCreateInput,
-  UnionOfChipboardsSchema,
-} from "../schemas/UnionOfChipboards";
+import {UnionOfChipboardsSchema} from "../schemas/UnionOfChipboards";
 
 export class UnionOfChipboardsDao {
   constructor(private realm: Realm) {}
 
-  insertUnionOfChipboards(data: UnionOfChipboardsCreateInput): ObjectId {
-    let id: ObjectId = new ObjectId();
+  insertUnionOfChipboards(
+    data: Omit<Partial<UnionOfChipboardsSchema>, "id">,
+  ): string {
+    const id = new Realm.BSON.ObjectId();
+
     this.realm.write(() => {
-      this.realm.create("UnionOfChipboards", {...data, id});
+      this.realm.create("UnionOfChipboards", {
+        ...data,
+        id,
+      });
     });
-    return id;
+
+    return id.toHexString();
+  }
+
+  updateUnionOfChipboards(data: Partial<UnionOfChipboardsSchema>): void {
+    if (!data.id) throw new Error("Cannot update without id");
+
+    this.realm.write(() => {
+      this.realm.create("UnionOfChipboards", data, Realm.UpdateMode.Modified);
+    });
   }
 
   updateUnionOfChipboardsTitle(

@@ -37,7 +37,7 @@ export class UnionOfChipboardsSchema extends Realm.Object<UnionOfChipboardsSchem
 }
 
 export type UnionOfChipboards = {
-  id: Realm.BSON.ObjectId;
+  id: string;
   title: string;
   dimensions: number;
   direction: number;
@@ -51,9 +51,9 @@ export type UnionOfChipboards = {
   updatedAt: number;
 };
 
-export function mapUnionOfChipboards(obj: any): UnionOfChipboards {
+export function mapRealmToUnion(obj: any): UnionOfChipboards {
   return {
-    id: obj.id,
+    id: obj.id.toHexString(),
     title: obj.title,
     dimensions: obj.dimensions,
     direction: obj.direction,
@@ -68,12 +68,17 @@ export function mapUnionOfChipboards(obj: any): UnionOfChipboards {
   };
 }
 
-export type UnionOfChipboardsCreateInput = Omit<UnionOfChipboards, "id">;
+function isValidObjectIdHex(id: string): boolean {
+  return /^[a-f\d]{24}$/i.test(id);
+}
 
 export function mapUnionToRealm(
   union: UnionOfChipboards,
-): UnionOfChipboardsCreateInput {
+): Partial<UnionOfChipboardsSchema> {
   return {
+    id: isValidObjectIdHex(union.id)
+      ? Realm.BSON.ObjectId.createFromHexString(union.id)
+      : undefined,
     title: union.title,
     dimensions: union.dimensions,
     direction: union.direction,

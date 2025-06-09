@@ -1,14 +1,15 @@
 import Realm from "realm";
 import {ObjectId} from "bson";
 import {
-  mapUnionOfChipboards,
+  mapRealmToUnion,
   mapUnionToRealm,
   UnionOfChipboards,
 } from "../db/schemas/UnionOfChipboards";
 import {
   Chipboard,
   ChipboardSchema,
-  mapChipboard,
+  mapChipboardToRealm,
+  mapRealmToChipboard,
 } from "../db/schemas/Chipboard";
 import {ChipboardDao} from "../db/dao/ChipboardDao";
 import {UnionOfChipboardsDao} from "../db/dao/UnionOfChipboardsDao";
@@ -27,18 +28,24 @@ export class MeasureAndCountRepositoryImpl
     this.unionDao = unionDao;
   }
 
-  async insertUnionOfChipboards(
-    union: UnionOfChipboards,
-  ): Promise<Realm.BSON.ObjectId> {
+  async insertUnionOfChipboards(union: UnionOfChipboards): Promise<string> {
     const dataToInsert = mapUnionToRealm(union);
     return this.unionDao.insertUnionOfChipboards(dataToInsert);
   }
 
-  async insertAndGetUnionOfChipboards(
-    union: UnionOfChipboards,
-  ): Promise<UnionOfChipboards | null> {
-    const id = await this.insertUnionOfChipboards(union);
-    return this.unionDao.getUnionOfChipboardsById(id);
+  // async insertAndGetUnionOfChipboards(
+  //   union: UnionOfChipboards,
+  // ): Promise<UnionOfChipboards | null> {
+  //   const id = await this.insertUnionOfChipboards(union);
+  //   const result = this.unionDao.getUnionOfChipboardsById(id);
+  //   return result ? mapRealmToUnion(result) : null;
+  // }
+
+  async updateUnionOfChipboards(union: UnionOfChipboards): Promise<void> {
+    const dataToUpdate = mapUnionToRealm(union);
+    if (!union.id) throw new Error("Cannot update union without id");
+
+    this.unionDao.updateUnionOfChipboards(dataToUpdate);
   }
 
   async updateUnionOfChipboardsTitle(
@@ -102,11 +109,13 @@ export class MeasureAndCountRepositoryImpl
   async getUnionOfChipboardsById(
     unionId: ObjectId,
   ): Promise<UnionOfChipboards | null> {
-    return this.unionDao.getUnionOfChipboardsById(unionId);
+    const result = this.unionDao.getUnionOfChipboardsById(unionId);
+    return result ? mapRealmToUnion(result) : null;
   }
 
   async getLastUnFinishedUnionOfChipboards(): Promise<UnionOfChipboards | null> {
-    return this.unionDao.getLastUnFinishedUnionOfChipboards();
+    const result = this.unionDao.getLastUnFinishedUnionOfChipboards();
+    return result ? mapRealmToUnion(result) : null;
   }
 
   async deleteUnionOfChipboards(unionId: ObjectId): Promise<void> {
@@ -119,7 +128,9 @@ export class MeasureAndCountRepositoryImpl
     const all = this.unionDao.getAllUnions();
 
     const callback = () => {
-      listener(this.unionDao.getAllUnions());
+      const raw = this.unionDao.getAllUnions();
+      const mapped = raw.map(mapRealmToUnion);
+      listener(mapped);
     };
 
     // Note: Realm change listeners not abstracted into DAO
@@ -130,7 +141,12 @@ export class MeasureAndCountRepositoryImpl
   }
 
   async insertChipboard(chipboard: Chipboard): Promise<void> {
-    this.chipboardDao.insertChipboard(chipboard);
+    this.chipboardDao.insertChipboard(mapChipboardToRealm(chipboard));
+  }
+
+  async updateChipboard(chipboard: Chipboard): Promise<void> {
+    const dataToUpdate = mapChipboardToRealm(chipboard);
+    this.chipboardDao.updateChipboard(dataToUpdate);
   }
 
   async updateChipboardState(id: ObjectId, newState: number): Promise<void> {
@@ -147,9 +163,9 @@ export class MeasureAndCountRepositoryImpl
   async findSimilarFoundChipboard(
     chipboard: Chipboard,
   ): Promise<Chipboard | null> {
-    return this.chipboardDao.findSimilarFoundChipboard(
-      chipboard.unionId,
-      chipboard.id,
+    const similarChipboard = this.chipboardDao.findSimilarFoundChipboard(
+      Realm.BSON.ObjectId.createFromHexString(chipboard.unionId),
+      Realm.BSON.ObjectId.createFromHexString(chipboard.id),
       chipboard.color,
       chipboard.colorName,
       chipboard.size1,
@@ -159,13 +175,18 @@ export class MeasureAndCountRepositoryImpl
       chipboard.size3,
       chipboard.realSize3,
     );
+    return similarChipboard ? mapRealmToChipboard(similarChipboard) : null;
   }
 
   async getChipboardByIdAndUnionId(
     chipboardId: ObjectId,
     unionId: ObjectId,
   ): Promise<Chipboard | null> {
-    return this.chipboardDao.getChipboardByIdAndUnionId(chipboardId, unionId);
+    const chipboard = this.chipboardDao.getChipboardByIdAndUnionId(
+      chipboardId,
+      unionId,
+    );
+    return chipboard ? mapRealmToChipboard(chipboard) : null;
   }
 
   async getChipboardsCountByUnionId(unionId: ObjectId): Promise<number> {
@@ -193,7 +214,8 @@ export class MeasureAndCountRepositoryImpl
   }
 
   async getChipboardsByUnionId(unionId: ObjectId): Promise<Chipboard[]> {
-    return this.chipboardDao.getChipboardsByUnionId(unionId);
+    const chipboards = this.chipboardDao.getChipboardsByUnionId(unionId);
+    return chipboards.map(mapRealmToChipboard);
   }
 
   subscribeToChipboardsByUnionId(
@@ -203,7 +225,8 @@ export class MeasureAndCountRepositoryImpl
     return this.chipboardDao.subscribeToChipboardsByUnionId(
       unionId,
       realmCollection => {
-        const plainChipboards = Array.from(realmCollection).map(mapChipboard);
+        const plainChipboards =
+          Array.from(realmCollection).map(mapRealmToChipboard);
         listener(plainChipboards);
       },
     );

@@ -9,8 +9,16 @@ export class ChipboardDao {
     this.realm.write(() => {
       this.realm.create("Chipboard", {
         ...chipboard,
-        id: new ObjectId(),
+        id: new Realm.BSON.ObjectId(),
       });
+    });
+  }
+
+  updateChipboard(chipboard: Partial<ChipboardSchema>): void {
+    if (!chipboard.id) throw new Error("Cannot update chipboard without id");
+
+    this.realm.write(() => {
+      this.realm.create("Chipboard", chipboard, Realm.UpdateMode.Modified);
     });
   }
 

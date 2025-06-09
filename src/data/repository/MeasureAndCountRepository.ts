@@ -5,10 +5,13 @@ import {Chipboard} from "../db/schemas/Chipboard";
 type Unsubscribe = () => void;
 
 export interface MeasureAndCountRepository {
-  insertUnionOfChipboards(union: UnionOfChipboards): Promise<ObjectId>;
-  insertAndGetUnionOfChipboards(
-    union: UnionOfChipboards,
-  ): Promise<UnionOfChipboards | null>;
+  insertUnionOfChipboards(union: UnionOfChipboards): Promise<string>;
+
+  // insertAndGetUnionOfChipboards(
+  //   union: UnionOfChipboards,
+  // ): Promise<UnionOfChipboards | null>;
+
+  updateUnionOfChipboards(union: UnionOfChipboards): Promise<void>;
 
   updateUnionOfChipboardsTitle(
     unionId: ObjectId,
