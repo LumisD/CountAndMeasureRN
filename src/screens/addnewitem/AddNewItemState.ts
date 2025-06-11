@@ -1,10 +1,11 @@
-// import {UnionOfChipboardsUI} from "./UnionOfChipboardsUI";
-// import {ChipboardUi} from "./ChipboardUi";
+import {UnionOfChipboardsUI} from "../models/UnionOfChipboardsUI";
+import {AddNewItemEffect} from "./AddNewItemEffect";
+import {ChipboardUI} from "./models/ChipboardUI";
 
-// export interface AddNewItemState {
-//   unionOfChipboards: UnionOfChipboardsUI;
-//   createdChipboards: ChipboardUi[];
-//   newOrEditChipboard: ChipboardUi;
-//   isAddAreaOpen: boolean;
-//   isAddButtonAvailable: boolean;
-// }
+export interface AddNewItemState {
+  unionOfChipboards: UnionOfChipboardsUI;
+  createdChipboards: ChipboardUI[];
+  newOrEditChipboard: ChipboardUI;
+  isAddAreaOpen: boolean;
+  isAddButtonAvailable: boolean;
+}
