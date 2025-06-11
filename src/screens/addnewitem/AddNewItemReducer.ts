@@ -7,6 +7,16 @@ export const addNewItemReducer = (
   intent: AddNewItemIntent,
 ): {newState: AddNewItemState; effect?: AddNewItemEffect} => {
   switch (intent.type) {
+    case "TitleOfUnionChanged":
+      return {
+        newState: {
+          ...state,
+          unionOfChipboards: {
+            ...state.unionOfChipboards,
+            title: intent.newTitle,
+          },
+        },
+      };
     case "Back":
       return {
         newState: state,

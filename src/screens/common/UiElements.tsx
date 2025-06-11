@@ -44,6 +44,7 @@ type CommonButtonProps = {
   backgroundColor?: string;
   textColor?: string;
 };
+
 export const CommonButton: React.FC<CommonButtonProps> = ({
   text,
   enabled = true,
