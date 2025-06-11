@@ -1,4 +1,4 @@
-import React, {useEffect, useLayoutEffect} from "react";
+import React, {useEffect, useLayoutEffect, useMemo} from "react";
 import {
   View,
   Text,
@@ -8,7 +8,6 @@ import {
   Pressable,
   TextInput,
 } from "react-native";
-import {useAddNewItemStore} from "./AddNewItemStore";
 import {StackScreenProps} from "@react-navigation/stack";
 import {RootStackParamList} from "../../navigation/types";
 import {NewScreenType} from "../models/NewScreenType";
@@ -16,6 +15,10 @@ import {Gray, MainBg} from "../../theme/colors";
 import {Typography} from "../../theme/typography";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import {AddNewItemIntent} from "./AddNewItemIntent";
+import {useStore} from "zustand";
+import {createAddNewItemStore} from "./AddNewItemStore";
+import {useRealm} from "../../data/db/RealmContext";
+import {provideMeasureAndCountRepository} from "../../data/db/dao/provideRepository";
 
 type Props = StackScreenProps<RootStackParamList, "AddNewItem">;
 
@@ -36,8 +39,15 @@ export default function AddNewItemScreen({navigation, route}: Props) {
     console.error("Failed to parse serializedItemType", e);
   }
 
-  const {state, processIntent, currentEffect, consumeEffect} =
-    useAddNewItemStore();
+  const realm = useRealm();
+  const repo = useMemo(() => provideMeasureAndCountRepository(realm), [realm]);
+  const store = useMemo(() => createAddNewItemStore(repo), [repo]);
+
+  // Access the store values
+  const state = useStore(store, s => s.state);
+  const processIntent = useStore(store, s => s.processIntent);
+  const currentEffect = useStore(store, s => s.currentEffect);
+  const consumeEffect = useStore(store, s => s.consumeEffect);
 
   // Handle one-time effects
   useEffect(() => {
