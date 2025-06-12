@@ -24,6 +24,7 @@ type Props = StackScreenProps<RootStackParamList, "AddNewItem">;
 
 export default function AddNewItemScreen({navigation, route}: Props) {
   const {serializedItemType} = route.params;
+  console.log("AddNewItemScreen serializedItemType: ", serializedItemType);
   //Todo: later move to store all this logic
   let parsed: unknown;
   let itemType: NewScreenType | null = null;
@@ -48,6 +49,10 @@ export default function AddNewItemScreen({navigation, route}: Props) {
   const processIntent = useStore(store, s => s.processIntent);
   const currentEffect = useStore(store, s => s.currentEffect);
   const consumeEffect = useStore(store, s => s.consumeEffect);
+
+  useEffect(() => {
+    processIntent({type: "CreateNewUnion"});
+  }, []);
 
   // Handle one-time effects
   useEffect(() => {

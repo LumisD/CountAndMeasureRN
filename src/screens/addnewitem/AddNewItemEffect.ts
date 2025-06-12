@@ -1,6 +1,7 @@
 import {ChipboardUI} from "./models/ChipboardUI";
 
 export type AddNewItemEffect =
+  | {type: "CreateNewUnion"}
   | {
       type: "ShowDeleteConfirmationDialog";
       chipboard: ChipboardUI;

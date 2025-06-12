@@ -1,9 +1,8 @@
-// types/AddNewItemIntent.ts
-
 import {NewScreenType} from "../models/NewScreenType";
 import {ChipboardUI} from "./models/ChipboardUI";
 
 export type AddNewItemIntent =
+  | {type: "CreateNewUnion"}
   | {type: "SetItemType"; itemType: NewScreenType | null}
   | {type: "TitleOfUnionChanged"; newTitle: string}
   | {type: "SizeChanged"; newSizeAsString: string; dimension: number}
