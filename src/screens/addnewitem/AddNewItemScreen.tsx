@@ -140,11 +140,13 @@ const styles = StyleSheet.create({
   wrapper: {
     backgroundColor: MainBg,
     paddingHorizontal: 12,
-    paddingVertical: 8,
+    paddingTop: 8,
+    paddingBottom: 0,
   },
   row: {
     flexDirection: "row",
     alignItems: "center",
+    marginBottom: 0,
   },
   input: {
     ...Typography.titleLarge,
@@ -156,7 +158,7 @@ const styles = StyleSheet.create({
   divider: {
     height: 2,
     backgroundColor: Gray,
-    marginTop: 8,
+    marginTop: 0,
     textAlignVertical: "top", // for multiline alignment on Android
   },
 });
