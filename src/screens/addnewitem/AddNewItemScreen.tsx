@@ -125,6 +125,10 @@ export function TopBar({title, processIntent}: TopBarProps) {
           }
           style={styles.input}
           placeholder="Title"
+          multiline={true}
+          numberOfLines={2}
+          selection={{start: 0, end: 0}}
+          scrollEnabled={false} // optional, disable horizontal scroll
         />
       </View>
       <View style={styles.divider} />
@@ -153,6 +157,7 @@ const styles = StyleSheet.create({
     height: 2,
     backgroundColor: Gray,
     marginTop: 8,
+    textAlignVertical: "top", // for multiline alignment on Android
   },
 });
 
