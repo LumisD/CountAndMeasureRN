@@ -5,6 +5,7 @@ import {NewScreenType} from "../../models/NewScreenType";
 import {ChipboardUI} from "../models/ChipboardUI";
 import {AddNewItemIntent} from "../AddNewItemIntent";
 import {UpArrowIcon} from "../../common/UiElements";
+import {NumberEditor} from "./NumberEditor";
 
 type Props = {
   type: NewScreenType;
@@ -30,8 +31,8 @@ export const WidthLengthFields: React.FC<Props> = ({
             {isDirection ? <UpArrowIcon /> : <View style={styles.spacer} />}
             <NumberEditor
               label={t(nameKey)}
-              value={sizeOfDim}
-              columnIndex={index + 1}
+              sizeOfDim={sizeOfDim}
+              dimension={index + 1}
               processIntent={processIntent}
             />
           </View>
@@ -52,6 +53,16 @@ const styles = StyleSheet.create({
   },
 });
 
-function getSizeForIndex(index: number, chipboard: ChipboardUI): number {
-  return index === 0 ? chipboard.width : chipboard.length;
+function getSizeForIndex(index: number, chipboard: ChipboardUI | null): string {
+  if (chipboard === null) return "";
+  switch (index) {
+    case 0:
+      return chipboard.size1AsString;
+    case 1:
+      return chipboard.size2AsString;
+    case 2:
+      return chipboard.size3AsString;
+    default:
+      return "";
+  }
 }

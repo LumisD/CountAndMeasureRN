@@ -1,4 +1,4 @@
-import {toObjectIdOrUndefined} from "../../../../data/db/schemas/UnionOfChipboards";
+import {toObjectIdOrUndefined} from "../../../../data/db/utils";
 import {MeasureAndCountRepository} from "../../../../data/repository/MeasureAndCountRepository";
 import {AddNewItemEffect, NAVIGATE_BACK} from "../../AddNewItemEffect";
 import {AddNewItemState} from "../../AddNewItemState";

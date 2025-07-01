@@ -35,7 +35,6 @@ export const XIcon: React.FC<{
   <Icon name="close" style={style} size={size} color={color} />
 );
 
-// CommonButton
 type CommonButtonProps = {
   text: string;
   enabled?: boolean;
@@ -66,12 +65,12 @@ export const CommonButton: React.FC<CommonButtonProps> = ({
   </TouchableOpacity>
 );
 
-// ChipboardAsStringField
 type ChipboardAsStringFieldProps = {
   chipboardAsString: string;
   hasColor: boolean;
   color: string; // hex string, e.g. "#FF0000"
 };
+
 export const ChipboardAsStringField: React.FC<ChipboardAsStringFieldProps> = ({
   chipboardAsString,
   hasColor,
