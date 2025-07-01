@@ -58,7 +58,7 @@ export class ChipboardDao {
   findSimilarFoundChipboard(
     unionId: ObjectId,
     chipboardId: ObjectId,
-    color: number,
+    color: string,
     colorName: string,
     size1: number,
     realSize1: number,

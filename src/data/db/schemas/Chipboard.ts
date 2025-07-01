@@ -6,7 +6,7 @@ export class ChipboardSchema extends Realm.Object {
   state!: number; // 0 - not found, 1 - found, 2 - unknown
   quantity!: number;
   colorName!: string;
-  color!: number;
+  color!: string;
   size1!: number;
   realSize1!: number; // diff between real measured size and size1
   size2!: number;
@@ -23,7 +23,7 @@ export class ChipboardSchema extends Realm.Object {
       state: {type: "int", default: 0}, // 0 - not found, 1 - found, 2 - unknown
       quantity: "int",
       colorName: "string",
-      color: "int",
+      color: "string",
       size1: "float",
       realSize1: {type: "float", default: 0}, // diff between real measured size and size1
       size2: "float",
@@ -40,7 +40,7 @@ export type Chipboard = {
   state: number;
   quantity: number;
   colorName: string;
-  color: number;
+  color: string;
   size1: number;
   realSize1: number;
   size2: number;

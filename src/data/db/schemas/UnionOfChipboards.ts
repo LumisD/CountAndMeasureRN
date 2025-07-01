@@ -1,4 +1,5 @@
 import Realm from "realm";
+import {toObjectIdOrUndefined} from "../utils";
 
 export class UnionOfChipboardsSchema extends Realm.Object<UnionOfChipboardsSchema> {
   id!: Realm.BSON.ObjectId;
@@ -68,17 +69,11 @@ export function mapRealmToUnion(obj: any): UnionOfChipboards {
   };
 }
 
-function isValidObjectIdHex(id: string): boolean {
-  return /^[a-f\d]{24}$/i.test(id);
-}
-
 export function mapUnionToRealm(
   union: UnionOfChipboards,
 ): Partial<UnionOfChipboardsSchema> {
   return {
-    id: isValidObjectIdHex(union.id)
-      ? Realm.BSON.ObjectId.createFromHexString(union.id)
-      : undefined,
+    id: toObjectIdOrUndefined(union.id),
     title: union.title,
     dimensions: union.dimensions,
     direction: union.direction,
