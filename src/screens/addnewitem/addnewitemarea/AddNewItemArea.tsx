@@ -4,6 +4,10 @@ import {AddNewItemIntent} from "../AddNewItemIntent";
 import {NewScreenType} from "../../models/NewScreenType";
 import {ChipboardAsStringField} from "../../common/UiElements";
 import {AddNewItemState} from "../AddNewItemState";
+import {WidthLengthFields} from "./WidthLengthFields";
+import {AddItemColorField} from "./AddItemColorField";
+import {QuantityField} from "./QuantityField";
+import {AddChipboardButton} from "./AddChipboardButton";
 
 type Props = {
   itemType: NewScreenType;
@@ -35,7 +39,32 @@ export const AddNewItemArea: React.FC<Props> = ({
 
   return (
     <View style={[styles.container, {backgroundColor: flashColor}]}>
-      {/* TODO: Add WidthLengthFields, AddItemColorField, QuantityField, AddChipboardButton */}
+      <View style={styles.row}>
+        <View style={styles.leftColumn}>
+          <WidthLengthFields
+            type={itemType}
+            chipboard={state.newOrEditChipboard}
+            processIntent={processIntent}
+          />
+          {itemType.hasColor && (
+            <AddItemColorField
+              colorName={state.newOrEditChipboard.colorName}
+              processIntent={processIntent}
+            />
+          )}
+          <View style={styles.spacer16} />
+          <QuantityField
+            quantityAsString={state.newOrEditChipboard.quantityAsString}
+            processIntent={processIntent}
+          />
+        </View>
+
+        <AddChipboardButton
+          isEnabled={state.isAddButtonAvailable}
+          processIntent={processIntent}
+        />
+      </View>
+
       <ChipboardAsStringField
         chipboardAsString={state.newOrEditChipboard.chipboardAsString}
         hasColor={state.unionOfChipboards.hasColor}
@@ -51,5 +80,16 @@ const styles = StyleSheet.create({
     paddingTop: 0,
     paddingBottom: 16,
     paddingHorizontal: 16,
+  },
+  row: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "flex-start",
+  },
+  leftColumn: {
+    width: "60%",
+  },
+  spacer16: {
+    height: 16,
   },
 });
