@@ -1,31 +1,32 @@
-import React, {useEffect, useLayoutEffect, useMemo} from "react";
-import {
-  View,
-  Text,
-  Button,
-  Alert,
-  StyleSheet,
-  Pressable,
-  TextInput,
-} from "react-native";
+import React, {useEffect, useLayoutEffect, useMemo, useState} from "react";
+import {View, Alert, StyleSheet, ScrollView} from "react-native";
 import {StackScreenProps} from "@react-navigation/stack";
 import {RootStackParamList} from "../../navigation/types";
 import {NewScreenType} from "../models/NewScreenType";
 import {Gray, MainBg} from "../../theme/colors";
 import {Typography} from "../../theme/typography";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import {AddNewItemIntent} from "./AddNewItemIntent";
+import {
+  AddNewItemIntent,
+  BACK,
+  CREATE_NEW_UNION,
+  SET_ITEM_TYPE,
+  TITLE_OF_UNION_CHANGED,
+} from "./AddNewItemIntent";
 import {useStore} from "zustand";
-import {createAddNewItemStore} from "./AddNewItemStore";
+import {createAddNewItemStore} from "./store/AddNewItemStore";
 import {useRealm} from "../../data/db/RealmContext";
 import {provideMeasureAndCountRepository} from "../../data/db/dao/provideRepository";
+import {TextInput, Pressable, Text} from "react-native";
+import {AddNewItemArea} from "./addnewitemarea/AddNewItemArea";
+import {NAVIGATE_BACK, SHOW_SNACKBAR} from "./AddNewItemEffect";
 
 type Props = StackScreenProps<RootStackParamList, "AddNewItem">;
 
 export default function AddNewItemScreen({navigation, route}: Props) {
   const {serializedItemType} = route.params;
   console.log("AddNewItemScreen serializedItemType: ", serializedItemType);
-  //Todo: later move to store all this logic
+
   let parsed: unknown;
   let itemType: NewScreenType | null = null;
 
@@ -44,25 +45,26 @@ export default function AddNewItemScreen({navigation, route}: Props) {
   const repo = useMemo(() => provideMeasureAndCountRepository(realm), [realm]);
   const store = useMemo(() => createAddNewItemStore(repo), [repo]);
 
-  // Access the store values
   const state = useStore(store, s => s.state);
   const processIntent = useStore(store, s => s.processIntent);
   const currentEffect = useStore(store, s => s.currentEffect);
   const consumeEffect = useStore(store, s => s.consumeEffect);
 
+  const [shouldFlash, setShouldFlash] = useState(false);
+
   useEffect(() => {
-    processIntent({type: "CreateNewUnion"});
+    processIntent({type: CREATE_NEW_UNION});
+    processIntent({type: SET_ITEM_TYPE, itemType: itemType});
   }, []);
 
-  // Handle one-time effects
   useEffect(() => {
     if (!currentEffect) return;
 
     switch (currentEffect.type) {
-      case "ShowSnackbar":
+      case SHOW_SNACKBAR:
         Alert.alert("Snackbar", currentEffect.message);
         break;
-      case "NavigateBack":
+      case NAVIGATE_BACK:
         Alert.alert("Navigation", "Should navigate back");
         break;
       default:
@@ -85,23 +87,28 @@ export default function AddNewItemScreen({navigation, route}: Props) {
   }, [navigation, state.unionOfChipboards.title, processIntent]);
 
   return (
-    <View style={{flex: 1, justifyContent: "center", alignItems: "center"}}>
-      <Text>Add New Item Screen</Text>
-
-      <Text style={{marginTop: 10}}>
-        Add area is {state.isAddAreaOpen ? "open" : "closed"}
-      </Text>
-
-      <Button
-        title="Toggle Add Area"
-        onPress={() => processIntent({type: "ToggleAddAreaVisibility"})}
-      />
-
-      <Button
-        title="Back"
-        onPress={() => processIntent({type: "Back"})}
-        color="darkred"
-      />
+    <View style={styles.container}>
+      {state.isAddAreaOpen && itemType && (
+        <AddNewItemArea
+          itemType={itemType}
+          state={state}
+          shouldFlash={shouldFlash}
+          setShouldFlash={setShouldFlash}
+          processIntent={processIntent}
+        />
+      )}
+      {/* <ExpandHideNewItemField
+        isOpen={state.isAddAreaOpen}
+        onToggle={() => processIntent({type: TOGGLE_ADD_AREA_VISIBILITY})}
+      /> */}
+      <View style={styles.flexListWrapper}>
+        {/* <ListOfNewItems
+          hasColor={state.unionOfChipboards.hasColor}
+          items={state.createdChipboards}
+          processIntent={processIntent}
+        /> */}
+      </View>
+      <View style={{height: 8}} />
     </View>
   );
 }
@@ -115,20 +122,20 @@ export function TopBar({title, processIntent}: TopBarProps) {
   return (
     <View style={styles.wrapper}>
       <View style={styles.row}>
-        <Pressable onPress={() => processIntent({type: "Back"})}>
+        <Pressable onPress={() => processIntent({type: BACK})}>
           <Icon name="arrow-left" size={32} />
         </Pressable>
         <TextInput
           value={title}
           onChangeText={text =>
-            processIntent({type: "TitleOfUnionChanged", newTitle: text})
+            processIntent({type: TITLE_OF_UNION_CHANGED, newTitle: text})
           }
           style={styles.input}
           placeholder="Title"
           multiline={true}
           numberOfLines={2}
           selection={{start: 0, end: 0}}
-          scrollEnabled={false} // optional, disable horizontal scroll
+          scrollEnabled={false}
         />
       </View>
       <View style={styles.divider} />
@@ -137,6 +144,15 @@ export function TopBar({title, processIntent}: TopBarProps) {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingTop: 16,
+    paddingHorizontal: 16,
+    backgroundColor: MainBg,
+  },
+  flexListWrapper: {
+    flex: 1,
+  },
   wrapper: {
     backgroundColor: MainBg,
     paddingHorizontal: 12,
