@@ -1,22 +1,22 @@
 import React from "react";
 import {TextInput, View, Text, StyleSheet} from "react-native";
-import {AddNewItemIntent} from "../AddNewItemIntent";
+import {AddNewItemIntent, SIZE_CHANGED} from "../AddNewItemIntent";
 
 type Props = {
   label: string;
-  value: string;
+  sizeOfDim: string;
   dimension: number;
   processIntent: (intent: AddNewItemIntent) => void;
 };
 
 export const NumberEditor: React.FC<Props> = ({
   label,
-  value,
+  sizeOfDim,
   dimension,
   processIntent,
 }) => {
   const handleChange = (text: string) => {
-    processIntent({type: "SizeChanged", newSizeAsString: text, dimension});
+    processIntent({type: SIZE_CHANGED, newSizeAsString: text, dimension});
   };
 
   return (
@@ -24,7 +24,7 @@ export const NumberEditor: React.FC<Props> = ({
       <Text style={styles.label}>{label}</Text>
       <TextInput
         style={styles.input}
-        value={value}
+        value={sizeOfDim}
         onChangeText={handleChange}
         keyboardType="numeric"
         maxLength={10}
