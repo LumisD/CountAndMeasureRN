@@ -13,7 +13,9 @@ export async function handleEditChipboardInAddAreaAndRemoveFromDb(
 
   const objectId = toObjectIdOrUndefined(chipboard.id);
   if (!objectId) {
-    console.error("Invalid chipboard.id, skipping delete");
+    console.error(
+      `handleEditChipboardInAddAreaAndRemoveFromDb: Invalid chipboard.id: ${chipboard.id} , objectId: ${objectId}`,
+    );
     return {newState: currentState, effect: undefined};
   }
 

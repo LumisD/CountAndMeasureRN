@@ -12,7 +12,9 @@ export async function handleScreenExit(
   const objectId = toObjectIdOrUndefined(unionId);
 
   if (!objectId) {
-    console.error("Invalid unionId, skipping screen exit logic");
+    console.error(
+      `handleScreenExit: Invalid union.id: ${unionId} , objectId: ${objectId}`,
+    );
     return {newState: currentState, effect: undefined};
   }
 

@@ -13,7 +13,9 @@ export async function handleUpdateUnionTitle(
 
   const objectId = toObjectIdOrUndefined(union.id);
   if (!objectId) {
-    console.error("Invalid union.id, skipping update");
+    console.error(
+      `handleUpdateUnionTitle: Invalid union.id: ${union.id} , objectId: ${objectId}`,
+    );
     return {newState: currentState, effect: undefined};
   }
 

@@ -13,7 +13,9 @@ export async function handleDeleteUnion(
   const objectId = toObjectIdOrUndefined(union.id);
 
   if (!objectId) {
-    console.error("Invalid union.id, skipping deletion");
+    console.error(
+      `handleDeleteUnion: Invalid union.id: ${union.id} , objectId: ${objectId}`,
+    );
     return {newState: currentState, effect: undefined};
   }
 

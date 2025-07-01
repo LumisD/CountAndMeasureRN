@@ -3,14 +3,11 @@ import {
   NAVIGATE_BACK,
   SHOW_DELETE_CONFIRMATION_DIALOG,
   SHOW_EDIT_CONFIRMATION_DIALOG,
-  SHOW_SHARE_UNION_DIALOG,
-  SHOW_SNACKBAR,
 } from "./AddNewItemEffect";
 import {
   AddNewItemIntent,
   ASK_DELETE_CHIPBOARD,
   ASK_EDIT_CHIPBOARD,
-  PRESS_TO_SHARE_UNION,
   TOGGLE_ADD_AREA_VISIBILITY,
 } from "./AddNewItemIntent";
 import {AddNewItemState} from "./AddNewItemState";

@@ -23,7 +23,9 @@ export async function handleShareUnion(
   const unionIdObject = toObjectIdOrUndefined(currentUnion.id);
 
   if (!unionIdObject) {
-    console.error("Invalid union id, cannot share");
+    console.error(
+      `handleShareUnion: Invalid union.id: ${currentUnion.id} , objectId: ${unionIdObject}`,
+    );
     return {newState: currentState, effect: undefined};
   }
 

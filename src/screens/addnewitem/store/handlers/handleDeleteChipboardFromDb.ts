@@ -12,7 +12,9 @@ export async function handleDeleteChipboardFromDb(
   const currentState = get().state;
   const objectId = toObjectIdOrUndefined(chipboardId);
   if (!objectId) {
-    console.error("Invalid chipboardId, skipping update");
+    console.error(
+      `handleDeleteChipboardFromDb: Invalid chipboardId: ${chipboardId} , objectId: ${objectId}`,
+    );
     return {newState: currentState, effect: undefined};
   }
 

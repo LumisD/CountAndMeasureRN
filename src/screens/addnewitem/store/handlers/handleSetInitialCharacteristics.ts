@@ -23,7 +23,9 @@ export async function handleSetInitialCharacteristics(
 
   const objectId = toObjectIdOrUndefined(union.id);
   if (!objectId) {
-    console.error("Invalid union.id, skipping update");
+    console.error(
+      `handleSetInitialCharacteristics: Invalid union.id: ${union.id} , objectId: ${objectId}`,
+    );
     return {newState: currentState, effect: undefined};
   }
 
