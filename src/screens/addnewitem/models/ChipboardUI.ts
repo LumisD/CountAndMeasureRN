@@ -1,11 +1,13 @@
 import {Chipboard} from "../../../data/db/schemas/Chipboard";
+import {White} from "../../../theme/colors";
+import {UnionOfChipboardsUI} from "../../models/UnionOfChipboardsUI";
 
 export type ChipboardUI = {
   id: string;
   unionId: string;
   quantity: number;
   colorName: string;
-  color: number;
+  color: string;
   size1: number;
   size2: number;
   size3: number;
@@ -23,7 +25,7 @@ export function createDefaultChipboardUI(): ChipboardUI {
     unionId: "0",
     quantity: 1,
     colorName: "White",
-    color: 0xffffffff, // e.g. white ARGB
+    color: White, // e.g. white ARGB
     size1: 0,
     size2: 0,
     size3: 0,
@@ -69,4 +71,40 @@ export function mapChipboardToChipboardUi(chip: Chipboard): ChipboardUI {
     size3AsString: chip.size3.toString(),
     chipboardAsString: "", // can be composed elsewhere
   };
+}
+
+export function getShareableString(
+  chipboard: ChipboardUI,
+  union: UnionOfChipboardsUI,
+): string {
+  const {size1, size2, size3, quantity, colorName} = chipboard;
+  const {dimensions, direction, hasColor} = union;
+
+  const builder: string[] = [];
+
+  for (let i = 1; i <= dimensions; i++) {
+    if (i === direction) builder.push("↑");
+
+    switch (i) {
+      case 1:
+        builder.push(size1.toString());
+        break;
+      case 2:
+        builder.push(size2.toString());
+        break;
+      case 3:
+        builder.push(size3.toString());
+        break;
+    }
+
+    if (i < dimensions) builder.push(" x ");
+  }
+
+  builder.push(" - " + quantity.toString());
+
+  if (hasColor && colorName.trim() !== "") {
+    builder.push(` (${colorName})`);
+  }
+
+  return builder.join("");
 }
