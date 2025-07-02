@@ -9,12 +9,13 @@ export async function handleEditChipboardInAddAreaAndRemoveFromDb(
   repo: MeasureAndCountRepository,
   get: () => {state: AddNewItemState},
 ): Promise<{newState: AddNewItemState; effect?: AddNewItemEffect}> {
+  console.log("MaC handleEditChipboardInAddAreaAndRemoveFromDb started");
   const currentState = get().state;
 
   const objectId = toObjectIdOrUndefined(chipboard.id);
   if (!objectId) {
     console.error(
-      `handleEditChipboardInAddAreaAndRemoveFromDb: Invalid chipboard.id: ${chipboard.id} , objectId: ${objectId}`,
+      `MaC handleEditChipboardInAddAreaAndRemoveFromDb: Invalid chipboard.id: ${chipboard.id} , objectId: ${objectId}`,
     );
     return {newState: currentState, effect: undefined};
   }
@@ -27,6 +28,7 @@ export async function handleEditChipboardInAddAreaAndRemoveFromDb(
   };
 
   await repo.deleteChipboardById(objectId);
+  console.log("MaC handleEditChipboardInAddAreaAndRemoveFromDb finished");
 
   return {
     newState,

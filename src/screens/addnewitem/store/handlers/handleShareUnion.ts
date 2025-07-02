@@ -18,13 +18,14 @@ export async function handleShareUnion(
   get: () => {state: AddNewItemState},
   t: (key: string) => string,
 ): Promise<{newState: AddNewItemState; effect?: AddNewItemEffect}> {
+  console.log("MaC handleShareUnion started");
   const currentState = get().state;
   const currentUnion = currentState.unionOfChipboards;
   const unionIdObject = toObjectIdOrUndefined(currentUnion.id);
 
   if (!unionIdObject) {
     console.error(
-      `handleShareUnion: Invalid union.id: ${currentUnion.id} , objectId: ${unionIdObject}`,
+      `MaC handleShareUnion: Invalid union.id: ${currentUnion.id} , objectId: ${unionIdObject}`,
     );
     return {newState: currentState, effect: undefined};
   }
@@ -34,6 +35,7 @@ export async function handleShareUnion(
   const chipboards = chipboardsFromDb.map(c => mapChipboardToChipboardUi(c));
 
   if (chipboards.length === 0) {
+    console.log("MaC handleShareUnion: No chipboards to share");
     return {
       newState: currentState,
       effect: {type: SHOW_SNACKBAR, message: t("no_chipboards_to_share")},
@@ -56,6 +58,7 @@ export async function handleShareUnion(
     unionTitle,
     t,
   );
+  console.log("MaC handleShareUnion finished");
 
   return {
     newState: currentState,

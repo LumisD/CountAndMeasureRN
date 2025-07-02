@@ -18,6 +18,7 @@ export const addNewItemReducer = (
   state: AddNewItemState,
   intent: AddNewItemIntent,
 ): {newState: AddNewItemState; effect?: AddNewItemEffect} => {
+  console.warn("MaC addNewItemReducer started with intent:", intent);
   switch (intent.type) {
     case TOGGLE_ADD_AREA_VISIBILITY:
       return {
@@ -55,7 +56,7 @@ export const addNewItemReducer = (
       };
 
     default:
-      console.warn("Unhandled intent:", intent);
+      console.warn("MaC addNewItemReducer Unhandled intent:", intent);
       return {newState: state};
   }
 };

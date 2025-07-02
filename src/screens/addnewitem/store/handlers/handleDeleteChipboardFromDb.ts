@@ -9,16 +9,18 @@ export async function handleDeleteChipboardFromDb(
   get: () => {state: AddNewItemState},
   t: (key: string) => string,
 ): Promise<{newState: AddNewItemState; effect?: AddNewItemEffect}> {
+  console.log("MaC handleDeleteChipboardFromDb started");
   const currentState = get().state;
   const objectId = toObjectIdOrUndefined(chipboardId);
   if (!objectId) {
     console.error(
-      `handleDeleteChipboardFromDb: Invalid chipboardId: ${chipboardId} , objectId: ${objectId}`,
+      `MaC handleDeleteChipboardFromDb: Invalid chipboardId: ${chipboardId} , objectId: ${objectId}`,
     );
     return {newState: currentState, effect: undefined};
   }
 
   await repo.deleteChipboardById(objectId);
+  console.log("MaC handleDeleteChipboardFromDb finished");
 
   return {
     newState: currentState,

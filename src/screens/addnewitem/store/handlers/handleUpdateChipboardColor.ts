@@ -7,6 +7,7 @@ export async function handleUpdateChipboardColor(
   newColor: string,
   get: () => {state: AddNewItemState},
 ): Promise<{newState: AddNewItemState; effect?: AddNewItemEffect}> {
+  console.log("MaC handleUpdateChipboardColor started");
   const currentState = get().state;
 
   const updatedChipboard = {
@@ -28,6 +29,7 @@ export async function handleUpdateChipboardColor(
     ...currentState,
     newOrEditChipboard: updatedChipboard2,
   };
+  console.log("MaC handleUpdateChipboardColor finished");
 
   return {newState, effect: undefined};
 }

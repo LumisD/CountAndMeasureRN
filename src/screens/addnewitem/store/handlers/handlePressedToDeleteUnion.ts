@@ -10,10 +10,12 @@ export async function handlePressedToDeleteUnion(
   repo: MeasureAndCountRepository,
   get: () => {state: AddNewItemState},
 ): Promise<{newState: AddNewItemState; effect?: AddNewItemEffect}> {
+  console.log("MaC handlePressedToDeleteUnion started");
   const currentState = get().state;
 
   // IF there are chipboards in the union
   if (currentState.createdChipboards.length > 0) {
+    console.log("MaC handleCreateNewUnion SHOW_REMOVE_UNION_DIALOG");
     // Show confirmation dialog
     return {
       newState: currentState,

@@ -10,6 +10,7 @@ export async function handleSetInitialCharacteristics(
   repo: MeasureAndCountRepository,
   get: () => {state: AddNewItemState},
 ): Promise<{newState: AddNewItemState; effect?: AddNewItemEffect}> {
+  console.log("MaC handleSetInitialCharacteristics started");
   if (!itemType) {
     return {newState: get().state, effect: undefined};
   }
@@ -24,7 +25,7 @@ export async function handleSetInitialCharacteristics(
   const objectId = toObjectIdOrUndefined(union.id);
   if (!objectId) {
     console.error(
-      `handleSetInitialCharacteristics: Invalid union.id: ${union.id} , objectId: ${objectId}`,
+      `MaC handleSetInitialCharacteristics: Invalid union.id: ${union.id} , objectId: ${objectId}`,
     );
     return {newState: currentState, effect: undefined};
   }
@@ -61,6 +62,7 @@ export async function handleSetInitialCharacteristics(
     unionOfChipboards: updatedUnion,
     newOrEditChipboard: updatedChipboard,
   };
+  console.log("MaC handleSetInitialCharacteristics finished");
 
   return {newState, effect: undefined};
 }

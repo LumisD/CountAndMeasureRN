@@ -12,6 +12,7 @@ export async function handleCreateNewUnion(
   repo: MeasureAndCountRepository,
   get: () => AddNewItemStore,
 ): Promise<{newState: AddNewItemState; effect?: AddNewItemEffect}> {
+  console.log("MaC handleCreateNewUnion started");
   const newUnion: UnionOfChipboardsUI = {
     ...createDefaultUnionOfChipboardsUI(),
     title: getDefaultUnionTitle(),
@@ -33,6 +34,7 @@ export async function handleCreateNewUnion(
       colorName: "White",
     },
   };
+  console.log("MaC handleCreateNewUnion finished");
 
   return {newState, effect: undefined};
 }

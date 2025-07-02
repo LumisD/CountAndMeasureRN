@@ -7,6 +7,7 @@ export async function handleUpdateChipboardSize(
   dimension: number,
   get: () => {state: AddNewItemState},
 ): Promise<{newState: AddNewItemState; effect?: AddNewItemEffect}> {
+  console.log("MaC handleUpdateChipboardSize started");
   const currentState = get().state;
   const currentChipboard = currentState.newOrEditChipboard;
 
@@ -58,6 +59,7 @@ export async function handleUpdateChipboardSize(
     newOrEditChipboard: finalChipboard,
     isAddButtonAvailable,
   };
+  console.log("MaC handleUpdateChipboardSize finished");
 
   return {newState, effect: undefined};
 }

@@ -8,13 +8,14 @@ export async function handleUpdateUnionTitle(
   repo: MeasureAndCountRepository,
   get: () => {state: AddNewItemState},
 ): Promise<{newState: AddNewItemState; effect?: AddNewItemEffect}> {
+  console.log("MaC handleUpdateUnionTitle started");
   const currentState = get().state;
   const union = currentState.unionOfChipboards;
 
   const objectId = toObjectIdOrUndefined(union.id);
   if (!objectId) {
     console.error(
-      `handleUpdateUnionTitle: Invalid union.id: ${union.id} , objectId: ${objectId}`,
+      `MaC handleUpdateUnionTitle: Invalid union.id: ${union.id} , objectId: ${objectId}`,
     );
     return {newState: currentState, effect: undefined};
   }
@@ -30,6 +31,7 @@ export async function handleUpdateUnionTitle(
     ...currentState,
     unionOfChipboards: updatedUnion,
   };
+  console.log("MaC handleUpdateUnionTitle finished");
 
   return {newState, effect: undefined};
 }

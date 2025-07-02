@@ -8,13 +8,14 @@ export async function handleDeleteUnion(
   repo: MeasureAndCountRepository,
   get: () => {state: AddNewItemState},
 ): Promise<{newState: AddNewItemState; effect?: AddNewItemEffect}> {
+  console.log("MaC handleDeleteUnion started");
   const currentState = get().state;
   const union = currentState.unionOfChipboards;
   const objectId = toObjectIdOrUndefined(union.id);
 
   if (!objectId) {
     console.error(
-      `handleDeleteUnion: Invalid union.id: ${union.id} , objectId: ${objectId}`,
+      `MaC handleDeleteUnion: Invalid union.id: ${union.id} , objectId: ${objectId}`,
     );
     return {newState: currentState, effect: undefined};
   }
@@ -36,6 +37,7 @@ export async function handleDeleteUnion(
       Date.now(),
     );
   }
+  console.log("MaC handleDeleteUnion finished");
 
   return {
     newState: currentState,

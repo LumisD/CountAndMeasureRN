@@ -6,6 +6,7 @@ export async function handleUpdateChipboardQuantity(
   newQuantityAsString: string,
   get: () => {state: AddNewItemState},
 ): Promise<{newState: AddNewItemState; effect?: AddNewItemEffect}> {
+  console.log("MaC handleUpdateChipboardQuantity started");
   const currentState = get().state;
 
   const newQuantityAsInt = parseInt(newQuantityAsString, 10) || 0;
@@ -36,6 +37,7 @@ export async function handleUpdateChipboardQuantity(
     newOrEditChipboard: updatedChipboard2,
     isAddButtonAvailable,
   };
+  console.log("MaC handleUpdateChipboardQuantity finished");
 
   return {newState, effect: undefined};
 }

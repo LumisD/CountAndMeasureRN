@@ -25,7 +25,7 @@ type Props = StackScreenProps<RootStackParamList, "AddNewItem">;
 
 export default function AddNewItemScreen({navigation, route}: Props) {
   const {serializedItemType} = route.params;
-  console.log("AddNewItemScreen serializedItemType: ", serializedItemType);
+  console.log("MaC AddNewItemScreen serializedItemType: ", serializedItemType);
 
   let parsed: unknown;
   let itemType: NewScreenType | null = null;
@@ -35,10 +35,10 @@ export default function AddNewItemScreen({navigation, route}: Props) {
     if (isValidNewScreenType(parsed)) {
       itemType = parsed;
     } else {
-      console.warn("Parsed object is not a valid NewScreenType", parsed);
+      console.warn("MaC Parsed object is not a valid NewScreenType", parsed);
     }
   } catch (e) {
-    console.error("Failed to parse serializedItemType", e);
+    console.error("MaC Failed to parse serializedItemType", e);
   }
 
   const realm = useRealm();

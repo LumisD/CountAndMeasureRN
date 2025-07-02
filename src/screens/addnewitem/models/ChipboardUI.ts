@@ -41,7 +41,7 @@ export function mapChipboardUIToChipboard(ui: ChipboardUI): Chipboard {
   return {
     id: ui.id,
     unionId: ui.unionId,
-    state: 0, // default state, can be changed later
+    state: 0, // default state
     quantity: ui.quantity,
     colorName: ui.colorName,
     color: ui.color,
@@ -69,7 +69,7 @@ export function mapChipboardToChipboardUi(chip: Chipboard): ChipboardUI {
     size1AsString: chip.size1.toString(),
     size2AsString: chip.size2.toString(),
     size3AsString: chip.size3.toString(),
-    chipboardAsString: "", // can be composed elsewhere
+    chipboardAsString: "",
   };
 }
 
