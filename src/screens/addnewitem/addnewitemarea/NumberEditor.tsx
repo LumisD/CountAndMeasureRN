@@ -1,6 +1,8 @@
 import React from "react";
 import {TextInput, View, Text, StyleSheet} from "react-native";
 import {AddNewItemIntent, SIZE_CHANGED} from "../AddNewItemIntent";
+import {Typography} from "../../../theme/typography";
+import {Black, Gray} from "../../../theme/colors";
 
 type Props = {
   label: string;
@@ -35,18 +37,21 @@ export const NumberEditor: React.FC<Props> = ({
 
 const styles = StyleSheet.create({
   container: {
-    marginLeft: 8,
     width: 150,
     height: 70,
     justifyContent: "center",
   },
   label: {
+    ...Typography.bodyNormal,
+    color: Black,
     fontSize: 14,
     marginBottom: 4,
   },
   input: {
+    ...Typography.bodyNormal,
+    color: Black,
     borderWidth: 1,
-    borderColor: "#888",
+    borderColor: Gray,
     paddingHorizontal: 8,
     paddingVertical: 4,
     fontSize: 16,

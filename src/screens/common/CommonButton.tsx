@@ -26,7 +26,8 @@ export const CommonButton: React.FC<Props> = ({text, enabled, onPress}) => {
 const styles = StyleSheet.create({
   button: {
     height: 50,
-    borderRadius: 4,
+    minWidth: 90,
+    borderRadius: 25,
     justifyContent: "center",
     alignItems: "center",
     paddingHorizontal: 16,

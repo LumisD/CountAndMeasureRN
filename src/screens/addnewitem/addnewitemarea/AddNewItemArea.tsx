@@ -52,17 +52,18 @@ export const AddNewItemArea: React.FC<Props> = ({
               processIntent={processIntent}
             />
           )}
-          <View style={styles.spacer16} />
           <QuantityField
             quantityAsString={state.newOrEditChipboard.quantityAsString}
             processIntent={processIntent}
           />
         </View>
 
-        <AddChipboardButton
-          isEnabled={state.isAddButtonAvailable}
-          processIntent={processIntent}
-        />
+        <View style={styles.rightColumn}>
+          <AddChipboardButton
+            isEnabled={state.isAddButtonAvailable}
+            processIntent={processIntent}
+          />
+        </View>
       </View>
 
       <ChipboardAsStringField
@@ -79,17 +80,20 @@ const styles = StyleSheet.create({
     width: "100%",
     paddingTop: 0,
     paddingBottom: 16,
-    paddingHorizontal: 16,
+    paddingHorizontal: 0,
   },
   row: {
     flexDirection: "row",
     justifyContent: "space-between",
-    alignItems: "flex-start",
+    alignItems: "stretch",
   },
   leftColumn: {
     width: "60%",
   },
-  spacer16: {
-    height: 16,
+  rightColumn: {
+    width: "40%",
+    justifyContent: "center",
+    alignItems: "center",
+    flex: 1,
   },
 });

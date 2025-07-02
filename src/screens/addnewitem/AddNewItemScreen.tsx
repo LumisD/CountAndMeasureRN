@@ -146,7 +146,7 @@ export function TopBar({title, processIntent}: TopBarProps) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 16,
+    paddingTop: 0,
     paddingHorizontal: 16,
     backgroundColor: MainBg,
   },

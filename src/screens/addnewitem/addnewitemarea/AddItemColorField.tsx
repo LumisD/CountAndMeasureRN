@@ -41,7 +41,6 @@ export const AddItemColorField: React.FC<Props> = ({
 
 const styles = StyleSheet.create({
   wrapper: {
-    marginTop: 16,
     marginHorizontal: 24,
   },
 });
