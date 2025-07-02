@@ -20,7 +20,6 @@ import {MeasureAndCountRepository} from "../../../data/repository/MeasureAndCoun
 import {t} from "i18next";
 import {AddNewItemStore} from "./AddNewItemStore";
 import {handleCreateNewUnionAndSetInitialCharacteristics} from "./handlers/handleCreateNewUnionAndSetInitialCharacteristics";
-import {handleCreateNewUnion} from "./handlers/handleCreateNewUnion";
 import {handleUpdateUnionTitle} from "./handlers/handleUpdateUnionTitle";
 import {handlePressedToDeleteUnion} from "./handlers/handlePressedToDeleteUnion";
 import {handleDeleteUnion} from "./handlers/handleDeleteUnion";

@@ -19,6 +19,7 @@ import {provideMeasureAndCountRepository} from "../../data/db/dao/provideReposit
 import {TextInput, Pressable, Text} from "react-native";
 import {AddNewItemArea} from "./addnewitemarea/AddNewItemArea";
 import {NAVIGATE_BACK, SHOW_SNACKBAR} from "./AddNewItemEffect";
+import {Snackbar} from "react-native-paper";
 
 type Props = StackScreenProps<RootStackParamList, "AddNewItem">;
 
@@ -49,6 +50,9 @@ export default function AddNewItemScreen({navigation, route}: Props) {
   const currentEffect = useStore(store, s => s.currentEffect);
   const consumeEffect = useStore(store, s => s.consumeEffect);
 
+  const [snackbarVisible, setSnackbarVisible] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
+
   const [shouldFlash, setShouldFlash] = useState(false);
 
   useEffect(() => {
@@ -60,13 +64,16 @@ export default function AddNewItemScreen({navigation, route}: Props) {
 
     switch (currentEffect.type) {
       case SHOW_SNACKBAR:
-        Alert.alert("Snackbar", currentEffect.message);
+        setSnackbarMessage(currentEffect.message);
+        setSnackbarVisible(true);
         break;
+
       case NAVIGATE_BACK:
-        Alert.alert("Navigation", "Should navigate back");
+        navigation.goBack();
         break;
+
       default:
-        Alert.alert("Unhandled effect", currentEffect.type);
+        console.warn("Unhandled effect:", currentEffect.type);
         break;
     }
 
@@ -85,29 +92,39 @@ export default function AddNewItemScreen({navigation, route}: Props) {
   }, [navigation, state.unionOfChipboards.title, processIntent]);
 
   return (
-    <View style={styles.container}>
-      {state.isAddAreaOpen && itemType && (
-        <AddNewItemArea
-          itemType={itemType}
-          state={state}
-          shouldFlash={shouldFlash}
-          setShouldFlash={setShouldFlash}
-          processIntent={processIntent}
-        />
-      )}
-      {/* <ExpandHideNewItemField
+    <>
+      <View style={styles.container}>
+        {state.isAddAreaOpen && itemType && (
+          <AddNewItemArea
+            itemType={itemType}
+            state={state}
+            shouldFlash={shouldFlash}
+            setShouldFlash={setShouldFlash}
+            processIntent={processIntent}
+          />
+        )}
+        {/* <ExpandHideNewItemField
         isOpen={state.isAddAreaOpen}
         onToggle={() => processIntent({type: TOGGLE_ADD_AREA_VISIBILITY})}
       /> */}
-      <View style={styles.flexListWrapper}>
-        {/* <ListOfNewItems
+        <View style={styles.flexListWrapper}>
+          {/* <ListOfNewItems
           hasColor={state.unionOfChipboards.hasColor}
           items={state.createdChipboards}
           processIntent={processIntent}
         /> */}
+        </View>
+        <View style={{height: 8}} />
       </View>
-      <View style={{height: 8}} />
-    </View>
+
+      <Snackbar
+        visible={snackbarVisible}
+        onDismiss={() => setSnackbarVisible(false)}
+        duration={2000}
+        style={{borderRadius: 4}}>
+        {snackbarMessage}
+      </Snackbar>
+    </>
   );
 }
 
