@@ -2,8 +2,7 @@ import {NewScreenType} from "../models/NewScreenType";
 import {ChipboardUI} from "./models/ChipboardUI";
 
 // Handled in handleAddNewItemIntent
-export const CREATE_NEW_UNION = "CreateNewUnion";
-export const SET_ITEM_TYPE = "SetItemType";
+export const CREATE_NEW_UNION_WITH_ITEM_TYPE = "CreateNewUnionSetItemType";
 export const TITLE_OF_UNION_CHANGED = "TitleOfUnionChanged";
 export const PRESS_TO_DELETE_UNION = "PressToDeleteUnion";
 export const DELETING_UNION_CONFIRMED = "DeletingUnionConfirmed";
@@ -24,8 +23,10 @@ export const ASK_DELETE_CHIPBOARD = "AskDeleteChipboard";
 export const BACK = "Back";
 
 export type AddNewItemIntent =
-  | {type: typeof CREATE_NEW_UNION}
-  | {type: typeof SET_ITEM_TYPE; itemType: NewScreenType | null}
+  | {
+      type: typeof CREATE_NEW_UNION_WITH_ITEM_TYPE;
+      itemType: NewScreenType | null;
+    }
   | {type: typeof TITLE_OF_UNION_CHANGED; newTitle: string}
   | {type: typeof SIZE_CHANGED; newSizeAsString: string; dimension: number}
   | {type: typeof QUANTITY_CHANGED; newQuantityAsString: string}

@@ -4,7 +4,7 @@ import {
   ADD_CHIPBOARD_TO_DB,
   AddNewItemIntent,
   COLOR_CHANGED,
-  CREATE_NEW_UNION,
+  CREATE_NEW_UNION_WITH_ITEM_TYPE,
   DELETE_CHIPBOARD_CONFIRMED,
   DELETING_UNION_CONFIRMED,
   EDIT_CHIPBOARD_CONFIRMED,
@@ -12,7 +12,6 @@ import {
   PRESS_TO_DELETE_UNION,
   PRESS_TO_SHARE_UNION,
   QUANTITY_CHANGED,
-  SET_ITEM_TYPE,
   SHARING_UNION_CONFIRMED,
   SIZE_CHANGED,
   TITLE_OF_UNION_CHANGED,
@@ -20,7 +19,7 @@ import {
 import {MeasureAndCountRepository} from "../../../data/repository/MeasureAndCountRepository";
 import {t} from "i18next";
 import {AddNewItemStore} from "./AddNewItemStore";
-import {handleSetInitialCharacteristics} from "./handlers/handleSetInitialCharacteristics";
+import {handleCreateNewUnionAndSetInitialCharacteristics} from "./handlers/handleCreateNewUnionAndSetInitialCharacteristics";
 import {handleCreateNewUnion} from "./handlers/handleCreateNewUnion";
 import {handleUpdateUnionTitle} from "./handlers/handleUpdateUnionTitle";
 import {handlePressedToDeleteUnion} from "./handlers/handlePressedToDeleteUnion";
@@ -48,15 +47,8 @@ export async function handleAddNewItemIntent(
   let effect: AddNewItemEffect | undefined;
 
   switch (intent.type) {
-    case CREATE_NEW_UNION: {
-      const result = await handleCreateNewUnion(repo, get);
-      newState = result.newState;
-      effect = result.effect;
-      break;
-    }
-
-    case SET_ITEM_TYPE: {
-      const result = await handleSetInitialCharacteristics(
+    case CREATE_NEW_UNION_WITH_ITEM_TYPE: {
+      const result = await handleCreateNewUnionAndSetInitialCharacteristics(
         intent.itemType,
         repo,
         get,

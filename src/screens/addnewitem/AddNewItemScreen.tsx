@@ -9,8 +9,7 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import {
   AddNewItemIntent,
   BACK,
-  CREATE_NEW_UNION,
-  SET_ITEM_TYPE,
+  CREATE_NEW_UNION_WITH_ITEM_TYPE,
   TITLE_OF_UNION_CHANGED,
 } from "./AddNewItemIntent";
 import {useStore} from "zustand";
@@ -53,8 +52,7 @@ export default function AddNewItemScreen({navigation, route}: Props) {
   const [shouldFlash, setShouldFlash] = useState(false);
 
   useEffect(() => {
-    processIntent({type: CREATE_NEW_UNION});
-    processIntent({type: SET_ITEM_TYPE, itemType: itemType});
+    processIntent({type: CREATE_NEW_UNION_WITH_ITEM_TYPE, itemType: itemType});
   }, []);
 
   useEffect(() => {
