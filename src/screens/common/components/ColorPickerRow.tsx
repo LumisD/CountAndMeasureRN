@@ -43,20 +43,31 @@ export const ColorPickerRow: React.FC<Props> = ({
 
       {showDropdown && (
         <Portal>
-          <View style={[styles.dropdownContainer, {top: anchorY}]}>
-            <FlatList
-              data={colorListWithNames}
-              keyExtractor={item => item.name}
-              renderItem={({item}) => (
-                <Pressable
-                  style={styles.dropdownItem}
-                  onPress={() => onColorSelected(item)}>
-                  <ColorCircle color={item.color} />
-                  <Text style={styles.dropdownText}>{item.name}</Text>
-                </Pressable>
-              )}
+          <>
+            {/* This covers the whole screen and catches taps outside the dropdown */}
+            <Pressable
+              style={StyleSheet.absoluteFill}
+              onPress={() => setShowDropdown(false)}
             />
-          </View>
+            <View
+              style={[
+                styles.dropdownContainer,
+                {top: anchorY, maxHeight: 400},
+              ]}>
+              <FlatList
+                data={colorListWithNames}
+                keyExtractor={item => item.name}
+                renderItem={({item}) => (
+                  <Pressable
+                    style={styles.dropdownItem}
+                    onPress={() => onColorSelected(item)}>
+                    <ColorCircle color={item.color} />
+                    <Text style={styles.dropdownText}>{item.name}</Text>
+                  </Pressable>
+                )}
+              />
+            </View>
+          </>
         </Portal>
       )}
     </>
@@ -66,13 +77,15 @@ export const ColorPickerRow: React.FC<Props> = ({
 const styles = StyleSheet.create({
   dropdownContainer: {
     position: "absolute",
-    left: 24,
-    right: 24,
+    left: 0,
+    right: 0,
     backgroundColor: "white",
-    elevation: 4,
     borderRadius: 4,
-    paddingVertical: 4,
-    zIndex: 1000,
+    elevation: 4, // shadow for Android
+    shadowColor: "#000", // shadow for iOS
+    shadowOffset: {width: 0, height: 2},
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
   },
   row: {
     flexDirection: "row",
