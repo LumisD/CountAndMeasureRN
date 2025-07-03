@@ -12,6 +12,7 @@ type Props = {
 };
 
 import {Portal} from "react-native-paper";
+import {t} from "i18next";
 
 export const ColorPickerRow: React.FC<Props> = ({
   selectedColor,
@@ -62,7 +63,7 @@ export const ColorPickerRow: React.FC<Props> = ({
                     style={styles.dropdownItem}
                     onPress={() => onColorSelected(item)}>
                     <ColorCircle color={item.color} />
-                    <Text style={styles.dropdownText}>{item.name}</Text>
+                    <Text style={styles.dropdownText}>{t(item.name)}</Text>
                   </Pressable>
                 )}
               />
