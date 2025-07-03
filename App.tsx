@@ -16,6 +16,7 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import {StatusBar} from "react-native";
 import {MainBg} from "./src/theme/colors";
 import {RealmProvider} from "./src/data/db/RealmContext";
+import {PaperProvider} from "react-native-paper";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -62,7 +63,7 @@ function TabNavigator() {
 
 export default function App() {
   return (
-    <>
+    <PaperProvider>
       <StatusBar backgroundColor={MainBg} barStyle="dark-content" />
       <ThemeProvider>
         <RealmProvider>
@@ -79,6 +80,6 @@ export default function App() {
           </NavigationContainer>
         </RealmProvider>
       </ThemeProvider>
-    </>
+    </PaperProvider>
   );
 }
