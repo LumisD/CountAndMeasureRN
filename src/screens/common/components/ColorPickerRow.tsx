@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {View, Text, Pressable, StyleSheet, FlatList} from "react-native";
 import {ColorCircle} from "./ColorCircle";
 import {ColorItem} from "../../models/ColorItem";
@@ -11,15 +11,29 @@ type Props = {
   onColorSelected: (colorItem: ColorItem) => void;
 };
 
+import {Portal} from "react-native-paper";
+
 export const ColorPickerRow: React.FC<Props> = ({
   selectedColor,
   showDropdown,
   setShowDropdown,
   onColorSelected,
 }) => {
+  const anchorRef = useRef<View>(null);
+  const [anchorY, setAnchorY] = useState(0);
+
+  useEffect(() => {
+    if (showDropdown && anchorRef.current) {
+      anchorRef.current.measure((x, y, width, height, pageX, pageY) => {
+        setAnchorY(pageY + height);
+      });
+    }
+  }, [showDropdown]);
+
   return (
-    <View>
+    <>
       <Pressable
+        ref={anchorRef}
         style={styles.row}
         onPress={() => setShowDropdown(!showDropdown)}>
         <Text style={styles.label}>Color</Text>
@@ -28,24 +42,38 @@ export const ColorPickerRow: React.FC<Props> = ({
       </Pressable>
 
       {showDropdown && (
-        <FlatList
-          data={colorListWithNames}
-          keyExtractor={item => item.name}
-          renderItem={({item}) => (
-            <Pressable
-              style={styles.dropdownItem}
-              onPress={() => onColorSelected(item)}>
-              <ColorCircle color={item.color} />
-              <Text style={styles.dropdownText}>{item.name}</Text>
-            </Pressable>
-          )}
-        />
+        <Portal>
+          <View style={[styles.dropdownContainer, {top: anchorY}]}>
+            <FlatList
+              data={colorListWithNames}
+              keyExtractor={item => item.name}
+              renderItem={({item}) => (
+                <Pressable
+                  style={styles.dropdownItem}
+                  onPress={() => onColorSelected(item)}>
+                  <ColorCircle color={item.color} />
+                  <Text style={styles.dropdownText}>{item.name}</Text>
+                </Pressable>
+              )}
+            />
+          </View>
+        </Portal>
       )}
-    </View>
+    </>
   );
 };
 
 const styles = StyleSheet.create({
+  dropdownContainer: {
+    position: "absolute",
+    left: 24,
+    right: 24,
+    backgroundColor: "white",
+    elevation: 4,
+    borderRadius: 4,
+    paddingVertical: 4,
+    zIndex: 1000,
+  },
   row: {
     flexDirection: "row",
     alignItems: "center",
