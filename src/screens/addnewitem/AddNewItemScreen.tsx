@@ -22,6 +22,7 @@ import {Snackbar} from "react-native-paper";
 import {ExpandHideNewItemField} from "./components/ExpandHideNewItemField";
 import {convertToNewScreenType} from "./handlers/convertToNewScreenType";
 import {handleAddNewItemEffects} from "./handlers/handleAddNewItemEffects";
+import {AnimatedExpandCollapse} from "../common/components/AnimatedExpandCollapse";
 
 type Props = StackScreenProps<RootStackParamList, "AddNewItem">;
 
@@ -76,14 +77,16 @@ export default function AddNewItemScreen({navigation, route}: Props) {
   return (
     <>
       <View style={styles.container}>
-        {state.isAddAreaOpen && itemType && (
-          <AddNewItemArea
-            itemType={itemType}
-            state={state}
-            shouldFlash={shouldFlash}
-            setShouldFlash={setShouldFlash}
-            processIntent={processIntent}
-          />
+        {itemType && (
+          <AnimatedExpandCollapse isVisible={state.isAddAreaOpen}>
+            <AddNewItemArea
+              itemType={itemType}
+              state={state}
+              shouldFlash={shouldFlash}
+              setShouldFlash={setShouldFlash}
+              processIntent={processIntent}
+            />
+          </AnimatedExpandCollapse>
         )}
         <ExpandHideNewItemField
           isAddAreaOpen={state.isAddAreaOpen}
