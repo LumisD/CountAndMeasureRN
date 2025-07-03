@@ -4,6 +4,22 @@
     <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="android:editTextBackground">@drawable/rn_edit_text_material</item>
+
+        <item name="colorPrimary">@color/primary_blue</item>
+        <item name="colorPrimaryVariant">@color/dark_blue</item>
+        <item name="colorAccent">@color/orange</item>
+
+        <!-- Set dialog title and message text colors to blue -->
+        <item name="android:textColorPrimary">@color/primary_blue</item>
+        <item name="android:textColorSecondary">@color/primary_blue</item>
+
+        <!-- Customize AlertDialog theme -->
+        <item name="alertDialogTheme">@style/CustomAlertDialog</item>
+    </style>
+
+    <style name="CustomAlertDialog" parent="Theme.MaterialComponents.Light.Dialog.Alert">
+        <item name="android:textColorPrimary">@color/primary_blue</item>
+        <item name="android:textColorSecondary">@color/primary_blue</item>
     </style>
 
 </resources>
