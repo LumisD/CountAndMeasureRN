@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
   editorContainer: {
     marginHorizontal: 24,
     width: 150,
-    height: 70,
+    height: 75,
     justifyContent: "center",
   },
   label: {
@@ -50,6 +50,7 @@ const styles = StyleSheet.create({
   },
   input: {
     ...Typography.bodyNormal,
+    height: 40,
     color: Black,
     borderWidth: 1,
     borderColor: Gray,
