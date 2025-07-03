@@ -2,25 +2,26 @@ import {NewScreenType} from "../models/NewScreenType";
 import {ChipboardUI} from "./models/ChipboardUI";
 
 // Handled in handleAddNewItemIntent
-export const CREATE_NEW_UNION_WITH_ITEM_TYPE = "CreateNewUnionSetItemType";
-export const TITLE_OF_UNION_CHANGED = "TitleOfUnionChanged";
-export const PRESS_TO_DELETE_UNION = "PressToDeleteUnion";
-export const DELETING_UNION_CONFIRMED = "DeletingUnionConfirmed";
-export const SIZE_CHANGED = "SizeChanged";
-export const COLOR_CHANGED = "ColorChanged";
-export const QUANTITY_CHANGED = "QuantityChanged";
-export const ADD_CHIPBOARD_TO_DB = "AddChipboardToDb";
-export const PRESS_TO_SHARE_UNION = "PressToShareUnion";
-export const EDIT_CHIPBOARD_CONFIRMED = "EditChipboardConfirmed";
-export const DELETE_CHIPBOARD_CONFIRMED = "DeleteChipboardConfirmed";
-export const SHARING_UNION_CONFIRMED = "SharingUnionConfirmed";
-export const HANDLE_SCREEN_EXIT = "HandleScreenExit";
+export const CREATE_NEW_UNION_WITH_ITEM_TYPE =
+  "CreateNewUnionSetItemType" as const;
+export const TITLE_OF_UNION_CHANGED = "TitleOfUnionChanged" as const;
+export const PRESS_TO_DELETE_UNION = "PressToDeleteUnion" as const;
+export const DELETING_UNION_CONFIRMED = "DeletingUnionConfirmed" as const;
+export const SIZE_CHANGED = "SizeChanged" as const;
+export const COLOR_CHANGED = "ColorChanged" as const;
+export const QUANTITY_CHANGED = "QuantityChanged" as const;
+export const ADD_CHIPBOARD_TO_DB = "AddChipboardToDb" as const;
+export const PRESS_TO_SHARE_UNION = "PressToShareUnion" as const;
+export const EDIT_CHIPBOARD_CONFIRMED = "EditChipboardConfirmed" as const;
+export const DELETE_CHIPBOARD_CONFIRMED = "DeleteChipboardConfirmed" as const;
+export const SHARING_UNION_CONFIRMED = "SharingUnionConfirmed" as const;
+export const HANDLE_SCREEN_EXIT = "HandleScreenExit" as const;
 
 // Handled in reducer
-export const TOGGLE_ADD_AREA_VISIBILITY = "ToggleAddAreaVisibility";
-export const ASK_EDIT_CHIPBOARD = "AskEditChipboard";
-export const ASK_DELETE_CHIPBOARD = "AskDeleteChipboard";
-export const BACK = "Back";
+export const TOGGLE_ADD_AREA_VISIBILITY = "ToggleAddAreaVisibility" as const;
+export const ASK_EDIT_CHIPBOARD = "AskEditChipboard" as const;
+export const ASK_DELETE_CHIPBOARD = "AskDeleteChipboard" as const;
+export const BACK = "Back" as const;
 
 export type AddNewItemIntent =
   | {

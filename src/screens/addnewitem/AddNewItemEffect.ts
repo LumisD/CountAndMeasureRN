@@ -1,14 +1,16 @@
 import {PlatformShareIntent} from "../common/shareUnion";
 import {ChipboardUI} from "./models/ChipboardUI";
 
-export const SHOW_DELETE_CONFIRMATION_DIALOG = "ShowDeleteConfirmationDialog";
-export const SHOW_EDIT_CONFIRMATION_DIALOG = "ShowEditConfirmationDialog";
-export const SHOW_SNACKBAR = "ShowSnackbar";
-export const SHOW_REMOVE_UNION_DIALOG = "ShowRemoveUnionDialog";
-export const SHOW_SHARE_UNION_DIALOG = "ShowShareUnionDialog";
-export const FLASH_ADD_ITEM_AREA = "FlashAddItemArea";
-export const SHARE_UNION = "ShareUnion";
-export const NAVIGATE_BACK = "NavigateBack";
+export const SHOW_DELETE_CONFIRMATION_DIALOG =
+  "ShowDeleteConfirmationDialog" as const;
+export const SHOW_EDIT_CONFIRMATION_DIALOG =
+  "ShowEditConfirmationDialog" as const;
+export const SHOW_SNACKBAR = "ShowSnackbar" as const;
+export const SHOW_REMOVE_UNION_DIALOG = "ShowRemoveUnionDialog" as const;
+export const SHOW_SHARE_UNION_DIALOG = "ShowShareUnionDialog" as const;
+export const FLASH_ADD_ITEM_AREA = "FlashAddItemArea" as const;
+export const SHARE_UNION = "ShareUnion" as const;
+export const NAVIGATE_BACK = "NavigateBack" as const;
 
 export type AddNewItemEffect =
   | {type: typeof SHOW_SNACKBAR; message: string}
