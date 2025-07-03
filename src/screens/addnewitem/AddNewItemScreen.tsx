@@ -23,6 +23,7 @@ import {ExpandHideNewItemField} from "./components/ExpandHideNewItemField";
 import {convertToNewScreenType} from "./handlers/convertToNewScreenType";
 import {handleAddNewItemEffects} from "./handlers/handleAddNewItemEffects";
 import {AnimatedExpandCollapse} from "../common/components/AnimatedExpandCollapse";
+import {ListOfNewItems} from "./components/ListOfNewItems";
 
 type Props = StackScreenProps<RootStackParamList, "AddNewItem">;
 
@@ -95,11 +96,11 @@ export default function AddNewItemScreen({navigation, route}: Props) {
           }
         />
         <View style={styles.flexListWrapper}>
-          {/* <ListOfNewItems
-          hasColor={state.unionOfChipboards.hasColor}
-          items={state.createdChipboards}
-          processIntent={processIntent}
-        /> */}
+          <ListOfNewItems
+            hasColor={state.unionOfChipboards.hasColor}
+            chipboards={state.createdChipboards}
+            processIntent={processIntent}
+          />
         </View>
         <View style={{height: 8}} />
       </View>
