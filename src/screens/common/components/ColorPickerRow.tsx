@@ -1,8 +1,8 @@
 import React from "react";
 import {View, Text, Pressable, StyleSheet, FlatList} from "react-native";
 import {ColorCircle} from "./ColorCircle";
-import {ColorItem} from "../models/ColorItem";
-import {colorListWithNames} from "./screenData";
+import {ColorItem} from "../../models/ColorItem";
+import {colorListWithNames} from "../screenData";
 
 type Props = {
   selectedColor: ColorItem;

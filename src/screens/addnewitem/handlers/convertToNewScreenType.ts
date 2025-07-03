@@ -1,4 +1,4 @@
-import {NewScreenType} from "../../../models/NewScreenType";
+import {NewScreenType} from "../../models/NewScreenType";
 
 export function convertToNewScreenType(
   serializedItemType: string,

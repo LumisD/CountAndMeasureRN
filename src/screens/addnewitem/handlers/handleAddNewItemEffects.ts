@@ -9,16 +9,16 @@ import {
   SHOW_REMOVE_UNION_DIALOG,
   SHOW_SHARE_UNION_DIALOG,
   SHOW_SNACKBAR,
-} from "../../AddNewItemEffect";
-import {showAlert} from "../../../common/showAlert";
+} from "../AddNewItemEffect";
+import {AddNewItemIntent} from "../AddNewItemIntent";
 import {
-  AddNewItemIntent,
   DELETE_CHIPBOARD_CONFIRMED,
   DELETING_UNION_CONFIRMED,
   EDIT_CHIPBOARD_CONFIRMED,
   SHARING_UNION_CONFIRMED,
-} from "../../AddNewItemIntent";
-import {shareUnion} from "../../../common/shareUnion";
+} from "../AddNewItemIntent";
+import {showAlert} from "../../common/showAlert";
+import {shareUnion} from "../../common/shareUnion";
 
 export function handleAddNewItemEffects(
   currentEffect: AddNewItemEffect,

@@ -8,14 +8,14 @@ import {
   StyleProp,
 } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import {DEFAULT_ICON_SIZE} from "./Constants";
+import {DEFAULT_ICON_SIZE} from "../Constants";
 import {
   Black,
   ButtonBlue,
   DisabledGray,
   White,
   Yellowish,
-} from "../../theme/colors";
+} from "../../../theme/colors";
 
 // UpArrowIcon
 export const UpArrowIcon: React.FC<{
@@ -88,7 +88,8 @@ export const ChipboardAsStringField: React.FC<ChipboardAsStringFieldProps> = ({
 const styles = StyleSheet.create({
   button: {
     height: 50,
-    borderRadius: 6,
+    minWidth: 90,
+    borderRadius: 25,
     justifyContent: "center",
     alignItems: "center",
     paddingHorizontal: 16,

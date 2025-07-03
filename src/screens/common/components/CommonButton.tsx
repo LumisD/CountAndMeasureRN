@@ -1,6 +1,6 @@
 import React from "react";
 import {Pressable, Text, StyleSheet, GestureResponderEvent} from "react-native";
-import {Grayish, PrimaryBlue, White} from "../../theme/colors";
+import {Grayish, PrimaryBlue, White} from "../../../theme/colors";
 
 type Props = {
   text: string;
