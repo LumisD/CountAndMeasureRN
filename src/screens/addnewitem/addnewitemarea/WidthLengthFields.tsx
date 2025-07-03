@@ -4,7 +4,7 @@ import {useTranslation} from "react-i18next";
 import {NewScreenType} from "../../models/NewScreenType";
 import {ChipboardUI} from "../models/ChipboardUI";
 import {AddNewItemIntent} from "../AddNewItemIntent";
-import {UpArrowIcon} from "../../common/UiElements";
+import {UpArrowIcon} from "../../common/components/UiElements";
 import {NumberEditor} from "./NumberEditor";
 
 type Props = {

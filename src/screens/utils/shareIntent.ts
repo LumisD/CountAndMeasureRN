@@ -1,5 +1,5 @@
 import {Platform} from "react-native";
-import {PlatformShareIntent} from "../addnewitem/AddNewItemEffect";
+import {PlatformShareIntent} from "../common/shareUnion";
 
 export function createPlatformShareIntent(
   text: string,

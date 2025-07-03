@@ -1,9 +1,9 @@
 import React, {useState} from "react";
 import {Text, View, Pressable, StyleSheet} from "react-native";
-import {ColorPickerRow} from "../../common/ColorPickerRow";
 import {colorListWithNames} from "../../common/screenData";
 import {AddNewItemIntent, COLOR_CHANGED} from "../AddNewItemIntent";
 import {ColorItem} from "../../models/ColorItem";
+import {ColorPickerRow} from "../../common/components/ColorPickerRow";
 
 type Props = {
   colorName: string;

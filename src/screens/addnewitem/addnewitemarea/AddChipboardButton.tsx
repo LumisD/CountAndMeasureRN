@@ -1,8 +1,8 @@
 import React from "react";
 import {View, StyleSheet} from "react-native";
 import {ADD_CHIPBOARD_TO_DB, AddNewItemIntent} from "../AddNewItemIntent";
-import {CommonButton} from "../../common/CommonButton";
 import {useTranslation} from "react-i18next";
+import {CommonButton} from "../../common/components/CommonButton";
 
 type Props = {
   isEnabled: boolean;

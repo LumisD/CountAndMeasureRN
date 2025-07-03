@@ -13,7 +13,7 @@ import {RootStackParamList} from "../navigation/types";
 import {NewScreenType} from "./models/NewScreenType";
 import {useTranslation} from "react-i18next";
 import {defaultScreenTypes} from "./common/screenData";
-import {UpArrowIcon, XIcon} from "./common/UiElements";
+import {UpArrowIcon, XIcon} from "./common/components/UiElements";
 import {Typography} from "../theme/typography";
 import {Gray, MainBg, Transparent} from "../theme/colors";
 

@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {View, StyleSheet} from "react-native";
 import {AddNewItemIntent} from "../AddNewItemIntent";
 import {NewScreenType} from "../../models/NewScreenType";
-import {ChipboardAsStringField} from "../../common/UiElements";
+import {ChipboardAsStringField} from "../../common/components/UiElements";
 import {AddNewItemState} from "../AddNewItemState";
 import {WidthLengthFields} from "./WidthLengthFields";
 import {AddItemColorField} from "./AddItemColorField";
