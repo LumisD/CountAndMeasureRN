@@ -55,7 +55,7 @@ export function ExpandHideFieldInternal<T>({
         onPress={() => processIntent(intentFactory())}
         style={styles.iconWrapper}>
         <Animated.View style={{transform: [{rotate: rotateInterpolate}]}}>
-          <Icon name="keyboard-arrow-up" size={32} color="black" />
+          <Icon name="chevron-up" size={48} color="black" />
         </Animated.View>
       </Pressable>
 
