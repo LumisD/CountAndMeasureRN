@@ -10,6 +10,10 @@ import {
   AddNewItemIntent,
   BACK,
   CREATE_NEW_UNION_WITH_ITEM_TYPE,
+  DELETE_CHIPBOARD_CONFIRMED,
+  DELETING_UNION_CONFIRMED,
+  EDIT_CHIPBOARD_CONFIRMED,
+  SHARING_UNION_CONFIRMED,
   TITLE_OF_UNION_CHANGED,
 } from "./AddNewItemIntent";
 import {useStore} from "zustand";
@@ -18,8 +22,20 @@ import {useRealm} from "../../data/db/RealmContext";
 import {provideMeasureAndCountRepository} from "../../data/db/dao/provideRepository";
 import {TextInput, Pressable, Text} from "react-native";
 import {AddNewItemArea} from "./addnewitemarea/AddNewItemArea";
-import {NAVIGATE_BACK, SHOW_SNACKBAR} from "./AddNewItemEffect";
+import {
+  FLASH_ADD_ITEM_AREA,
+  NAVIGATE_BACK,
+  SHARE_UNION,
+  SHOW_DELETE_CONFIRMATION_DIALOG,
+  SHOW_EDIT_CONFIRMATION_DIALOG,
+  SHOW_REMOVE_UNION_DIALOG,
+  SHOW_SHARE_UNION_DIALOG,
+  SHOW_SNACKBAR,
+} from "./AddNewItemEffect";
 import {Snackbar} from "react-native-paper";
+import {showAlert} from "../common/showAlert";
+import {t} from "i18next";
+import {shareUnion} from "../common/shareUnion";
 
 type Props = StackScreenProps<RootStackParamList, "AddNewItem">;
 
@@ -68,12 +84,120 @@ export default function AddNewItemScreen({navigation, route}: Props) {
         setSnackbarVisible(true);
         break;
 
+      case SHOW_DELETE_CONFIRMATION_DIALOG: {
+        const title = t("confirm_deletion");
+
+        const message = currentEffect.hasColor
+          ? t("are_you_sure_delete_with_color", {
+              chipboardAsString: currentEffect.chipboard.chipboardAsString,
+              colorName: currentEffect.chipboard.colorName,
+            })
+          : t("are_you_sure_delete_no_color", {
+              chipboardAsString: currentEffect.chipboard.chipboardAsString,
+            });
+
+        const confirmText = t("delete");
+        const dismissText = t("cancel");
+
+        showAlert({
+          title,
+          message,
+          confirmText,
+          dismissText,
+          onConfirm: () => {
+            processIntent({
+              type: DELETE_CHIPBOARD_CONFIRMED,
+              chipboardId: currentEffect.chipboard.id,
+            });
+          },
+        });
+
+        break;
+      }
+
+      case SHOW_EDIT_CONFIRMATION_DIALOG: {
+        const {chipboard, hasColor} = currentEffect;
+
+        const title = t("confirm_editing");
+        const text = hasColor
+          ? t("are_you_sure_edit_with_color", {
+              chipboard: chipboard.chipboardAsString,
+              color: chipboard.colorName,
+            })
+          : t("are_you_sure_edit_no_color", {
+              chipboard: chipboard.chipboardAsString,
+            });
+
+        const confirmText = t("edit");
+        const dismissText = t("cancel");
+
+        showAlert({
+          title,
+          message: text,
+          confirmText,
+          dismissText,
+          onConfirm: () => {
+            processIntent({type: EDIT_CHIPBOARD_CONFIRMED, chipboard});
+          },
+        });
+
+        break;
+      }
+
+      case SHOW_REMOVE_UNION_DIALOG: {
+        const title = t("confirm_deletion");
+        const message = t("are_you_sure_delete_current_list_chipboards");
+        const confirmText = t("delete");
+        const dismissText = t("cancel");
+
+        showAlert({
+          title,
+          message,
+          confirmText,
+          dismissText,
+          onConfirm: () => {
+            processIntent({type: DELETING_UNION_CONFIRMED});
+          },
+        });
+
+        break;
+      }
+
+      case SHOW_SHARE_UNION_DIALOG: {
+        const title = t("confirm_sharing");
+        const message = t("are_you_sure_share_current_list_chipboards");
+        const confirmText = t("share");
+        const dismissText = t("cancel");
+
+        showAlert({
+          title,
+          message,
+          confirmText,
+          dismissText,
+          onConfirm: () => {
+            processIntent({type: SHARING_UNION_CONFIRMED});
+          },
+        });
+
+        break;
+      }
+
+      case FLASH_ADD_ITEM_AREA:
+        setShouldFlash(true);
+        break;
+
+      case SHARE_UNION:
+        shareUnion(currentEffect.shareIntent).catch(e =>
+          console.warn("MaC AddNewItemScreen Failed to share:", e),
+        );
+        break;
+
       case NAVIGATE_BACK:
         navigation.goBack();
         break;
 
       default:
-        console.warn("Unhandled effect:", currentEffect.type);
+        console.warn("MaC AddNewItemScreen Unhandled effect:", currentEffect);
         break;
     }
 
