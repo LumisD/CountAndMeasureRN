@@ -44,26 +44,26 @@ type CommonButtonProps = {
   textColor?: string;
 };
 
-export const CommonButton: React.FC<CommonButtonProps> = ({
-  text,
-  enabled = true,
-  onPress,
-  style,
-  backgroundColor = ButtonBlue,
-  textColor = White,
-}) => (
-  <TouchableOpacity
-    style={[
-      styles.button,
-      {backgroundColor: enabled ? backgroundColor : DisabledGray},
-      style,
-    ]}
-    onPress={onPress}
-    disabled={!enabled}
-    activeOpacity={0.7}>
-    <Text style={[styles.buttonText, {color: textColor}]}>{text}</Text>
-  </TouchableOpacity>
-);
+// export const CommonButton: React.FC<CommonButtonProps> = ({
+//   text,
+//   enabled = true,
+//   onPress,
+//   style,
+//   backgroundColor = ButtonBlue,
+//   textColor = White,
+// }) => (
+//   <TouchableOpacity
+//     style={[
+//       styles.button,
+//       {backgroundColor: enabled ? backgroundColor : DisabledGray},
+//       style,
+//     ]}
+//     onPress={onPress}
+//     disabled={!enabled}
+//     activeOpacity={0.7}>
+//     <Text style={[styles.buttonText, {color: textColor}]}>{text}</Text>
+//   </TouchableOpacity>
+// );
 
 type ChipboardAsStringFieldProps = {
   chipboardAsString: string;
