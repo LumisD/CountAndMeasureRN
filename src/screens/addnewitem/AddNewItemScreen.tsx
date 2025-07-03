@@ -10,6 +10,7 @@ import {
   BACK,
   CREATE_NEW_UNION_WITH_ITEM_TYPE,
   TITLE_OF_UNION_CHANGED,
+  TOGGLE_ADD_AREA_VISIBILITY,
 } from "./AddNewItemIntent";
 import {useStore} from "zustand";
 import {createAddNewItemStore} from "./store/AddNewItemStore";
@@ -18,8 +19,9 @@ import {provideMeasureAndCountRepository} from "../../data/db/dao/provideReposit
 import {TextInput, Pressable, Text} from "react-native";
 import {AddNewItemArea} from "./addnewitemarea/AddNewItemArea";
 import {Snackbar} from "react-native-paper";
-import {handleAddNewItemEffects} from "./store/handlers/handleAddNewItemEffects";
-import {convertToNewScreenType} from "./store/handlers/convertToNewScreenType";
+import {ExpandHideNewItemField} from "./components/ExpandHideNewItemField";
+import {convertToNewScreenType} from "./handlers/convertToNewScreenType";
+import {handleAddNewItemEffects} from "./handlers/handleAddNewItemEffects";
 
 type Props = StackScreenProps<RootStackParamList, "AddNewItem">;
 
@@ -83,10 +85,12 @@ export default function AddNewItemScreen({navigation, route}: Props) {
             processIntent={processIntent}
           />
         )}
-        {/* <ExpandHideNewItemField
-        isOpen={state.isAddAreaOpen}
-        onToggle={() => processIntent({type: TOGGLE_ADD_AREA_VISIBILITY})}
-      /> */}
+        <ExpandHideNewItemField
+          isAddAreaOpen={state.isAddAreaOpen}
+          processIntent={() =>
+            processIntent({type: TOGGLE_ADD_AREA_VISIBILITY})
+          }
+        />
         <View style={styles.flexListWrapper}>
           {/* <ListOfNewItems
           hasColor={state.unionOfChipboards.hasColor}
