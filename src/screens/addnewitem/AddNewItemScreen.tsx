@@ -273,7 +273,6 @@ export function TopBar({title, processIntent}: TopBarProps) {
           placeholder="Title"
           multiline={true}
           numberOfLines={2}
-          selection={{start: 0, end: 0}}
           scrollEnabled={false}
         />
       </View>

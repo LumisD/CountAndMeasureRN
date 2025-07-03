@@ -7,7 +7,7 @@
 
         <item name="colorPrimary">@color/primary_blue</item>
         <item name="colorPrimaryVariant">@color/dark_blue</item>
-        <item name="colorAccent">@color/orange</item>
+        <item name="colorAccent">@color/black</item>
 
         <!-- Set dialog title and message text colors to blue -->
         <item name="android:textColorPrimary">@color/primary_blue</item>

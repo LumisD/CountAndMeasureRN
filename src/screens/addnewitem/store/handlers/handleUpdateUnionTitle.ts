@@ -8,7 +8,7 @@ export async function handleUpdateUnionTitle(
   repo: MeasureAndCountRepository,
   get: () => {state: AddNewItemState},
 ): Promise<{newState: AddNewItemState; effect?: AddNewItemEffect}> {
-  console.log("MaC handleUpdateUnionTitle started");
+  console.log("MaC handleUpdateUnionTitle started newTitle:", newTitle);
   const currentState = get().state;
   const union = currentState.unionOfChipboards;
 
