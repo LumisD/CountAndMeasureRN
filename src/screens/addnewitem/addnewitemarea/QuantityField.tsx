@@ -23,7 +23,6 @@ export const QuantityField: React.FC<Props> = ({
           processIntent({type: QUANTITY_CHANGED, newQuantityAsString: text})
         }
         keyboardType="numeric"
-        placeholder="Enter quantity"
       />
     </View>
   );
