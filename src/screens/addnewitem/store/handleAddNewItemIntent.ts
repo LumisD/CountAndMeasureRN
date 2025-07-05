@@ -3,8 +3,9 @@ import {AddNewItemEffect} from "../AddNewItemEffect";
 import {
   ADD_CHIPBOARD_TO_DB,
   AddNewItemIntent,
+  CLEANUP,
   COLOR_CHANGED,
-  CREATE_NEW_UNION_WITH_ITEM_TYPE,
+  START,
   DELETE_CHIPBOARD_CONFIRMED,
   DELETING_UNION_CONFIRMED,
   EDIT_CHIPBOARD_CONFIRMED,
@@ -19,7 +20,7 @@ import {
 import {MeasureAndCountRepository} from "../../../data/repository/MeasureAndCountRepository";
 import {t} from "i18next";
 import {AddNewItemStore} from "./AddNewItemStore";
-import {handleCreateNewUnionAndSetInitialCharacteristics} from "./handlers/handleCreateNewUnionAndSetInitialCharacteristics";
+import {handleStart} from "./handlers/handleStart";
 import {handleUpdateUnionTitle} from "./handlers/handleUpdateUnionTitle";
 import {handlePressedToDeleteUnion} from "./handlers/handlePressedToDeleteUnion";
 import {handleDeleteUnion} from "./handlers/handleDeleteUnion";
@@ -33,9 +34,12 @@ import {handleEditChipboardInAddAreaAndRemoveFromDb} from "./handlers/handleEdit
 import {handleShareUnion} from "./handlers/handleShareUnion";
 import {handleScreenExit} from "./handlers/handleScreenExit";
 
+let unsubscribeChipboards: (() => void) | null = null;
+
 export async function handleAddNewItemIntent(
   intent: AddNewItemIntent,
   get: () => AddNewItemStore,
+  set: (fn: (store: AddNewItemStore) => AddNewItemStore) => void,
   repo: MeasureAndCountRepository,
 ): Promise<{
   handled: true;
@@ -46,14 +50,28 @@ export async function handleAddNewItemIntent(
   let effect: AddNewItemEffect | undefined;
 
   switch (intent.type) {
-    case CREATE_NEW_UNION_WITH_ITEM_TYPE: {
-      const result = await handleCreateNewUnionAndSetInitialCharacteristics(
+    case START: {
+      const result = await handleStart(
         intent.itemType,
         repo,
         get,
+        set,
+        unsubscribeChipboards,
+        newUnsub => {
+          unsubscribeChipboards = newUnsub;
+        },
       );
+
       newState = result.newState;
       effect = result.effect;
+      break;
+    }
+
+    case CLEANUP: {
+      unsubscribeChipboards?.();
+      unsubscribeChipboards = null;
+
+      (newState = get().state), (effect = undefined);
       break;
     }
 

@@ -30,7 +30,12 @@ export const createAddNewItemStore = (repo: MeasureAndCountRepository) => {
 
     processIntent: async (intent: AddNewItemIntent) => {
       // use a handler for intents that require special processing
-      const handledResult = await handleAddNewItemIntent(intent, get, repo);
+      const handledResult = await handleAddNewItemIntent(
+        intent,
+        get,
+        set,
+        repo,
+      );
 
       if (handledResult?.handled) {
         set({state: handledResult.newState});
