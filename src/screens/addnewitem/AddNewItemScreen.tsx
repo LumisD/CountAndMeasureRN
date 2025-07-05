@@ -8,7 +8,8 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import {
   AddNewItemIntent,
   BACK,
-  CREATE_NEW_UNION_WITH_ITEM_TYPE,
+  CLEANUP,
+  START,
   TITLE_OF_UNION_CHANGED,
   TOGGLE_ADD_AREA_VISIBILITY,
 } from "./AddNewItemIntent";
@@ -46,7 +47,10 @@ export default function AddNewItemScreen({navigation, route}: Props) {
   const [shouldFlash, setShouldFlash] = useState(false);
 
   useEffect(() => {
-    processIntent({type: CREATE_NEW_UNION_WITH_ITEM_TYPE, itemType: itemType});
+    processIntent({type: START, itemType: itemType});
+    return () => {
+      processIntent({type: CLEANUP});
+    };
   }, []);
 
   useEffect(() => {
