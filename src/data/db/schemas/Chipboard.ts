@@ -52,7 +52,7 @@ export type Chipboard = {
 export function mapRealmToChipboard(obj: any): Chipboard {
   return {
     id: obj.id.toHexString(),
-    unionId: obj.unionId,
+    unionId: obj.unionId.toHexString(),
     state: obj.state,
     quantity: obj.quantity,
     colorName: obj.colorName,

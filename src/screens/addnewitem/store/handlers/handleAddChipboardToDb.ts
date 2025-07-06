@@ -9,8 +9,11 @@ export async function handleAddChipboardToDb(
   get: () => {state: AddNewItemState},
   t: (key: string) => string,
 ): Promise<{newState: AddNewItemState; effect?: AddNewItemEffect}> {
-  console.log("MaC handleAddChipboardToDb started");
   const currentState = get().state;
+  console.log(
+    "MaC handleAddChipboardToDb currentState.newOrEditChipboard:",
+    currentState.newOrEditChipboard,
+  );
 
   await repo.insertChipboard(
     mapChipboardUIToChipboard(currentState.newOrEditChipboard),
