@@ -3,6 +3,7 @@ import {View, StyleSheet} from "react-native";
 import {ADD_CHIPBOARD_TO_DB, AddNewItemIntent} from "../AddNewItemIntent";
 import {useTranslation} from "react-i18next";
 import {CommonButton} from "../../common/components/CommonButton";
+import {hideKeyboard} from "../../common/components/UiElements";
 
 type Props = {
   isEnabled: boolean;
@@ -19,7 +20,10 @@ export const AddChipboardButton: React.FC<Props> = ({
       <CommonButton
         text={t("add")}
         enabled={isEnabled}
-        onPress={() => processIntent({type: ADD_CHIPBOARD_TO_DB})}
+        onPress={() => {
+          hideKeyboard();
+          processIntent({type: ADD_CHIPBOARD_TO_DB});
+        }}
       />
     </View>
   );
