@@ -7,12 +7,12 @@ export class ChipboardSchema extends Realm.Object {
   quantity!: number;
   colorName!: string;
   color!: string;
-  size1!: number;
-  realSize1!: number; // diff between real measured size and size1
-  size2!: number;
-  realSize2!: number;
-  size3!: number;
-  realSize3!: number;
+  size1!: string;
+  realSize1!: string; // diff between real measured size and size1
+  size2!: string;
+  realSize2!: string;
+  size3!: string;
+  realSize3!: string;
 
   static schema: Realm.ObjectSchema = {
     name: "Chipboard",
@@ -24,12 +24,12 @@ export class ChipboardSchema extends Realm.Object {
       quantity: "int",
       colorName: "string",
       color: "string",
-      size1: "float",
-      realSize1: {type: "float", default: 0}, // diff between real measured size and size1
-      size2: "float",
-      realSize2: {type: "float", default: 0},
-      size3: "float",
-      realSize3: {type: "float", default: 0},
+      size1: {type: "string", default: "0"},
+      realSize1: {type: "string", default: "0"}, // diff between real measured size and size1
+      size2: {type: "string", default: "0"},
+      realSize2: {type: "string", default: "0"},
+      size3: {type: "string", default: "0"},
+      realSize3: {type: "string", default: "0"},
     },
   };
 }
@@ -41,12 +41,12 @@ export type Chipboard = {
   quantity: number;
   colorName: string;
   color: string;
-  size1: number;
-  realSize1: number;
-  size2: number;
-  realSize2: number;
-  size3: number;
-  realSize3: number;
+  size1: string;
+  realSize1: string;
+  size2: string;
+  realSize2: string;
+  size3: string;
+  realSize3: string;
 };
 
 export function mapRealmToChipboard(obj: any): Chipboard {

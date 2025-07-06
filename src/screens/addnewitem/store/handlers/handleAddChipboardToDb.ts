@@ -21,11 +21,11 @@ export async function handleAddChipboardToDb(
     id: "0",
     quantity: 1,
     quantityAsString: "1",
-    size1: 0,
+    size1: "0",
     size1AsString: "",
-    size2: 0,
+    size2: "0",
     size2AsString: "",
-    size3: 0,
+    size3: "0",
     size3AsString: "",
   };
 

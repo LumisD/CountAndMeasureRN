@@ -8,9 +8,9 @@ export type ChipboardUI = {
   quantity: number;
   colorName: string;
   color: string;
-  size1: number;
-  size2: number;
-  size3: number;
+  size1: string;
+  size2: string;
+  size3: string;
 
   quantityAsString: string;
   size1AsString: string;
@@ -26,9 +26,9 @@ export function createDefaultChipboardUI(): ChipboardUI {
     quantity: 1,
     colorName: "White",
     color: White, // e.g. white ARGB
-    size1: 0,
-    size2: 0,
-    size3: 0,
+    size1: "0",
+    size2: "0",
+    size3: "0",
     quantityAsString: "1",
     size1AsString: "",
     size2AsString: "",
@@ -46,11 +46,11 @@ export function mapChipboardUIToChipboard(ui: ChipboardUI): Chipboard {
     colorName: ui.colorName,
     color: ui.color,
     size1: ui.size1,
-    realSize1: 0,
+    realSize1: "0",
     size2: ui.size2,
-    realSize2: 0,
+    realSize2: "0",
     size3: ui.size3,
-    realSize3: 0,
+    realSize3: "0",
   };
 }
 
@@ -66,9 +66,9 @@ export function mapChipboardToChipboardUi(chip: Chipboard): ChipboardUI {
     size3: chip.size3,
 
     quantityAsString: chip.quantity.toString(),
-    size1AsString: chip.size1.toString(),
-    size2AsString: chip.size2.toString(),
-    size3AsString: chip.size3.toString(),
+    size1AsString: chip.size1,
+    size2AsString: chip.size2,
+    size3AsString: chip.size3,
     chipboardAsString: "",
   };
 }
@@ -87,13 +87,13 @@ export function getShareableString(
 
     switch (i) {
       case 1:
-        builder.push(size1.toString());
+        builder.push(size1);
         break;
       case 2:
-        builder.push(size2.toString());
+        builder.push(size2);
         break;
       case 3:
-        builder.push(size3.toString());
+        builder.push(size3);
         break;
     }
 

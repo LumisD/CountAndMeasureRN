@@ -60,12 +60,12 @@ export class ChipboardDao {
     chipboardId: ObjectId,
     color: string,
     colorName: string,
-    size1: number,
-    realSize1: number,
-    size2: number,
-    realSize2: number,
-    size3: number,
-    realSize3: number,
+    size1: string,
+    realSize1: string,
+    size2: string,
+    realSize2: string,
+    size3: string,
+    realSize3: string,
   ): ChipboardSchema | null {
     return (
       this.realm.objects<ChipboardSchema>("Chipboard").filtered(

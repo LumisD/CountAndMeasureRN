@@ -40,13 +40,13 @@ export function setAddButtonAvailability(
   for (let i = 1; i <= dimensions; i++) {
     switch (i) {
       case 1:
-        if (chipboard.size1 === 0) isAddButtonAvailable = false;
+        if (Number(chipboard.size1) === 0) isAddButtonAvailable = false;
         break;
       case 2:
-        if (chipboard.size2 === 0) isAddButtonAvailable = false;
+        if (Number(chipboard.size2) === 0) isAddButtonAvailable = false;
         break;
       case 3:
-        if (chipboard.size3 === 0) isAddButtonAvailable = false;
+        if (Number(chipboard.size3) === 0) isAddButtonAvailable = false;
         break;
     }
   }

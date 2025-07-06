@@ -7,12 +7,12 @@ export async function handleUpdateChipboardSize(
   dimension: number,
   get: () => {state: AddNewItemState},
 ): Promise<{newState: AddNewItemState; effect?: AddNewItemEffect}> {
-  console.log("MaC handleUpdateChipboardSize started");
+  console.log("MaC handleUpdateChipboardSize started: ", newSizeAsString);
   const currentState = get().state;
   const currentChipboard = currentState.newOrEditChipboard;
 
   const newSizeAsFloat = parseFloat(newSizeAsString);
-  const size = isNaN(newSizeAsFloat) ? 0 : newSizeAsFloat;
+  const size = (isNaN(newSizeAsFloat) ? 0 : newSizeAsFloat).toString();
 
   const updatedChipboard = (() => {
     switch (dimension) {
