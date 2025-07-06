@@ -6,6 +6,7 @@ import {
   View,
   ViewStyle,
   StyleProp,
+  Keyboard,
 } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import {DEFAULT_ICON_SIZE} from "../Constants";
@@ -17,6 +18,10 @@ import {
   Yellowish,
 } from "../../../theme/colors";
 import {Typography} from "../../../theme/typography";
+
+export function hideKeyboard() {
+  Keyboard.dismiss();
+}
 
 // UpArrowIcon
 export const UpArrowIcon: React.FC<{
