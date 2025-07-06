@@ -43,7 +43,7 @@ export function handleAddNewItemEffects(
             colorName: currentEffect.chipboard.colorName,
           })
         : t("are_you_sure_delete_no_color", {
-            chipboardAsString: currentEffect.chipboard.chipboardAsString,
+            value: currentEffect.chipboard.chipboardAsString,
           });
 
       const confirmText = t("delete");
