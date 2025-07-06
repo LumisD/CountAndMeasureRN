@@ -125,6 +125,6 @@ const styles = StyleSheet.create({
     height: 42,
     borderWidth: 1,
     borderColor: Black,
-    borderRadius: 4,
+    borderRadius: 0,
   },
 });
