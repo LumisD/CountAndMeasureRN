@@ -10,8 +10,9 @@ import {
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import {AddNewItemIntent} from "../AddNewItemIntent";
 import {ChipboardUI} from "../models/ChipboardUI";
-import {PurpleGrey80} from "../../../theme/colors";
+import {Purple80} from "../../../theme/colors";
 import {ColorRectangle} from "../../common/components/ColorRectangle";
+import {Typography} from "../../../theme/typography";
 
 interface Props {
   hasColor: boolean;
@@ -29,7 +30,7 @@ export const ListOfNewItems: React.FC<Props> = ({
       data={chipboards}
       keyExtractor={item => item.id.toString()}
       ItemSeparatorComponent={() => (
-        <View style={[styles.separator, {backgroundColor: PurpleGrey80}]} />
+        <View style={[styles.separator, {backgroundColor: Purple80}]} />
       )}
       renderItem={({item}) => (
         <Pressable
@@ -41,6 +42,7 @@ export const ListOfNewItems: React.FC<Props> = ({
               <Text style={styles.chipboardText}>{item.chipboardAsString}</Text>
               {hasColor && <ColorRectangle color={item.color} />}
             </View>
+            <View style={{width: 16}} />
             <Pressable
               onPress={() =>
                 processIntent({type: "AskDeleteChipboard", chipboard: item})
@@ -59,8 +61,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    paddingVertical: 8,
-    paddingHorizontal: 16,
+    paddingVertical: 4,
+    paddingHorizontal: 8,
   },
   chipboardRow: {
     flexDirection: "row",
@@ -68,8 +70,9 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   chipboardText: {
+    ...Typography.bodyLarge,
     flex: 1,
-    fontSize: 16,
+    fontSize: 19,
   },
   icon: {
     transform: [{scale: 1.3}],

@@ -1,4 +1,5 @@
 export const PrimaryBlue = "#0000FF";
+export const Purple80 = "#D0BCFF";
 export const PurpleGrey80 = "#FFCCC2DC";
 export const PurpleGrey40 = "#FF625b71";
 export const Pink80 = "#FFEFB8C8";
