@@ -27,16 +27,33 @@ export const AnimatedExpandCollapse: React.FC<Props> = ({
 
   return (
     <>
-      {isVisible && contentHeight === 0 && (
-        <View
-          style={{position: "absolute", opacity: 0, zIndex: -1}}
-          onLayout={event => setContentHeight(event.nativeEvent.layout.height)}>
-          {children}
-        </View>
-      )}
+      {/* Hidden measurement view */}
+      <View
+        style={{
+          position: "absolute",
+          opacity: 0,
+          zIndex: -1,
+          left: 0,
+          right: 0,
+        }}
+        onLayout={event => {
+          if (contentHeight === 0) {
+            setContentHeight(event.nativeEvent.layout.height);
+          }
+        }}>
+        {children}
+      </View>
 
-      <Animated.View style={[{height: heightAnim, overflow: "hidden"}, style]}>
-        {isVisible && contentHeight > 0 && children}
+      {/* Animated visible content */}
+      <Animated.View
+        style={[
+          {
+            height: heightAnim,
+            overflow: "hidden",
+          },
+          style,
+        ]}>
+        <View style={{flexGrow: 1}}>{children}</View>
       </Animated.View>
     </>
   );
