@@ -16,6 +16,7 @@ import {
   White,
   Yellowish,
 } from "../../../theme/colors";
+import {Typography} from "../../../theme/typography";
 
 // UpArrowIcon
 export const UpArrowIcon: React.FC<{
@@ -108,6 +109,7 @@ const styles = StyleSheet.create({
     minHeight: 42,
   },
   chipboardText: {
+    ...Typography.bodyLarge,
     flex: 1,
     textAlign: "center",
     fontSize: 18,

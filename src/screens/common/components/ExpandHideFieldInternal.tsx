@@ -1,6 +1,7 @@
 import React from "react";
 import {View, Pressable, StyleSheet, Animated} from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import {DEFAULT_ICON_SIZE} from "../Constants";
 
 interface ExpandHideFieldProps<T> {
   isAreaOpen: boolean;
@@ -46,7 +47,7 @@ export function ExpandHideFieldInternal<T>({
         <Icon
           name={isRestoreIconShown ? "restore" : "delete"}
           accessibilityLabel="Delete or Restore"
-          size={32}
+          size={DEFAULT_ICON_SIZE}
           color="black"
         />
       </Pressable>
@@ -62,7 +63,7 @@ export function ExpandHideFieldInternal<T>({
       <Pressable
         onPress={() => onShareClick(shareFactory())}
         style={[styles.iconWrapper, {opacity: 0.35}]}>
-        <Icon name="share" size={32} color="black" />
+        <Icon name="share-variant" size={DEFAULT_ICON_SIZE} color="black" />
       </Pressable>
     </View>
   );
@@ -74,6 +75,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     width: "100%",
+    paddingVertical: 0,
   },
   iconWrapper: {
     width: 48,

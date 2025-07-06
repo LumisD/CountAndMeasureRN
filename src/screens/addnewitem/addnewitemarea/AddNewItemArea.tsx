@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
   container: {
     width: "100%",
     paddingTop: 0,
-    paddingBottom: 16,
+    paddingBottom: 0,
     paddingHorizontal: 0,
   },
   row: {
