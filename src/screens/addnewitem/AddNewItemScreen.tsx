@@ -95,9 +95,7 @@ export default function AddNewItemScreen({navigation, route}: Props) {
         )}
         <ExpandHideNewItemField
           isAddAreaOpen={state.isAddAreaOpen}
-          processIntent={() =>
-            processIntent({type: TOGGLE_ADD_AREA_VISIBILITY})
-          }
+          processIntent={processIntent}
         />
         <View style={styles.flexListWrapper}>
           <ListOfNewItems
