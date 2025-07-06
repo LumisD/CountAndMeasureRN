@@ -12,6 +12,7 @@ import {AddNewItemState} from "../../AddNewItemState";
 import {getChipboardAsString} from "../utils";
 import {mapChipboardToChipboardUi} from "../../models/ChipboardUI";
 import {AddNewItemStore} from "../AddNewItemStore";
+import {colorListWithNames} from "../../../common/screenData";
 
 export async function handleStart(
   itemType: NewScreenType | null,
@@ -57,7 +58,7 @@ export async function handleStart(
     newOrEditChipboard: {
       ...currentState.newOrEditChipboard,
       unionId,
-      colorName: "White",
+      colorName: colorListWithNames[0].name, // e.g. "White"
     },
   };
 

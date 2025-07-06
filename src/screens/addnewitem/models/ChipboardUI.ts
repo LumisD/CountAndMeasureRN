@@ -1,6 +1,8 @@
+import {t} from "i18next";
 import {Chipboard} from "../../../data/db/schemas/Chipboard";
 import {White} from "../../../theme/colors";
 import {UnionOfChipboardsUI} from "../../models/UnionOfChipboardsUI";
+import {colorListWithNames} from "../../common/screenData";
 
 export type ChipboardUI = {
   id: string;
@@ -24,7 +26,7 @@ export function createDefaultChipboardUI(): ChipboardUI {
     id: "0",
     unionId: "0",
     quantity: 1,
-    colorName: "White",
+    colorName: colorListWithNames[0].name, // e.g. "White"
     color: White, // e.g. white ARGB
     size1: "0",
     size2: "0",
@@ -103,7 +105,7 @@ export function getShareableString(
   builder.push(" - " + quantity.toString());
 
   if (hasColor && colorName.trim() !== "") {
-    builder.push(` (${colorName})`);
+    builder.push(` (${t(colorName)})`);
   }
 
   return builder.join("");
