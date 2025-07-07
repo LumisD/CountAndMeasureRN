@@ -1,6 +1,7 @@
 import {ChipboardUI} from "./models/ChipboardUI";
 
-export const SET_UNION_ID = "SetUnionId" as const;
+export const START = "SetUnionId" as const;
+export const CLEANUP = "Cleanup" as const;
 export const TITLE_OF_UNION_CHANGED = "TitleOfUnionChanged" as const;
 export const SIZE_CHANGED = "SizeChanged" as const;
 export const REAL_SIZE_CHANGED = "RealSizeChanged" as const;
@@ -21,7 +22,8 @@ export const BACK = "Back" as const;
 export const SET_LIST_DONE = "SetListDone" as const;
 
 export type CountIntent =
-  | {type: typeof SET_UNION_ID; unionId: string | null}
+  | {type: typeof START; unionId: string | null}
+  | {type: typeof CLEANUP}
   | {type: typeof TITLE_OF_UNION_CHANGED; newTitle: string}
   | {type: typeof SIZE_CHANGED; newSizeAsString: string; dimension: number}
   | {type: typeof REAL_SIZE_CHANGED; newDiffAsString: string; dimension: number}
