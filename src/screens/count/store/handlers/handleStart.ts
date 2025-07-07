@@ -1,4 +1,3 @@
-import {ObjectId} from "bson";
 import {toObjectIdOrUndefined} from "../../../../data/db/utils";
 import {MeasureAndCountRepository} from "../../../../data/repository/MeasureAndCountRepository";
 import {CountStore} from "../CountStore";
@@ -9,12 +8,12 @@ import {
   toUnionOfChipboardsUI,
   UnionOfChipboardsUI,
 } from "../../../models/UnionOfChipboardsUI";
+import {mapChipboardToChipboardUi} from "../../models/ChipboardUI";
 import {
-  ChipboardUI,
-  createDefaultChipboardUI,
-  mapChipboardToChipboardUi,
-} from "../../models/ChipboardUI";
-import {getAllRealsAsString, getChipboardAsString} from "../utils";
+  getAllRealsAsString,
+  getChipboardAsString,
+  getChipboardWithInitialValuesAndCharacteristics,
+} from "../utils";
 
 export async function handleStart(
   unionId: string | null,
@@ -88,7 +87,7 @@ export async function handleStart(
       return {newState: newState, effect: undefined};
     }
 
-    const isInitialChipboardSetForCurrentUnion = false;
+    //let isInitialChipboardSetForCurrentUnion = false;
     const unsub = repo.subscribeToChipboardsByUnionId(objectId, chipboards => {
       const updated = chipboards
         .sort((a, b) => {
@@ -130,27 +129,26 @@ export async function handleStart(
         messageForEmptyList: null,
       };
 
-      if (!isInitialChipboardSetForCurrentUnion) {
-        const initialChipboard =
-          getChipboardWithInitialValuesAndCharacteristics(
-            updated[0],
-            unionUI.dimensions,
-            unionUI.direction,
-          );
-        set(store => ({
-          ...store,
-          state: {
-            ...updatedState,
-            chipboardToFind: initialChipboard,
-          },
-          isInitialChipboardSetForCurrentUnion: true,
-        }));
-      } else {
-        set(store => ({
-          ...store,
-          state: updatedState,
-        }));
-      }
+      //if (!isInitialChipboardSetForCurrentUnion) {
+      const initialChipboard = getChipboardWithInitialValuesAndCharacteristics(
+        updated[0],
+        unionUI.dimensions,
+        unionUI.direction,
+      );
+      //isInitialChipboardSetForCurrentUnion = true;
+      set(store => ({
+        ...store,
+        state: {
+          ...updatedState,
+          chipboardToFind: initialChipboard,
+        },
+      }));
+      // } else {
+      //   set(store => ({
+      //     ...store,
+      //     state: updatedState,
+      //   }));
+      // }
     });
     saveUnsubscribe(unsub);
   }
@@ -158,32 +156,5 @@ export async function handleStart(
   return {
     newState,
     effect: undefined,
-  };
-}
-
-function getChipboardWithInitialValuesAndCharacteristics(
-  chipboard: ChipboardUI | null,
-  dimensions: number,
-  direction: number,
-): ChipboardUI {
-  const defaultChipboardUI = createDefaultChipboardUI();
-  if (chipboard === null) return defaultChipboardUI;
-
-  const newChipboardToFind: ChipboardUI = {
-    ...defaultChipboardUI,
-
-    // Copy properties from the existing chipboard
-    unionId: chipboard.unionId,
-    colorName: chipboard.colorName,
-    color: chipboard.color,
-  };
-
-  return {
-    ...newChipboardToFind,
-    chipboardAsString: getChipboardAsString(
-      newChipboardToFind,
-      dimensions,
-      direction,
-    ),
   };
 }
