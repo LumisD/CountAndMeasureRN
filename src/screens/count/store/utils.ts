@@ -117,6 +117,32 @@ export function getChipboardWithInitialValuesAndCharacteristics(
   };
 }
 
+export function setUnknownButtonAvailability(
+  chipboard: ChipboardUI,
+  dimensions: number,
+): boolean {
+  if (chipboard.state !== 2) return false;
+
+  let isUnknownButtonAvailable = true;
+
+  for (let i = 1; i <= dimensions; i++) {
+    switch (i) {
+      case 1:
+        if (parseFloat(chipboard.size1) === 0) isUnknownButtonAvailable = false;
+        break;
+      case 2:
+        if (parseFloat(chipboard.size2) === 0) isUnknownButtonAvailable = false;
+        break;
+      case 3:
+        if (parseFloat(chipboard.size3) === 0) isUnknownButtonAvailable = false;
+        break;
+    }
+    if (chipboard.quantity === 0) isUnknownButtonAvailable = false;
+  }
+
+  return isUnknownButtonAvailable;
+}
+
 export function setAddButtonAvailability(
   chipboard: ChipboardUI,
   dimensions: number,
