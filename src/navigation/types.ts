@@ -1,5 +1,5 @@
 export type RootStackParamList = {
   Tabs: undefined;
-  Count: { unionId: number };
-  AddNewItem: { serializedItemType: string };
+  Count: {unionId: string};
+  AddNewItem: {serializedItemType: string};
 };
