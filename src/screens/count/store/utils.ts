@@ -1,4 +1,4 @@
-import {ChipboardUI} from "../models/ChipboardUI";
+import {ChipboardUI, createDefaultChipboardUI} from "../models/ChipboardUI";
 
 export function getChipboardAsString(
   chipboard: ChipboardUI,
@@ -88,6 +88,33 @@ export function getAllRealsAsString(
   }
 
   return isAllRealsEmpty ? "" : builder;
+}
+
+export function getChipboardWithInitialValuesAndCharacteristics(
+  chipboard: ChipboardUI | null,
+  dimensions: number,
+  direction: number,
+): ChipboardUI {
+  const defaultChipboardUI = createDefaultChipboardUI();
+  if (chipboard === null) return defaultChipboardUI;
+
+  const newChipboardToFind: ChipboardUI = {
+    ...defaultChipboardUI,
+
+    // Copy properties from the existing chipboard
+    unionId: chipboard.unionId,
+    colorName: chipboard.colorName,
+    color: chipboard.color,
+  };
+
+  return {
+    ...newChipboardToFind,
+    chipboardAsString: getChipboardAsString(
+      newChipboardToFind,
+      dimensions,
+      direction,
+    ),
+  };
 }
 
 export function setAddButtonAvailability(
