@@ -8,6 +8,6 @@ export interface CountState {
   isFoundAreaOpen: boolean;
   isUnknownButtonAvailable: boolean;
   isFoundButtonAvailable: boolean;
-  messageForEmptyList: number | null;
+  messageForEmptyList: string | null;
   isBackButtonVisible: boolean;
 }
