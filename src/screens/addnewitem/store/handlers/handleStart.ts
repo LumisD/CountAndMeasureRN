@@ -24,7 +24,6 @@ export async function handleStart(
 ): Promise<{
   newState: AddNewItemState;
   effect?: AddNewItemEffect;
-  unionId?: ObjectId;
 }> {
   // This function consists of trhee parts:
   // 1. Create a new union of chipboards in the db
@@ -35,7 +34,7 @@ export async function handleStart(
   const currentState = get().state;
   if (!itemType) {
     console.log("MaC handleStart itemType is null");
-    return {newState: currentState, effect: undefined, unionId: undefined};
+    return {newState: currentState, effect: undefined};
   }
 
   // 1. Create a new union of chipboards in the db
@@ -72,7 +71,7 @@ export async function handleStart(
     console.error(
       `MaC handleStart: Invalid unionId: ${unionId} , objectId: ${objectId}`,
     );
-    return {newState: initialState, effect: undefined, unionId: undefined};
+    return {newState: initialState, effect: undefined};
   }
 
   // Update union in db
@@ -158,5 +157,5 @@ export async function handleStart(
   };
   console.log("MaC handleStart finished");
 
-  return {newState, effect: undefined, unionId: objectId};
+  return {newState, effect: undefined};
 }
