@@ -89,6 +89,10 @@ export async function handleStart(
 
     //let isInitialChipboardSetForCurrentUnion = false;
     const unsub = repo.subscribeToChipboardsByUnionId(objectId, chipboards => {
+      console.log(
+        "MaC handleStart: repo.subscribeToChipboardsByUnionId called with chipboards.length:",
+        chipboards.length,
+      );
       const updated = chipboards
         .sort((a, b) => {
           const priority = (s: number) => (s === 0 ? 0 : s === 2 ? 1 : 2);
@@ -152,6 +156,7 @@ export async function handleStart(
     });
     saveUnsubscribe(unsub);
   }
+  console.log("MaC handleStart finished");
 
   return {
     newState,

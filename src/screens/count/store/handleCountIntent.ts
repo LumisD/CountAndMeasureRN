@@ -6,6 +6,7 @@ import {
   CLEANUP,
   TITLE_OF_UNION_CHANGED,
   SIZE_CHANGED,
+  REAL_SIZE_CHANGED,
 } from "../CountIntent";
 import {MeasureAndCountRepository} from "../../../data/repository/MeasureAndCountRepository";
 import {CountStore} from "./CountStore";
@@ -15,6 +16,7 @@ import {
   handleSortBySize,
   handleUpdateChipboardSize,
 } from "./handlers/handleUpdateChipboardSize";
+import {handleUpdateRealSizeForSize} from "./handlers/handleUpdateRealSizeForSize";
 
 let unsubscribeChipboards: (() => void) | null = null;
 
@@ -80,6 +82,18 @@ export async function handleCountIntent(
 
       newState = result.newState;
       effect = resultSort.effect;
+      break;
+    }
+
+    case REAL_SIZE_CHANGED: {
+      const result = await handleUpdateRealSizeForSize(
+        intent.newDiffAsString,
+        intent.dimension,
+        get,
+      );
+
+      newState = result.newState;
+      effect = result.effect;
       break;
     }
 
