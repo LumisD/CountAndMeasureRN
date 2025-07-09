@@ -8,6 +8,7 @@ import {
   SIZE_CHANGED,
   REAL_SIZE_CHANGED,
   QUANTITY_CHANGED,
+  COLOR_CHANGED,
 } from "../CountIntent";
 import {MeasureAndCountRepository} from "../../../data/repository/MeasureAndCountRepository";
 import {CountStore} from "./CountStore";
@@ -19,6 +20,7 @@ import {
 } from "./handlers/handleUpdateChipboardSize";
 import {handleUpdateRealSizeForSize} from "./handlers/handleUpdateRealSizeForSize";
 import {handleChangedQuantity} from "./handlers/handleChangedQuantity";
+import {handleUpdateColor} from "./handlers/handleUpdateColor";
 
 let unsubscribeChipboards: (() => void) | null = null;
 
@@ -103,6 +105,18 @@ export async function handleCountIntent(
       const result = await handleChangedQuantity(
         intent.newQuantityAsString,
         repo,
+        get,
+      );
+
+      newState = result.newState;
+      effect = result.effect;
+      break;
+    }
+
+    case COLOR_CHANGED: {
+      const result = await handleUpdateColor(
+        intent.newColorName,
+        intent.newColor,
         get,
       );
 
