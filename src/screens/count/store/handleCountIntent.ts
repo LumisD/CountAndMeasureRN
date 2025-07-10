@@ -17,6 +17,7 @@ import {
   SELECT_UNKNOWN_TO_FIND_AREA_CONFIRMED,
   REMOVE_NOT_FOUND_FROM_FIND_AREA_CONFIRMED,
   DELETING_UNION_CONFIRMED,
+  SHARING_UNION_CONFIRMED,
 } from "../CountIntent";
 import {MeasureAndCountRepository} from "../../../data/repository/MeasureAndCountRepository";
 import {CountStore} from "./CountStore";
@@ -36,6 +37,7 @@ import {handleSetChipboardAsNotFound} from "./handlers/handleSetChipboardAsNotFo
 import {handleSetChipboardInFindArea} from "./handlers/handleSetChipboardInFindArea";
 import {handleRemoveNotFoundChipboardFromFindArea} from "./handlers/handleRemoveNotFoundChipboardFromFindArea";
 import {handleDeleteUnion} from "./handlers/handleDeleteUnion";
+import {handleShareUnion} from "./handlers/handleShareUnion";
 
 let unsubscribeChipboards: (() => void) | null = null;
 
@@ -196,6 +198,13 @@ export async function handleCountIntent(
 
     case DELETING_UNION_CONFIRMED: {
       const result = await handleDeleteUnion(false, repo, get);
+      newState = result.newState;
+      effect = result.effect;
+      break;
+    }
+
+    case SHARING_UNION_CONFIRMED: {
+      const result = await handleShareUnion(repo, get);
       newState = result.newState;
       effect = result.effect;
       break;
