@@ -11,6 +11,7 @@ import {
   COLOR_CHANGED,
   SET_FOUND_CHIPBOARD,
   CREATE_UNKNOWN_CHIPBOARD,
+  PRESS_ON_ITEM_IN_LIST,
 } from "../CountIntent";
 import {MeasureAndCountRepository} from "../../../data/repository/MeasureAndCountRepository";
 import {CountStore} from "./CountStore";
@@ -25,6 +26,7 @@ import {handleChangedQuantity} from "./handlers/handleChangedQuantity";
 import {handleUpdateColor} from "./handlers/handleUpdateColor";
 import {handleSetFoundChipboard} from "./handlers/handleSetFoundChipboard";
 import {handleCreateUnknownAndSaveInDb} from "./handlers/handleCreateUnknownAndSaveInDb";
+import {handlePressOnItemInList} from "./handlers/handlePressOnItemInList";
 
 let unsubscribeChipboards: (() => void) | null = null;
 
@@ -141,6 +143,12 @@ export async function handleCountIntent(
       newState = result.newState;
       effect = result.effect;
       break;
+    }
+
+    case PRESS_ON_ITEM_IN_LIST: {
+      const result = await handlePressOnItemInList(intent.chipboard, get);
+      newState = result.newState;
+      effect = result.effect;
     }
 
     default:
