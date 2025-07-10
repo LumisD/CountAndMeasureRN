@@ -4,6 +4,9 @@ import {
   SHOW_DELETE_UNION_DIALOG,
   SHOW_RESTORE_UNION_DIALOG,
   SHOW_SHARE_UNION_DIALOG,
+  SHOW_WHAT_IS_FOUND_DIALOG,
+  SHOW_WHAT_IS_REAL_SIZE_DIALOG,
+  SHOW_WHAT_IS_UNKNOWN_DIALOG,
 } from "./CountEffect";
 import {
   CountIntent,
@@ -11,6 +14,9 @@ import {
   BACK,
   PRESS_TO_SHARE_UNION,
   PRESS_TO_DELETE_OR_RESTORE_UNION,
+  SHOW_WHAT_IS_FOUND,
+  SHOW_WHAT_IS_UNKNOWN,
+  SHOW_WHAT_IS_REAL_SIZE,
 } from "./CountIntent";
 import {CountState} from "./CountState";
 
@@ -51,6 +57,27 @@ export const countReducer = (
       return {
         newState: state,
         effect: {type: SHOW_SHARE_UNION_DIALOG},
+      };
+    }
+
+    case SHOW_WHAT_IS_FOUND: {
+      return {
+        newState: state,
+        effect: {type: SHOW_WHAT_IS_FOUND_DIALOG},
+      };
+    }
+
+    case SHOW_WHAT_IS_UNKNOWN: {
+      return {
+        newState: state,
+        effect: {type: SHOW_WHAT_IS_UNKNOWN_DIALOG},
+      };
+    }
+
+    case SHOW_WHAT_IS_REAL_SIZE: {
+      return {
+        newState: state,
+        effect: {type: SHOW_WHAT_IS_REAL_SIZE_DIALOG},
       };
     }
 

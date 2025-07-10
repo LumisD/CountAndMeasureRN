@@ -11,7 +11,10 @@ export const SHOW_SELECT_UNKNOWN_TO_FIND_AREA_CONFIRMATION_DIALOG =
   "ShowSelectUnknownToFindAreaConfirmationDialog" as const;
 export const SHOW_NOT_EXCEEDING_TARGET_QUANTITY_DIALOG =
   "ShowNotExceedingTargetQuantityDialog" as const;
-export const SHOW_WHAT_IS_DIALOG = "ShowWhatIsDialog" as const;
+export const SHOW_WHAT_IS_FOUND_DIALOG = "ShowWhatIsFoundDialog" as const;
+export const SHOW_WHAT_IS_UNKNOWN_DIALOG = "ShowWhatIsUnknownDialog" as const;
+export const SHOW_WHAT_IS_REAL_SIZE_DIALOG =
+  "ShowWhatIsRealSizeDialog" as const;
 export const SHOW_SNACKBAR = "ShowSnackbar" as const;
 export const SHOW_DELETE_UNION_DIALOG = "ShowDeleteUnionDialog" as const;
 export const SHOW_RESTORE_UNION_DIALOG = "ShowRestoreUnionDialog" as const;
@@ -44,7 +47,9 @@ export type CountEffect =
       targetQuantity: number;
       enteredQuantity: number;
     }
-  | {type: typeof SHOW_WHAT_IS_DIALOG; questionType: unknown}
+  | {type: typeof SHOW_WHAT_IS_FOUND_DIALOG}
+  | {type: typeof SHOW_WHAT_IS_UNKNOWN_DIALOG}
+  | {type: typeof SHOW_WHAT_IS_REAL_SIZE_DIALOG}
   | {type: typeof SHOW_SNACKBAR; message: string}
   | {type: typeof SHOW_DELETE_UNION_DIALOG}
   | {type: typeof SHOW_RESTORE_UNION_DIALOG}
