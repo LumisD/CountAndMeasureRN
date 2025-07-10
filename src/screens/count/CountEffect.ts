@@ -20,8 +20,11 @@ export const SHOW_DELETE_UNION_DIALOG = "ShowDeleteUnionDialog" as const;
 export const SHOW_RESTORE_UNION_DIALOG = "ShowRestoreUnionDialog" as const;
 export const SHOW_SHARE_UNION_DIALOG = "ShowShareUnionDialog" as const;
 export const SHOW_FIELD_DISABLED = "ShowFieldDisabled" as const;
+
+export const FLASH_AND_SCROLL = "FlashAndScroll" as const;
 export const FLASH_FIND_ITEM_AREA = "FlashFindItemArea" as const;
 export const SCROLL_TO_TOP = "ScrollToTop" as const;
+
 export const SHARE_UNION = "ShareUnion" as const;
 export const HIDE_KEYBOARD = "HideKeyboard" as const;
 export const NAVIGATE_TO_LISTS_SCREEN = "NavigateToListsScreen" as const;
@@ -55,6 +58,7 @@ export type CountEffect =
   | {type: typeof SHOW_RESTORE_UNION_DIALOG}
   | {type: typeof SHOW_SHARE_UNION_DIALOG}
   | {type: typeof SHOW_FIELD_DISABLED}
+  | {type: typeof FLASH_AND_SCROLL}
   | {type: typeof FLASH_FIND_ITEM_AREA}
   | {type: typeof SCROLL_TO_TOP}
   | {type: typeof SHARE_UNION; shareIntent: PlatformShareIntent}

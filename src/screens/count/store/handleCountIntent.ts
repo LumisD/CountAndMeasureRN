@@ -13,6 +13,8 @@ import {
   CREATE_UNKNOWN_CHIPBOARD,
   PRESS_ON_ITEM_IN_LIST,
   UNCHECK_CHIPBOARD_CONFIRMED,
+  SELECT_NOT_FOUND_TO_FIND_AREA_CONFIRMED,
+  SELECT_UNKNOWN_TO_FIND_AREA_CONFIRMED,
 } from "../CountIntent";
 import {MeasureAndCountRepository} from "../../../data/repository/MeasureAndCountRepository";
 import {CountStore} from "./CountStore";
@@ -29,6 +31,7 @@ import {handleSetFoundChipboard} from "./handlers/handleSetFoundChipboard";
 import {handleCreateUnknownAndSaveInDb} from "./handlers/handleCreateUnknownAndSaveInDb";
 import {handlePressOnItemInList} from "./handlers/handlePressOnItemInList";
 import {handleSetChipboardAsNotFound} from "./handlers/handleSetChipboardAsNotFound";
+import {handleSetChipboardInFindArea} from "./handlers/handleSetChipboardInFindArea";
 
 let unsubscribeChipboards: (() => void) | null = null;
 
@@ -161,6 +164,18 @@ export async function handleCountIntent(
       );
       newState = result.newState;
       effect = result.effect;
+    }
+
+    case SELECT_NOT_FOUND_TO_FIND_AREA_CONFIRMED:
+    case SELECT_UNKNOWN_TO_FIND_AREA_CONFIRMED: {
+      const result = await handleSetChipboardInFindArea(
+        intent.chipboard,
+        repo,
+        get,
+      );
+      newState = result.newState;
+      effect = result.effect;
+      break;
     }
 
     default:
