@@ -3,6 +3,7 @@ import {
   NAVIGATE_BACK,
   SHOW_DELETE_UNION_DIALOG,
   SHOW_RESTORE_UNION_DIALOG,
+  SHOW_SHARE_UNION_DIALOG,
 } from "./CountEffect";
 import {
   CountIntent,
@@ -43,6 +44,13 @@ export const countReducer = (
             ? SHOW_RESTORE_UNION_DIALOG
             : SHOW_DELETE_UNION_DIALOG,
         },
+      };
+    }
+
+    case PRESS_TO_SHARE_UNION: {
+      return {
+        newState: state,
+        effect: {type: SHOW_SHARE_UNION_DIALOG},
       };
     }
 
