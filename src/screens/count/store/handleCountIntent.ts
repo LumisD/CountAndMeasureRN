@@ -10,6 +10,7 @@ import {
   QUANTITY_CHANGED,
   COLOR_CHANGED,
   SET_FOUND_CHIPBOARD,
+  CREATE_UNKNOWN_CHIPBOARD,
 } from "../CountIntent";
 import {MeasureAndCountRepository} from "../../../data/repository/MeasureAndCountRepository";
 import {CountStore} from "./CountStore";
@@ -23,6 +24,7 @@ import {handleUpdateRealSizeForSize} from "./handlers/handleUpdateRealSizeForSiz
 import {handleChangedQuantity} from "./handlers/handleChangedQuantity";
 import {handleUpdateColor} from "./handlers/handleUpdateColor";
 import {handleSetFoundChipboard} from "./handlers/handleSetFoundChipboard";
+import {handleCreateUnknownAndSaveInDb} from "./handlers/handleCreateUnknownAndSaveInDb";
 
 let unsubscribeChipboards: (() => void) | null = null;
 
@@ -129,6 +131,13 @@ export async function handleCountIntent(
 
     case SET_FOUND_CHIPBOARD: {
       const result = await handleSetFoundChipboard(repo, get);
+      newState = result.newState;
+      effect = result.effect;
+      break;
+    }
+
+    case CREATE_UNKNOWN_CHIPBOARD: {
+      const result = await handleCreateUnknownAndSaveInDb(repo, get);
       newState = result.newState;
       effect = result.effect;
       break;
