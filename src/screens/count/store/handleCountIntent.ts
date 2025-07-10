@@ -16,6 +16,7 @@ import {
   SELECT_NOT_FOUND_TO_FIND_AREA_CONFIRMED,
   SELECT_UNKNOWN_TO_FIND_AREA_CONFIRMED,
   REMOVE_NOT_FOUND_FROM_FIND_AREA_CONFIRMED,
+  DELETING_UNION_CONFIRMED,
 } from "../CountIntent";
 import {MeasureAndCountRepository} from "../../../data/repository/MeasureAndCountRepository";
 import {CountStore} from "./CountStore";
@@ -34,6 +35,7 @@ import {handlePressOnItemInList} from "./handlers/handlePressOnItemInList";
 import {handleSetChipboardAsNotFound} from "./handlers/handleSetChipboardAsNotFound";
 import {handleSetChipboardInFindArea} from "./handlers/handleSetChipboardInFindArea";
 import {handleRemoveNotFoundChipboardFromFindArea} from "./handlers/handleRemoveNotFoundChipboardFromFindArea";
+import {handleDeleteUnion} from "./handlers/handleDeleteUnion";
 
 let unsubscribeChipboards: (() => void) | null = null;
 
@@ -187,6 +189,13 @@ export async function handleCountIntent(
         intent.chipboard,
         get,
       );
+      newState = result.newState;
+      effect = result.effect;
+      break;
+    }
+
+    case DELETING_UNION_CONFIRMED: {
+      const result = await handleDeleteUnion(false, repo, get);
       newState = result.newState;
       effect = result.effect;
       break;

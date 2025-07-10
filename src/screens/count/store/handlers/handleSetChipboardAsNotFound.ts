@@ -9,6 +9,9 @@ export async function handleSetChipboardAsNotFound(
   repo: MeasureAndCountRepository,
   get: () => {state: CountState},
 ): Promise<{newState: CountState; effect?: CountEffect}> {
+  //find chipboard in the list and set chipboard.state = 0
+  //update state.chipboards and real sizes
+  //update chipboard in db
   console.log("MaC handleSetChipboardAsNotFound started");
   const currentState = get().state;
 
