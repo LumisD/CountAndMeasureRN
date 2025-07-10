@@ -12,7 +12,17 @@ export const SET_FOUND_CHIPBOARD = "SetFoundChipboard" as const;
 export const CREATE_UNKNOWN_CHIPBOARD = "CreateUnknownChipboard" as const;
 export const PRESS_ON_ITEM_IN_LIST = "PressOnItemInList" as const;
 
-export const ACTION_CONFIRMED = "ActionConfirmed" as const;
+export const UNCHECK_CHIPBOARD_CONFIRMED = "UncheckChipboardConfirmed" as const;
+export const SELECT_NOT_FOUND_TO_FIND_AREA_CONFIRMED =
+  "SelectNotFoundToFindAreaConfirmed" as const;
+export const REMOVE_NOT_FOUND_FROM_FIND_AREA_CONFIRMED =
+  "RemoveNotFoundFromFindAreaConfirmed" as const;
+export const SELECT_UNKNOWN_TO_FIND_AREA_CONFIRMED =
+  "SelectUnknownToFindAreaConfirmed" as const;
+export const DELETING_UNION_CONFIRMED = "DeletingUnionConfirmed" as const;
+export const RESTORING_UNION_CONFIRMED = "RestoringUnionConfirmed" as const;
+export const SHARING_UNION_CONFIRMED = "SharingUnionConfirmed" as const;
+
 export const LIST_SCROLLED_BY_USER = "ListScrolledByUser" as const;
 export const FIELD_DISABLED = "FieldDisabled" as const;
 
@@ -43,7 +53,19 @@ export type CountIntent =
   | {type: typeof SHOW_WHAT_IS_FOUND}
   | {type: typeof SHOW_WHAT_IS_UNKNOWN}
   | {type: typeof SHOW_WHAT_IS_REAL_SIZE}
-  | {type: typeof ACTION_CONFIRMED; confirmationType: unknown}
+  | {type: typeof UNCHECK_CHIPBOARD_CONFIRMED; chipboard: ChipboardUI}
+  | {
+      type: typeof SELECT_NOT_FOUND_TO_FIND_AREA_CONFIRMED;
+      chipboard: ChipboardUI;
+    }
+  | {
+      type: typeof REMOVE_NOT_FOUND_FROM_FIND_AREA_CONFIRMED;
+      chipboard: ChipboardUI;
+    }
+  | {type: typeof SELECT_UNKNOWN_TO_FIND_AREA_CONFIRMED; chipboard: ChipboardUI}
+  | {type: typeof DELETING_UNION_CONFIRMED}
+  | {type: typeof RESTORING_UNION_CONFIRMED}
+  | {type: typeof SHARING_UNION_CONFIRMED}
   | {type: typeof LIST_SCROLLED_BY_USER}
   | {type: typeof FIELD_DISABLED}
   | {type: typeof TOGGLE_FIND_AREA_VISIBILITY}
