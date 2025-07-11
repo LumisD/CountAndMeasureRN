@@ -32,18 +32,25 @@ export const NAVIGATE_TO_NEW_SCREEN = "NavigateToNewScreen" as const;
 export const NAVIGATE_BACK = "NavigateBack" as const;
 
 export type CountEffect =
-  | {type: typeof SHOW_UNCHECK_CONFIRMATION_DIALOG; chipboard: ChipboardUI}
+  | {
+      type: typeof SHOW_UNCHECK_CONFIRMATION_DIALOG;
+      chipboard: ChipboardUI;
+      hasColor: boolean;
+    }
   | {
       type: typeof SHOW_SELECT_NOT_FOUND_TO_FIND_AREA_CONFIRMATION_DIALOG;
       chipboard: ChipboardUI;
+      hasColor: boolean;
     }
   | {
       type: typeof SHOW_REMOVE_NOT_FOUND_FROM_FIND_AREA_CONFIRMATION_DIALOG;
       chipboard: ChipboardUI;
+      hasColor: boolean;
     }
   | {
       type: typeof SHOW_SELECT_UNKNOWN_TO_FIND_AREA_CONFIRMATION_DIALOG;
       chipboard: ChipboardUI;
+      hasColor: boolean;
     }
   | {
       type: typeof SHOW_NOT_EXCEEDING_TARGET_QUANTITY_DIALOG;
