@@ -138,7 +138,7 @@ export function handleAddNewItemEffects(
 
     case SHARE_UNION:
       shareUnion(currentEffect.shareIntent).catch(e =>
-        console.warn("MaC AddNewItemScreen Failed to share:", e),
+        console.warn("MaC handleAddNewItemEffects Failed to share:", e),
       );
       break;
 
@@ -147,7 +147,10 @@ export function handleAddNewItemEffects(
       break;
 
     default:
-      console.warn("MaC AddNewItemScreen Unhandled effect:", currentEffect);
+      console.warn(
+        "MaC handleAddNewItemEffects Unhandled effect:",
+        currentEffect,
+      );
       break;
   }
 }
