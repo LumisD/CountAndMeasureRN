@@ -12,6 +12,7 @@ export async function handlePressOnItemInList(
   chipboard: ChipboardUI,
   get: () => {state: CountState},
 ): Promise<{newState: CountState; effect?: CountEffect}> {
+  console.log("MaC handlePressOnItemInList started");
   const currentState = get().state;
 
   switch (chipboard.state) {

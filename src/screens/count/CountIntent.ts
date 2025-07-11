@@ -11,7 +11,6 @@ export const COLOR_CHANGED = "ColorChanged" as const;
 export const SET_FOUND_CHIPBOARD = "SetFoundChipboard" as const;
 export const CREATE_UNKNOWN_CHIPBOARD = "CreateUnknownChipboard" as const;
 export const PRESS_ON_ITEM_IN_LIST = "PressOnItemInList" as const;
-
 export const UNCHECK_CHIPBOARD_CONFIRMED = "UncheckChipboardConfirmed" as const;
 export const SELECT_NOT_FOUND_TO_FIND_AREA_CONFIRMED =
   "SelectNotFoundToFindAreaConfirmed" as const;
@@ -20,12 +19,8 @@ export const REMOVE_NOT_FOUND_FROM_FIND_AREA_CONFIRMED =
 export const SELECT_UNKNOWN_TO_FIND_AREA_CONFIRMED =
   "SelectUnknownToFindAreaConfirmed" as const;
 export const DELETING_UNION_CONFIRMED = "DeletingUnionConfirmed" as const;
-export const RESTORING_UNION_CONFIRMED = "RestoringUnionConfirmed" as const;
 export const SHARING_UNION_CONFIRMED = "SharingUnionConfirmed" as const;
-
-export const LIST_SCROLLED_BY_USER = "ListScrolledByUser" as const;
-export const FIELD_DISABLED = "FieldDisabled" as const;
-
+export const RESTORING_UNION_CONFIRMED = "RestoringUnionConfirmed" as const;
 export const SET_LIST_DONE = "SetListDone" as const;
 // Handled in reducer
 export const TOGGLE_FIND_AREA_VISIBILITY = "ToggleFindAreaVisibility" as const;
@@ -36,6 +31,8 @@ export const PRESS_TO_SHARE_UNION = "PressToShareUnion" as const;
 export const SHOW_WHAT_IS_FOUND = "ShowWhatIsFount" as const;
 export const SHOW_WHAT_IS_UNKNOWN = "ShowWhatIsUnknown" as const;
 export const SHOW_WHAT_IS_REAL_SIZE = "ShowWhatIsRealSize" as const;
+export const LIST_SCROLLED_BY_USER = "ListScrolledByUser" as const;
+export const FIELD_DISABLED = "FieldDisabled" as const;
 
 export type CountIntent =
   | {type: typeof START; unionId: string | null}

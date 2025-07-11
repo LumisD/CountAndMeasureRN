@@ -12,6 +12,7 @@ export async function handleDeleteUnion(
   repo: MeasureAndCountRepository,
   get: () => {state: CountState},
 ): Promise<{newState: CountState; effect?: CountEffect}> {
+  console.log("MaC handleDeleteUnion started");
   const currentState = get().state;
   const unionId = toObjectIdOrUndefined(currentState.unionOfChipboards.id);
 
@@ -38,6 +39,7 @@ export async function handleDeleteUnion(
     unionCount > 0
       ? {type: NAVIGATE_TO_LISTS_SCREEN}
       : {type: NAVIGATE_TO_NEW_SCREEN};
+  console.log("MaC handleDeleteUnion finished");
 
   return {
     newState: currentState,

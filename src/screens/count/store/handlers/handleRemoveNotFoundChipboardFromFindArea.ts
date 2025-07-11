@@ -10,6 +10,7 @@ export async function handleRemoveNotFoundChipboardFromFindArea(
   // find chipboard in the list and set chipboard.isUnderReview = false, isFoundButtonAvailable = false
   // set chipboard default values in state.chipboardToFind
   // set state.isUnknownButtonAvailable = false
+  console.log("MaC handleRemoveNotFoundChipboardFromFindArea started");
 
   const currentState = get().state;
 
@@ -23,6 +24,7 @@ export async function handleRemoveNotFoundChipboardFromFindArea(
       currentState.unionOfChipboards.dimensions,
       currentState.unionOfChipboards.direction,
     );
+  console.log("MaC handleRemoveNotFoundChipboardFromFindArea finished");
 
   return {
     newState: {

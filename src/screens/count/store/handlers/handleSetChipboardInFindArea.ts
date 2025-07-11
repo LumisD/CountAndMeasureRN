@@ -24,6 +24,7 @@ export async function handleSetChipboardInFindArea(
   // state.isUnknownButtonAvailable = true
   // set state.isFoundAreaOpen = true
   // FlashFindItemArea as _effect.send(AddNewItemEffect.FlashFindItemArea)
+  console.log("MaC handleSetChipboardInFindArea started");
 
   const updatedChipboards = currentState.chipboards.map(it => {
     if (it.isUnderReview) {
@@ -62,6 +63,7 @@ export async function handleSetChipboardInFindArea(
       );
     }
   }
+  console.log("MaC handleSetChipboardInFindArea finished");
 
   return {
     newState: updatedState,

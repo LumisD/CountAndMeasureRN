@@ -16,6 +16,7 @@ export async function handleSetFoundChipboard(
   // this function can be called only for chipboards with state = 0
   // qty can be equal or smaller than original qty
   // chipboardToFind can differ only with real sizes and qty from the chipboard in db with the same id
+  console.log("MaC handleSetFoundChipboard started");
 
   const currentState = get().state;
   const chipboardToFind = currentState.chipboardToFind;
@@ -145,5 +146,6 @@ export async function handleSetFoundChipboard(
   };
 
   effect = {type: FLASH_FIND_ITEM_AREA};
+  console.log("MaC handleSetFoundChipboard finished");
   return {newState, effect};
 }
