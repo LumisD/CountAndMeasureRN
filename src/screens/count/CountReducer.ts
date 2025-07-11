@@ -3,6 +3,7 @@ import {
   HIDE_KEYBOARD,
   NAVIGATE_BACK,
   SHOW_DELETE_UNION_DIALOG,
+  SHOW_FIELD_DISABLED,
   SHOW_RESTORE_UNION_DIALOG,
   SHOW_SHARE_UNION_DIALOG,
   SHOW_WHAT_IS_FOUND_DIALOG,
@@ -19,6 +20,7 @@ import {
   SHOW_WHAT_IS_UNKNOWN,
   SHOW_WHAT_IS_REAL_SIZE,
   LIST_SCROLLED_BY_USER,
+  FIELD_DISABLED,
 } from "./CountIntent";
 import {CountState} from "./CountState";
 
@@ -90,6 +92,13 @@ export const countReducer = (
           isFoundAreaOpen: false,
         },
         effect: {type: HIDE_KEYBOARD},
+      };
+    }
+
+    case FIELD_DISABLED: {
+      return {
+        newState: state,
+        effect: {type: SHOW_FIELD_DISABLED},
       };
     }
 
