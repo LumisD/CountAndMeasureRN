@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Text, View, Pressable, StyleSheet} from "react-native";
+import {View, StyleSheet} from "react-native";
 import {colorListWithNames} from "../../common/screenData";
 import {AddNewItemIntent, COLOR_CHANGED} from "../AddNewItemIntent";
 import {ColorItem} from "../../models/ColorItem";
