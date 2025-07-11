@@ -14,13 +14,13 @@ const ListsScreen = () => {
   const repo = useMemo(() => provideMeasureAndCountRepository(realm), [realm]);
   //const stateHolder = useMemo(() => new StateHolder(repo), [repo]);
 
-  const goToCount = (id: number) => {
+  const goToCount = (id: string) => {
     navigation.navigate("Count", {unionId: id});
   };
 
   return (
     // your UI
-    <Button title="Go to Count" onPress={() => goToCount(42)} />
+    <Button title="Go to Count" onPress={() => goToCount("42")} />
   );
 };
 
