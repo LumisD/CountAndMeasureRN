@@ -13,5 +13,5 @@ export function getCurrentDateTime(): string {
 }
 
 export function getDefaultUnionTitle(): string {
-  return t("chipboard_sheet_list_title", {value: getCurrentDateTime()});
+  return t("chipboard_sheet_list_title", {title: getCurrentDateTime()});
 }
