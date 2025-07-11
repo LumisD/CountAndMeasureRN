@@ -1,5 +1,6 @@
 import {
   CountEffect,
+  HIDE_KEYBOARD,
   NAVIGATE_BACK,
   SHOW_DELETE_UNION_DIALOG,
   SHOW_RESTORE_UNION_DIALOG,
@@ -17,6 +18,7 @@ import {
   SHOW_WHAT_IS_FOUND,
   SHOW_WHAT_IS_UNKNOWN,
   SHOW_WHAT_IS_REAL_SIZE,
+  LIST_SCROLLED_BY_USER,
 } from "./CountIntent";
 import {CountState} from "./CountState";
 
@@ -78,6 +80,16 @@ export const countReducer = (
       return {
         newState: state,
         effect: {type: SHOW_WHAT_IS_REAL_SIZE_DIALOG},
+      };
+    }
+
+    case LIST_SCROLLED_BY_USER: {
+      return {
+        newState: {
+          ...state,
+          isFoundAreaOpen: false,
+        },
+        effect: {type: HIDE_KEYBOARD},
       };
     }
 
