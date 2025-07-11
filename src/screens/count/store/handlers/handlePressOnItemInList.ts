@@ -23,6 +23,7 @@ export async function handlePressOnItemInList(
           effect: {
             type: SHOW_REMOVE_NOT_FOUND_FROM_FIND_AREA_CONFIRMATION_DIALOG,
             chipboard,
+            hasColor: currentState.unionOfChipboards.hasColor,
           },
         };
       } else {
@@ -31,6 +32,7 @@ export async function handlePressOnItemInList(
           effect: {
             type: SHOW_SELECT_NOT_FOUND_TO_FIND_AREA_CONFIRMATION_DIALOG,
             chipboard,
+            hasColor: currentState.unionOfChipboards.hasColor,
           },
         };
       }
@@ -41,6 +43,7 @@ export async function handlePressOnItemInList(
         effect: {
           type: SHOW_UNCHECK_CONFIRMATION_DIALOG,
           chipboard,
+          hasColor: currentState.unionOfChipboards.hasColor,
         },
       };
 
@@ -50,6 +53,7 @@ export async function handlePressOnItemInList(
         effect: {
           type: SHOW_SELECT_UNKNOWN_TO_FIND_AREA_CONFIRMATION_DIALOG,
           chipboard,
+          hasColor: currentState.unionOfChipboards.hasColor,
         },
       };
 
