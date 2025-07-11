@@ -7,6 +7,7 @@ import {
   ViewStyle,
   StyleProp,
   Keyboard,
+  TextInput,
 } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import {DEFAULT_ICON_SIZE} from "../Constants";
@@ -21,6 +22,11 @@ import {Typography} from "../../../theme/typography";
 
 export function hideKeyboard() {
   Keyboard.dismiss();
+  // Try to blur the focused input, if any
+  const currentFocused = TextInput.State.currentlyFocusedInput?.();
+  if (currentFocused && typeof currentFocused.blur === "function") {
+    currentFocused.blur();
+  }
 }
 
 // UpArrowIcon
