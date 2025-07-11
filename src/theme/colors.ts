@@ -21,6 +21,7 @@ export const Cyan = "#00FFFF";
 export const Magenta = "#FF00FF";
 export const Gray = "#888888";
 export const DarkGray = "#A9A9A9";
+export const VeryDarkGray = "#333333";
 export const LightGray = "#D3D3D3";
 export const Orange = "#FF9800";
 export const Purple = "#9C27B0";
