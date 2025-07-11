@@ -19,6 +19,11 @@ import {Typography} from "../../theme/typography";
 import {Gray, MainBg} from "../../theme/colors";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import {t} from "i18next";
+import {AnimatedExpandCollapse} from "../common/components/AnimatedExpandCollapse";
+import {ExpandHideCountField} from "./components/ExpandHideCountField";
+import {FindArea} from "./findarea/FindArea";
+import {Snackbar} from "react-native-paper";
+import {ListOfItems} from "./components/ListOfItems";
 
 type Props = StackScreenProps<RootStackParamList, "Count">;
 
@@ -74,9 +79,40 @@ export default function CountScreen({navigation, route}: Props) {
   }, [navigation, state.unionOfChipboards.title, processIntent]);
 
   return (
-    <View style={{flex: 1, justifyContent: "center", alignItems: "center"}}>
-      <Text>Count Screen</Text>
-    </View>
+    <>
+      <View style={styles.container}>
+        <AnimatedExpandCollapse isVisible={state.isFoundAreaOpen}>
+          <FindArea
+            state={state}
+            shouldFlash={shouldFlash}
+            setShouldFlash={setShouldFlash}
+            processIntent={processIntent}
+          />
+        </AnimatedExpandCollapse>
+
+        <ExpandHideCountField
+          isFoundAreaOpen={state.isFoundAreaOpen}
+          processIntent={processIntent}
+        />
+
+        <View style={styles.flexListWrapper}>
+          <ListOfItems
+            hasColor={state.unionOfChipboards.hasColor}
+            chipboards={state.chipboards}
+            processIntent={processIntent}
+          />
+        </View>
+        <View style={{height: 8}} />
+      </View>
+
+      <Snackbar
+        visible={snackbarVisible}
+        onDismiss={() => setSnackbarVisible(false)}
+        duration={2000}
+        style={{borderRadius: 4}}>
+        {snackbarMessage}
+      </Snackbar>
+    </>
   );
 }
 
