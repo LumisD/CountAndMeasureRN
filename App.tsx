@@ -11,7 +11,7 @@ import NewScreen from "./src/screens/NewScreen";
 import PrivacyPolicyScreen from "./src/screens/PrivacyPolicyScreen";
 import CountScreen from "./src/screens/count/CountScreen";
 import AddNewItemScreen from "./src/screens/addnewitem/AddNewItemScreen";
-import {RootStackParamList} from "./src/navigation/types";
+import {RootStackParamList, SCREENS} from "./src/navigation/types";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import {StatusBar} from "react-native";
 import {MainBg} from "./src/theme/colors";
@@ -43,17 +43,17 @@ function TabNavigator() {
         tabBarStyle: {backgroundColor: MainBg}, //important to set background color for the tab bar
       })}>
       <Tab.Screen
-        name="Lists"
+        name={SCREENS.Lists}
         component={ListsScreen}
         options={{title: t("lists")}}
       />
       <Tab.Screen
-        name="New"
+        name={SCREENS.New}
         component={NewScreen}
         options={{title: t("_new")}}
       />
       <Tab.Screen
-        name="Privacy"
+        name={SCREENS.Privacy}
         component={PrivacyPolicyScreen}
         options={{title: t("privacy")}}
       />
