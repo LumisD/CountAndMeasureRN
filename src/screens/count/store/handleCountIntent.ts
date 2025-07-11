@@ -19,6 +19,7 @@ import {
   DELETING_UNION_CONFIRMED,
   SHARING_UNION_CONFIRMED,
   RESTORING_UNION_CONFIRMED,
+  SET_LIST_DONE,
 } from "../CountIntent";
 import {MeasureAndCountRepository} from "../../../data/repository/MeasureAndCountRepository";
 import {CountStore} from "./CountStore";
@@ -40,6 +41,7 @@ import {handleRemoveNotFoundChipboardFromFindArea} from "./handlers/handleRemove
 import {handleDeleteUnion} from "./handlers/handleDeleteUnion";
 import {handleShareUnion} from "./handlers/handleShareUnion";
 import {handleRestoreUnion} from "./handlers/handleRestoreUnion";
+import {handleListDoneOrUnDone} from "./handlers/handleListDoneOrUnDone";
 
 let unsubscribeChipboards: (() => void) | null = null;
 
@@ -214,6 +216,13 @@ export async function handleCountIntent(
 
     case RESTORING_UNION_CONFIRMED: {
       const result = await handleRestoreUnion(repo, get);
+      newState = result.newState;
+      effect = result.effect;
+      break;
+    }
+
+    case SET_LIST_DONE: {
+      const result = await handleListDoneOrUnDone(repo, get);
       newState = result.newState;
       effect = result.effect;
       break;
