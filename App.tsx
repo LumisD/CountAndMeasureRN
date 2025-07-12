@@ -6,7 +6,6 @@ import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import {useTranslation} from "react-i18next";
 import {ThemeProvider} from "./src/theme/ThemeContext";
 
-import ListsScreen from "./src/screens/ListsScreen";
 import NewScreen from "./src/screens/NewScreen";
 import PrivacyPolicyScreen from "./src/screens/PrivacyPolicyScreen";
 import CountScreen from "./src/screens/count/CountScreen";
@@ -17,6 +16,7 @@ import {StatusBar} from "react-native";
 import {MainBg} from "./src/theme/colors";
 import {RealmProvider} from "./src/data/db/RealmContext";
 import {PaperProvider} from "react-native-paper";
+import ListsScreen from "./src/screens/lists/ListsScreen";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator<RootStackParamList>();
