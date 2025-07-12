@@ -1,6 +1,6 @@
 import {t} from "i18next";
 import {StyleSheet, Text, View} from "react-native";
-import {Typography} from "../../../../theme/typography";
+import {Typography} from "../../../theme/typography";
 
 export function EmptyList() {
   return (
