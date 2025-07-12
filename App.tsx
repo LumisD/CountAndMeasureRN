@@ -26,6 +26,7 @@ function TabNavigator() {
 
   return (
     <Tab.Navigator
+      initialRouteName={SCREENS.New}
       screenOptions={({route}) => ({
         tabBarIcon: ({color, size}) => {
           let iconName = "";
