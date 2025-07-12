@@ -33,6 +33,7 @@ import {handleDeleteChipboardFromDb} from "./handlers/handleDeleteChipboardFromD
 import {handleEditChipboardInAddAreaAndRemoveFromDb} from "./handlers/handleEditChipboardInAddAreaAndRemoveFromDb";
 import {handleShareUnion} from "./handlers/handleShareUnion";
 import {handleScreenExit} from "./handlers/handleScreenExit";
+import {handleCleanup} from "./handlers/handleCleanup";
 
 let unsubscribeChipboards: (() => void) | null = null;
 
@@ -71,7 +72,9 @@ export async function handleAddNewItemIntent(
       unsubscribeChipboards?.();
       unsubscribeChipboards = null;
 
-      (newState = get().state), (effect = undefined);
+      const result = await handleCleanup(repo, get);
+      newState = result.newState;
+      effect = result.effect;
       break;
     }
 
