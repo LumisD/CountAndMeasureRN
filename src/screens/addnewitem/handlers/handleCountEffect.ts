@@ -39,7 +39,7 @@ import {hideKeyboard} from "../../common/components/UiElements";
 import {StackNavigationProp} from "@react-navigation/stack";
 import {RootStackParamList, SCREENS} from "../../../navigation/types";
 
-export function handleCountffects(
+export function handleCountEffects(
   currentEffect: CountEffect,
   setSnackbarMessage: React.Dispatch<React.SetStateAction<string>>,
   setSnackbarVisible: React.Dispatch<React.SetStateAction<boolean>>,
