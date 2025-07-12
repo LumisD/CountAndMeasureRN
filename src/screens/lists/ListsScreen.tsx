@@ -77,8 +77,8 @@ export function TopBar({title}: TopBarProps) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 0,
-    paddingHorizontal: 16,
+    paddingTop: 10,
+    paddingHorizontal: 12,
     backgroundColor: MainBg,
   },
   flexListWrapper: {

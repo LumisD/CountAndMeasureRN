@@ -3,6 +3,7 @@ import {UnionOfChipboardsUI} from "../../models/UnionOfChipboardsUI";
 import {ListsIntent, PRESS_ON_ITEM_IN_LIST} from "../ListsIntent";
 import {FlatList, Pressable, StyleSheet, Text, View} from "react-native";
 import {Grayish, Purple80} from "../../../theme/colors";
+import {Typography} from "../../../theme/typography";
 
 export const ListOfItems: React.FC<{
   unions: UnionOfChipboardsUI[];
@@ -59,6 +60,8 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
   },
   title: {
+    ...Typography.titleLarge,
+    textAlign: "left",
     flex: 1,
     fontSize: 18,
     fontWeight: "bold",
