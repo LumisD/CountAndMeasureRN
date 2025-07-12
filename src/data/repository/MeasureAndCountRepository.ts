@@ -7,10 +7,6 @@ type Unsubscribe = () => void;
 export interface MeasureAndCountRepository {
   insertUnionOfChipboards(union: UnionOfChipboards): Promise<string>;
 
-  // insertAndGetUnionOfChipboards(
-  //   union: UnionOfChipboards,
-  // ): Promise<UnionOfChipboards | null>;
-
   updateUnionOfChipboards(union: UnionOfChipboards): Promise<void>;
 
   updateUnionOfChipboardsTitle(
@@ -35,6 +31,7 @@ export interface MeasureAndCountRepository {
     isFinished: boolean,
     updatedAt: number,
   ): Promise<void>;
+
   setUnionOfChipboardsIsMarkedAsDeleted(
     unionId: ObjectId,
     isMarkedAsDeleted: boolean,
@@ -48,6 +45,7 @@ export interface MeasureAndCountRepository {
   ): Promise<UnionOfChipboards | null>;
   getLastUnFinishedUnionOfChipboards(): Promise<UnionOfChipboards | null>;
   deleteUnionOfChipboards(unionId: ObjectId): Promise<void>;
+
   subscribeToAllUnions(
     listener: (data: UnionOfChipboards[]) => void,
   ): Unsubscribe;
