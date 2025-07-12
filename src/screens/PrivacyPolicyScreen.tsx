@@ -29,9 +29,7 @@ export default function PrivacyPolicyScreen() {
 
   useLayoutEffect(() => {
     rootNavigation.setOptions({
-      header: () => (
-        <TopBar title={t("privacy_policy_title")} navigation={rootNavigation} />
-      ),
+      header: () => <TopBar title={t("privacy_policy_title")} />,
     });
   }, [rootNavigation]);
 
@@ -84,18 +82,13 @@ const Spacer = ({size = 16}: {size?: number}) => (
 );
 
 interface Props {
-  navigation: StackNavigationProp<RootStackParamList>;
   title: string;
 }
 
-export function TopBar({navigation, title}: Props) {
+export function TopBar({title}: Props) {
   return (
     <View style={styles.wrapper}>
       <View style={styles.row}>
-        <Pressable onPress={() => navigation.goBack()}>
-          <Icon name="arrow-left" size={32} />
-        </Pressable>
-
         <Text style={styles.title}>{title}</Text>
       </View>
       <View style={styles.divider} />
@@ -117,7 +110,7 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: 0,
+    marginBottom: 10,
   },
   titleWrapper: {
     flex: 1,
@@ -137,7 +130,8 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   content: {
-    padding: 16,
+    paddingHorizontal: 16,
+    paddingTop: 8,
   },
   body: {
     ...Typography.bodyNormal,
