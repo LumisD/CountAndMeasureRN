@@ -14,7 +14,7 @@ import {
   START,
   TITLE_OF_UNION_CHANGED,
 } from "./CountIntent";
-import {handleCountffects} from "../addnewitem/handlers/handleCountEffect";
+import {handleCountEffects} from "../addnewitem/handlers/handleCountEffect";
 import {Typography} from "../../theme/typography";
 import {Gray, MainBg} from "../../theme/colors";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
@@ -54,7 +54,7 @@ export default function CountScreen({navigation, route}: Props) {
   useEffect(() => {
     if (!currentEffect) return;
 
-    handleCountffects(
+    handleCountEffects(
       currentEffect,
       setSnackbarMessage,
       setSnackbarVisible,
