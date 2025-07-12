@@ -125,19 +125,10 @@ export class MeasureAndCountRepositoryImpl
   subscribeToAllUnions(
     listener: (data: UnionOfChipboards[]) => void,
   ): Unsubscribe {
-    const all = this.unionDao.getAllUnions();
-
-    const callback = () => {
-      const raw = this.unionDao.getAllUnions();
-      const mapped = raw.map(mapRealmToUnion);
-      listener(mapped);
-    };
-
-    // Note: Realm change listeners not abstracted into DAO
-    // This placeholder is for compatibility; real implementation requires Realm object
-    return () => {
-      // removeListener not implemented in DAO abstraction
-    };
+    return this.unionDao.subscribeToAllUnions(realmCollection => {
+      const plainUnions = Array.from(realmCollection).map(mapRealmToUnion);
+      listener(plainUnions);
+    });
   }
 
   async insertChipboard(chipboard: Chipboard): Promise<void> {
