@@ -67,7 +67,7 @@ export function TopBar({title}: TopBarProps) {
   return (
     <View style={styles.wrapper}>
       <View style={styles.row}>
-        <Text style={styles.input}>{title}</Text>
+        <Text style={styles.title}>{title}</Text>
       </View>
       <View style={styles.divider} />
     </View>
@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginBottom: 0,
   },
-  input: {
+  title: {
     ...Typography.titleLarge,
     flex: 1,
     fontSize: 19,
