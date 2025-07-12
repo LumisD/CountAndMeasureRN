@@ -93,13 +93,11 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: 0,
+    marginBottom: 10,
   },
   title: {
     ...Typography.titleLarge,
     flex: 1,
-    fontSize: 19,
-    textAlign: "center",
     marginLeft: 16,
   },
   divider: {
