@@ -120,10 +120,26 @@ export class UnionOfChipboardsDao {
     );
   }
 
-  getAllUnions(): UnionOfChipboardsSchema[] {
-    return this.realm
-      .objects<UnionOfChipboardsSchema>("UnionOfChipboards")
-      .slice();
+  subscribeToAllUnions(
+    listener: (data: Realm.Collection<UnionOfChipboardsSchema>) => void,
+  ): () => void {
+    const results =
+      this.realm.objects<UnionOfChipboardsSchema>("UnionOfChipboards");
+
+    const callback: Realm.CollectionChangeCallback<UnionOfChipboardsSchema> = (
+      collection,
+      changes,
+    ) => {
+      listener(collection as Realm.Collection<UnionOfChipboardsSchema>);
+    };
+
+    results.addListener(callback);
+
+    return () => {
+      if (results.isValid()) {
+        results.removeListener(callback);
+      }
+    };
   }
 
   getLastUnFinishedUnionOfChipboards(): UnionOfChipboardsSchema | null {
