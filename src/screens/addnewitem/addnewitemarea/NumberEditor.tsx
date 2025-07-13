@@ -37,7 +37,7 @@ export const NumberEditor: React.FC<Props> = ({
 
 const styles = StyleSheet.create({
   container: {
-    width: 150,
+    width: 130,
     height: 75,
     justifyContent: "center",
   },

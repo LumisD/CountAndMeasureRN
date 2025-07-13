@@ -40,12 +40,12 @@ export const SizeCountEditor: React.FC<Props> = ({
 
 const styles = StyleSheet.create({
   container: {
-    width: 150,
+    width: 130,
     height: 70,
     justifyContent: "center",
   },
   label: {
-    ...Typography.bodyLarge,
+    ...Typography.bodyNormal,
     fontSize: 14,
     color: Gray,
     marginBottom: 4,
