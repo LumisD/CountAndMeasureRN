@@ -60,7 +60,7 @@ export function handleCountEffects(
       const message = hasColor
         ? t("are_you_sure_uncheck_with_color", {
             chipboardAsString: chipboard.chipboardAsString,
-            colorName: chipboard.colorName,
+            colorName: t(chipboard.colorName),
           })
         : t("are_you_sure_uncheck_no_color", {
             chipboardAsString: chipboard.chipboardAsString,
@@ -92,13 +92,13 @@ export function handleCountEffects(
       const message = hasColor
         ? t("are_you_sure_select_not_found_with_color", {
             chipboardAsString: chipboard.chipboardAsString,
-            colorName: chipboard.colorName,
+            colorName: t(chipboard.colorName),
           })
         : t("are_you_sure_select_not_found_no_color", {
             chipboardAsString: chipboard.chipboardAsString,
           });
 
-      const confirmText = t("uncheck");
+      const confirmText = t("select");
       const dismissText = t("cancel");
 
       showAlert({
@@ -124,7 +124,7 @@ export function handleCountEffects(
       const message = hasColor
         ? t("are_you_sure_remove_not_found_with_color", {
             chipboardAsString: chipboard.chipboardAsString,
-            colorName: chipboard.colorName,
+            colorName: t(chipboard.colorName),
           })
         : t("are_you_sure_remove_not_found_no_color", {
             chipboardAsString: chipboard.chipboardAsString,
@@ -156,7 +156,7 @@ export function handleCountEffects(
       const message = hasColor
         ? t("are_you_sure_select_unknown_with_color", {
             chipboardAsString: chipboard.chipboardAsString,
-            colorName: chipboard.colorName,
+            colorName: t(chipboard.colorName),
           })
         : t("are_you_sure_select_unknown_no_color", {
             chipboardAsString: chipboard.chipboardAsString,
