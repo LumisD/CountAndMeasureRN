@@ -76,7 +76,12 @@ export default function CountScreen({navigation, route}: Props) {
         />
       ),
     });
-  }, [navigation, state.unionOfChipboards.title, processIntent]);
+  }, [
+    navigation,
+    state.unionOfChipboards.title,
+    state.unionOfChipboards.isFinished,
+    processIntent,
+  ]);
 
   return (
     <>
@@ -181,7 +186,7 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 19,
     textAlign: "center",
-    marginLeft: 16,
+    marginLeft: 0,
   },
   divider: {
     height: 2,

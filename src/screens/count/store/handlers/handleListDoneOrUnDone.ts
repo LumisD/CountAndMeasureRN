@@ -24,13 +24,13 @@ export async function handleListDoneOrUnDone(
   }
 
   const updatedAt = Date.now();
-  const newIsFinished = !currentUnion.isFinished;
+  const isFinished = !currentUnion.isFinished;
 
-  await repo.setUnionOfChipboardsIsFinished(unionId, newIsFinished, updatedAt);
+  await repo.setUnionOfChipboardsIsFinished(unionId, isFinished, updatedAt);
 
   const updatedUnion = {
     ...currentUnion,
-    isFinished: newIsFinished,
+    isFinished: isFinished,
     updatedAt,
   };
 
