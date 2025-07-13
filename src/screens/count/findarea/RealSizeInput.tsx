@@ -1,7 +1,7 @@
 import {StyleSheet, Text, TextInput, View} from "react-native";
 import {CountIntent, REAL_SIZE_CHANGED} from "../CountIntent";
 import {Typography} from "../../../theme/typography";
-import {DarkGray, Gray, LightGray, VeryDarkGray} from "../../../theme/colors";
+import {DarkGray, Gray, VeryDarkGray} from "../../../theme/colors";
 
 type Props = {
   value: string;
@@ -43,8 +43,10 @@ export const RealSizeInput: React.FC<Props> = ({
 };
 const styles = StyleSheet.create({
   container: {
-    width: 80,
+    maxWidth: 150,
     paddingLeft: 8,
+    paddingTop: 8,
+    paddingBottom: 6,
     justifyContent: "center",
   },
   label: {
@@ -52,9 +54,10 @@ const styles = StyleSheet.create({
     fontSize: 13,
     fontStyle: "italic",
     color: Gray,
-    marginBottom: 4,
+    marginBottom: 0,
   },
   input: {
+    width: 80,
     ...Typography.bodyNormal,
     borderWidth: 0.5,
     borderColor: DarkGray,
@@ -66,7 +69,7 @@ const styles = StyleSheet.create({
     fontStyle: "italic",
   },
   disabledInput: {
-    backgroundColor: LightGray,
+    //backgroundColor: LightGray,
     color: Gray,
   },
 });
