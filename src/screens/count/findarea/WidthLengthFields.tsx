@@ -33,11 +33,11 @@ export const WidthLengthFields: React.FC<Props> = ({
 
         const name =
           dim === 1
-            ? union.titleColumn1
+            ? t(union.titleColumn1)
             : dim === 2
-            ? union.titleColumn2
+            ? t(union.titleColumn2)
             : dim === 3
-            ? union.titleColumn3
+            ? t(union.titleColumn3)
             : "";
 
         const sizeOfDim = getSizeForIndex(dim, chipboard);
@@ -49,32 +49,40 @@ export const WidthLengthFields: React.FC<Props> = ({
               {isDirection ? <UpArrowIcon /> : <View style={styles.spacer} />}
 
               <View style={styles.inputsRow}>
-                <DisabledOverlay
-                  isEnabled={!chipboard.isUnderReview}
-                  onDisabledClick={() => processIntent({type: FIELD_DISABLED})}
-                  content={
-                    <SizeCountEditor
-                      label={name}
-                      value={sizeOfDim}
-                      dimension={dim}
-                      onSizeChanged={processIntent}
-                    />
-                  }
-                />
+                <View style={{alignSelf: "flex-end"}}>
+                  <DisabledOverlay
+                    isEnabled={!chipboard.isUnderReview}
+                    onDisabledClick={() =>
+                      processIntent({type: FIELD_DISABLED})
+                    }
+                    content={
+                      <SizeCountEditor
+                        label={name}
+                        value={sizeOfDim}
+                        dimension={dim}
+                        onSizeChanged={processIntent}
+                      />
+                    }
+                  />
+                </View>
 
-                <DisabledOverlay
-                  isEnabled={chipboard.isUnderReview}
-                  onDisabledClick={() => processIntent({type: FIELD_DISABLED})}
-                  content={
-                    <RealSizeInput
-                      value={realSizeOfDim}
-                      label={t("real_size")}
-                      dimension={dim}
-                      isEnabled={chipboard.isUnderReview}
-                      onValueChange={processIntent}
-                    />
-                  }
-                />
+                <View style={{alignSelf: "flex-end"}}>
+                  <DisabledOverlay
+                    isEnabled={chipboard.isUnderReview}
+                    onDisabledClick={() =>
+                      processIntent({type: FIELD_DISABLED})
+                    }
+                    content={
+                      <RealSizeInput
+                        value={realSizeOfDim}
+                        label={t("real_size")}
+                        dimension={dim}
+                        isEnabled={chipboard.isUnderReview}
+                        onValueChange={processIntent}
+                      />
+                    }
+                  />
+                </View>
               </View>
 
               {dim === 1 && (
