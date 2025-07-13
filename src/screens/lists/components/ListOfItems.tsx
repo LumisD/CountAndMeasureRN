@@ -22,12 +22,10 @@ export const ListOfItems: React.FC<{
         const backgroundColor = union.isFinished ? Grayish : "white";
 
         return (
-          <View style={styles.itemContainer}>
-            <Pressable
-              onPress={() =>
-                processIntent({type: PRESS_ON_ITEM_IN_LIST, union})
-              }
-              style={[styles.itemWrapper, {backgroundColor}]}>
+          <Pressable
+            onPress={() => processIntent({type: PRESS_ON_ITEM_IN_LIST, union})}
+            style={[styles.itemContainer, {backgroundColor}]}>
+            <View style={styles.itemWrapper}>
               <View style={styles.row}>
                 <Text
                   style={styles.title}
@@ -36,19 +34,20 @@ export const ListOfItems: React.FC<{
                   {union.title}
                 </Text>
               </View>
+
               {union.isFinished && (
                 <Text style={styles.finishedText}>{t("finished")}</Text>
               )}
-            </Pressable>
 
-            {union.isMarkedAsDeleted && (
-              <View style={styles.overlay}>
-                <Text style={styles.markedAsDeletedText}>
-                  {t("marked_as_deleted")}
-                </Text>
-              </View>
-            )}
-          </View>
+              {union.isMarkedAsDeleted && (
+                <View style={styles.overlay}>
+                  <Text style={styles.markedAsDeletedText}>
+                    {t("marked_as_deleted")}
+                  </Text>
+                </View>
+              )}
+            </View>
+          </Pressable>
         );
       }}
     />
