@@ -22,25 +22,33 @@ export const ListOfItems: React.FC<{
         const backgroundColor = union.isFinished ? Grayish : "white";
 
         return (
-          <Pressable
-            onPress={() => processIntent({type: PRESS_ON_ITEM_IN_LIST, union})}
-            style={[styles.itemWrapper, {backgroundColor}]}>
-            <View style={styles.row}>
-              <Text style={styles.title} numberOfLines={2} ellipsizeMode="tail">
-                {union.title}
-              </Text>
-            </View>
-
-            {union.isFinished && (
-              <Text style={styles.finishedText}>{t("finished")}</Text>
-            )}
+          <View style={styles.itemContainer}>
+            <Pressable
+              onPress={() =>
+                processIntent({type: PRESS_ON_ITEM_IN_LIST, union})
+              }
+              style={[styles.itemWrapper, {backgroundColor}]}>
+              <View style={styles.row}>
+                <Text
+                  style={styles.title}
+                  numberOfLines={2}
+                  ellipsizeMode="tail">
+                  {union.title}
+                </Text>
+              </View>
+              {union.isFinished && (
+                <Text style={styles.finishedText}>{t("finished")}</Text>
+              )}
+            </Pressable>
 
             {union.isMarkedAsDeleted && (
-              <Text style={styles.markedAsDeletedText}>
-                {t("marked_as_deleted")}
-              </Text>
+              <View style={styles.overlay}>
+                <Text style={styles.markedAsDeletedText}>
+                  {t("marked_as_deleted")}
+                </Text>
+              </View>
             )}
-          </Pressable>
+          </View>
         );
       }}
     />
@@ -67,24 +75,49 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   finishedText: {
+    ...Typography.bodyNormal,
     position: "absolute",
     bottom: 4,
     right: 16,
     color: "red",
     fontSize: 14,
   },
+  itemContainer: {
+    position: "relative", // allows overlay inside
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
+  overlay: {
+    ...StyleSheet.absoluteFillObject,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
   markedAsDeletedText: {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: [{translateX: -50}, {translateY: -12}, {rotate: "-10deg"}],
+    ...Typography.titleLarge,
+    transform: [{rotate: "-8deg"}],
     color: "red",
     fontSize: 26,
-    fontWeight: "900",
     textAlign: "center",
     borderWidth: 2,
     borderColor: "rgba(255,0,0,0.5)",
     borderRadius: 8,
     padding: 4,
   },
+
+  // markedAsDeletedText: {
+  //   ...Typography.titleLarge,
+  //   position: "absolute",
+  //   top: "37%",
+  //   alignSelf: "center",
+  //   transform: [{translateY: -12}, {rotate: "-8deg"}],
+  //   color: "red",
+  //   fontSize: 26,
+  //   textAlign: "center",
+  //   borderWidth: 2,
+  //   borderColor: "rgba(255,0,0,0.5)",
+  //   borderRadius: 8,
+  //   padding: 4,
+  // },
 });
