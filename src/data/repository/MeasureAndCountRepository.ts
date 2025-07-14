@@ -52,6 +52,8 @@ export interface MeasureAndCountRepository {
 
   insertChipboard(chipboard: Chipboard): Promise<void>;
 
+  updateChipboard(chipboard: Chipboard): Promise<void>;
+
   updateChipboardState(id: ObjectId, newState: number): Promise<void>;
 
   updateChipboardQuantity(id: ObjectId, newQuantity: number): Promise<void>;
