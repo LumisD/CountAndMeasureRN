@@ -74,37 +74,45 @@ export async function handleSetFoundChipboard(
       ? toObjectIdOrUndefined(originalChipboardInDb!.id)
       : undefined;
 
-    if (!originalChipboardInDbId || !similarFoundChipboardId) {
-      console.error(
-        `MaC handleStart: Invalid originalChipboardInDbId: ${originalChipboardInDbId}, similarFoundChipboardId: ${similarFoundChipboardId}`,
-      );
-      return {newState: currentState, effect: undefined};
-    }
-
     if (quantityFromToFind === quantityOriginalInDb) {
       if (similarFoundChipboard) {
         // Similar found chipboard exists:
-        await repo.updateChipboardQuantity(
-          similarFoundChipboardId,
-          similarFoundChipboard.quantity + quantityFromToFind,
-        );
-        await repo.deleteChipboardById(originalChipboardInDbId);
+        if (originalChipboardInDbId && similarFoundChipboardId) {
+          await repo.updateChipboardQuantity(
+            similarFoundChipboardId,
+            similarFoundChipboard.quantity + quantityFromToFind,
+          );
+          await repo.deleteChipboardById(originalChipboardInDbId);
+        } else {
+          console.error(
+            `MaC handleStart: 1 Invalid originalChipboardInDbId: ${originalChipboardInDbId}, similarFoundChipboardId: ${similarFoundChipboardId}`,
+          );
+        }
       } else {
         // No similar found chipboard: insert chipboardToFind in db as found (state = 1)
-        await repo.insertChipboard({...chipboardToFind, state: 1});
+        await repo.updateChipboard({
+          ...chipboardToFind,
+          state: 1,
+        });
       }
     } else {
       // quantityFromToFind < quantityOriginalInDb
       if (similarFoundChipboard) {
         // Similar found chipboard exists:
-        await repo.updateChipboardQuantity(
-          similarFoundChipboardId,
-          similarFoundChipboard.quantity + quantityFromToFind,
-        );
-        await repo.updateChipboardQuantity(
-          originalChipboardInDbId,
-          quantityOriginalInDb - quantityFromToFind,
-        );
+        if (originalChipboardInDbId && similarFoundChipboardId) {
+          await repo.updateChipboardQuantity(
+            similarFoundChipboardId,
+            similarFoundChipboard.quantity + quantityFromToFind,
+          );
+          await repo.updateChipboardQuantity(
+            originalChipboardInDbId,
+            quantityOriginalInDb - quantityFromToFind,
+          );
+        } else {
+          console.error(
+            `MaC handleStart: 2 Invalid originalChipboardInDbId: ${originalChipboardInDbId}, similarFoundChipboardId: ${similarFoundChipboardId}`,
+          );
+        }
       } else {
         // No similar found chipboard: create new chipboard with qty of chipboardToFind
         // AND decrease qty of original chipboard with the same id in db
@@ -114,10 +122,17 @@ export async function handleSetFoundChipboard(
           state: 1,
         };
         await repo.insertChipboard(newFoundChipboard);
-        await repo.updateChipboardQuantity(
-          originalChipboardInDbId,
-          quantityOriginalInDb - quantityFromToFind,
-        );
+        if (originalChipboardInDbId) {
+          console.log("MaC handleSetFoundChipboard 5");
+          await repo.updateChipboardQuantity(
+            originalChipboardInDbId,
+            quantityOriginalInDb - quantityFromToFind,
+          );
+        } else {
+          console.error(
+            `MaC handleStart: Invalid originalChipboardInDbId: ${originalChipboardInDbId}`,
+          );
+        }
       }
     }
   }
