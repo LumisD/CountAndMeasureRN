@@ -10,6 +10,7 @@ import {
   Yellowish,
 } from "../../../theme/colors";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import {Typography} from "../../../theme/typography";
 
 interface Props {
   chipboards: ChipboardUI[];
@@ -48,11 +49,15 @@ export const ListOfItems: React.FC<Props> = ({
             }>
             <View style={[styles.row, {backgroundColor}]}>
               <View style={styles.innerRow}>
-                <View style={{flex: 1}}>
-                  <Text>{item.chipboardAsString}</Text>
+                <View style={styles.textBox}>
+                  <Text style={styles.chipboardText}>
+                    {item.chipboardAsString}
+                  </Text>
+
                   {item.isUnderReview && (
                     <Text style={styles.underReview}>{t("under_review")}</Text>
                   )}
+
                   <Text style={styles.realSizes}>{item.allRealsAsString}</Text>
                 </View>
 
@@ -110,24 +115,42 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flex: 1,
   },
+  textBox: {
+    flex: 1,
+    height: 70,
+    justifyContent: "flex-end",
+    position: "relative",
+  },
+  chipboardText: {
+    ...Typography.bodyLarge,
+    fontSize: 19,
+    textAlign: "left",
+    position: "absolute",
+    top: "50%",
+    left: 0,
+    transform: [{translateY: -10}],
+  },
   underReview: {
     color: "rgba(255,0,0,0.5)",
     fontSize: 24,
     fontWeight: "bold",
     textAlign: "center",
-    transform: [{rotate: "-10deg"}],
+    transform: [{translateX: -50}, {translateY: -12}, {rotate: "-10deg"}],
     borderWidth: 2,
     borderColor: "rgba(255,0,0,0.5)",
     borderRadius: 8,
     padding: 4,
     position: "absolute",
-    alignSelf: "center",
+    top: "50%",
+    left: "50%",
   },
   realSizes: {
     color: "red",
     fontSize: 14,
     fontStyle: "italic",
-    paddingTop: 16,
+    position: "absolute",
+    bottom: 0,
+    left: 0,
   },
   colorBox: {
     width: 36,
