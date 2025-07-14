@@ -14,6 +14,7 @@ import {
 import {ChipboardDao} from "../db/dao/ChipboardDao";
 import {UnionOfChipboardsDao} from "../db/dao/UnionOfChipboardsDao";
 import {MeasureAndCountRepository} from "./MeasureAndCountRepository";
+import {toObjectIdOrUndefined} from "../db/utils";
 
 type Unsubscribe = () => void;
 
@@ -154,9 +155,12 @@ export class MeasureAndCountRepositoryImpl
   async findSimilarFoundChipboard(
     chipboard: Chipboard,
   ): Promise<Chipboard | null> {
+    const id = toObjectIdOrUndefined(chipboard.id);
+    const unionId = toObjectIdOrUndefined(chipboard.unionId);
+    if (!id || !unionId) return null;
     const similarChipboard = this.chipboardDao.findSimilarFoundChipboard(
-      Realm.BSON.ObjectId.createFromHexString(chipboard.unionId),
-      Realm.BSON.ObjectId.createFromHexString(chipboard.id),
+      unionId,
+      id,
       chipboard.color,
       chipboard.colorName,
       chipboard.size1,
