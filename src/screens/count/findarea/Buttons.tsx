@@ -9,6 +9,7 @@ import {
 } from "../CountIntent";
 import {useTranslation} from "react-i18next";
 import {WhatIsIconButton} from "./WhatIsIconButton";
+import {hideKeyboard} from "../../common/components/UiElements";
 
 type Props = {
   isFoundButtonAvailable: boolean;
@@ -29,7 +30,10 @@ export const Buttons: React.FC<Props> = ({
         <CommonButton
           text={t("found")}
           enabled={isFoundButtonAvailable}
-          onPress={() => processIntent({type: SET_FOUND_CHIPBOARD})}
+          onPress={() => {
+            hideKeyboard();
+            processIntent({type: SET_FOUND_CHIPBOARD});
+          }}
         />
         <View style={{width: 8}} />
         <WhatIsIconButton
@@ -44,7 +48,10 @@ export const Buttons: React.FC<Props> = ({
         <CommonButton
           text={t("unknown")}
           enabled={isUnknownButtonAvailable}
-          onPress={() => processIntent({type: CREATE_UNKNOWN_CHIPBOARD})}
+          onPress={() => {
+            hideKeyboard();
+            processIntent({type: CREATE_UNKNOWN_CHIPBOARD});
+          }}
         />
         <View style={{width: 8}} />
         <WhatIsIconButton
