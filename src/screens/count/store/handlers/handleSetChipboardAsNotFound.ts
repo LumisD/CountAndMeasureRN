@@ -52,7 +52,7 @@ export async function handleSetChipboardAsNotFound(
     real3AsString: "",
   };
 
-  await repo.insertChipboard(updatedChipboard);
+  await repo.updateChipboard(updatedChipboard);
   console.log("MaC handleSetChipboardAsNotFound finished");
 
   return {
