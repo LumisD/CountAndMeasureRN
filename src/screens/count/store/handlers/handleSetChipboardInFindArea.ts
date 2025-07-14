@@ -28,10 +28,10 @@ export async function handleSetChipboardInFindArea(
 
   const updatedChipboards = currentState.chipboards.map(it => {
     if (it.isUnderReview) {
-      return {...it, isUnderReview: false};
+      return {...it, isUnderReview: false}; //clear isUnderReview to avoid two chipboard under review
     } else if (it.id === chipboard.id) {
       if (chipboard.state === 0) {
-        return {...chipboard, isUnderReview: true};
+        return {...chipboard, isUnderReview: true}; //set isUnderReview for our chipboard
       }
     }
     return it;
@@ -45,7 +45,7 @@ export async function handleSetChipboardInFindArea(
     chipboards: chipboardsWithUnderReviewOnTop,
     chipboardToFind: {
       ...chipboard,
-      isUnderReview: chipboard.state === 0,
+      isUnderReview: chipboard.state === 0, //it means that only not found can be under review (state = 0) but unknown cannot be under review
     },
     isUnknownButtonAvailable: chipboard.state === 2,
     isFoundButtonAvailable: chipboard.state === 0,
@@ -53,6 +53,7 @@ export async function handleSetChipboardInFindArea(
   };
 
   if (chipboard.state === 2) {
+    //for unknown - delete it from db
     const id = toObjectIdOrUndefined(chipboard.id);
     if (id) {
       await repo.deleteChipboardById(id);
