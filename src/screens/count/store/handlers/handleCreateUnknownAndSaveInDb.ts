@@ -18,12 +18,11 @@ export async function handleCreateUnknownAndSaveInDb(
   const currentState = get().state;
   const chipboardToFind = currentState.chipboardToFind;
 
-  const chipboardToFindId = toObjectIdOrUndefined(chipboardToFind.id);
   const unionId = toObjectIdOrUndefined(chipboardToFind.unionId);
 
-  if (!chipboardToFindId || !unionId) {
+  if (!unionId) {
     console.error(
-      `MaC handleCreateUnknownAndSaveInDb: Invalid chipboard id or unionId: ${chipboardToFind.id}, ${chipboardToFind.unionId}`,
+      `MaC handleCreateUnknownAndSaveInDb: Invalid unionId:, ${chipboardToFind.unionId}`,
     );
     return {newState: currentState, effect: undefined};
   }
