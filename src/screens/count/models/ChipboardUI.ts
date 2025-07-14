@@ -86,7 +86,9 @@ export function mapChipboardToChipboardUi(chip: Chipboard): ChipboardUI {
     chipboardAsString: "",
     allRealsAsString: "",
 
-    isUnderReview: chip.state === 1, // "found" state enables review mode
+    isUnderReview: false, //if true - enable: Found button, "real size" editors
+    // AND disable: Unknown button,size editors, quantity editor, color editor
+    //if false - all opposite
   };
 }
 
