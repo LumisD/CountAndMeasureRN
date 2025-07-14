@@ -157,7 +157,8 @@ function updateChipboardQuantity(
     currentState.unionOfChipboards.dimensions,
   );
 
-  const isFoundButtonAvailable = newQuantityAsInt > 0;
+  const isFoundButtonAvailable =
+    newQuantityAsInt > 0 && currentState.chipboardToFind.state == 0;
 
   return {
     chipboardToFind: updatedChipboard2,
