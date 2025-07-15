@@ -9,8 +9,6 @@ export async function handleSetChipboardInFindArea(
   repo: MeasureAndCountRepository,
   get: () => {state: CountState},
 ): Promise<{newState: CountState; effect?: CountEffect}> {
-  const currentState = get().state;
-
   // logic for chipboard with state = 0 - not found
   // set in the chipboard isUnderReview = true (also in the list), isFoundButtonAvailable = true
   // set chipboard in state.chipboardToFind
@@ -26,13 +24,28 @@ export async function handleSetChipboardInFindArea(
   // FlashFindItemArea as _effect.send(AddNewItemEffect.FlashFindItemArea)
   console.log("MaC handleSetChipboardInFindArea started");
 
+  if (chipboard.state === 0) {
+    return await logicForState0(chipboard, repo, get);
+  } else if (chipboard.state === 2) {
+    return await logicForState2(chipboard, repo, get);
+  }
+
+  // Fallback: return unchanged state
+  return {newState: get().state};
+}
+
+async function logicForState0(
+  chipboard: ChipboardUI,
+  repo: MeasureAndCountRepository,
+  get: () => {state: CountState},
+): Promise<{newState: CountState; effect?: CountEffect}> {
+  const currentState = get().state;
+
   const updatedChipboards = currentState.chipboards.map(it => {
     if (it.isUnderReview) {
       return {...it, isUnderReview: false}; //clear isUnderReview to avoid two chipboard under review
     } else if (it.id === chipboard.id) {
-      if (chipboard.state === 0) {
-        return {...chipboard, isUnderReview: true}; //set isUnderReview for our chipboard
-      }
+      return {...chipboard, isUnderReview: true}; //set isUnderReview for our chipboard
     }
     return it;
   });
@@ -43,28 +56,50 @@ export async function handleSetChipboardInFindArea(
   const updatedState: CountState = {
     ...currentState,
     chipboards: chipboardsWithUnderReviewOnTop,
-    chipboardToFind: {
-      ...chipboard,
-      isUnderReview: chipboard.state === 0, //it means that only not found can be under review (state = 0) but unknown cannot be under review
-    },
-    isUnknownButtonAvailable: chipboard.state === 2,
-    isFoundButtonAvailable: chipboard.state === 0,
+    chipboardToFind: {...chipboard, isUnderReview: true},
+    isUnknownButtonAvailable: false,
+    isFoundButtonAvailable: true,
     isFoundAreaOpen: true,
   };
 
-  if (chipboard.state === 2) {
-    //for unknown - delete it from db
-    const id = toObjectIdOrUndefined(chipboard.id);
-    if (id) {
-      await repo.deleteChipboardById(id);
-    } else {
-      console.error(
-        "handleSetChipboardInFindArea: Invalid chipboard ID for deletion:",
-        chipboard.id,
-      );
-    }
+  return {
+    newState: updatedState,
+    effect: {type: FLASH_AND_SCROLL},
+  };
+}
+
+async function logicForState2(
+  chipboard: ChipboardUI,
+  repo: MeasureAndCountRepository,
+  get: () => {state: CountState},
+): Promise<{newState: CountState; effect?: CountEffect}> {
+  const currentState = get().state;
+
+  const updatedChipboards = currentState.chipboards.map(it =>
+    it.isUnderReview ? {...it, isUnderReview: false} : it,
+  );
+
+  const chipboardsWithUnderReviewOnTop =
+    setItemWhichUnderReviewOnTopOfList(updatedChipboards);
+
+  const updatedState: CountState = {
+    ...currentState,
+    chipboards: chipboardsWithUnderReviewOnTop,
+    chipboardToFind: {...chipboard, isUnderReview: false},
+    isUnknownButtonAvailable: true,
+    isFoundButtonAvailable: false,
+    isFoundAreaOpen: true,
+  };
+
+  const id = toObjectIdOrUndefined(chipboard.id);
+  if (id) {
+    await repo.deleteChipboardById(id);
+  } else {
+    console.error(
+      "handleSetChipboardInFindArea: Invalid chipboard ID for deletion:",
+      chipboard.id,
+    );
   }
-  console.log("MaC handleSetChipboardInFindArea finished");
 
   return {
     newState: updatedState,
