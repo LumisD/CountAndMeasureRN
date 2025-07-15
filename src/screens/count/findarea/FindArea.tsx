@@ -87,13 +87,14 @@ export const FindArea: React.FC<Props> = ({
 const styles = StyleSheet.create({
   container: {
     width: "100%",
-    paddingTop: 8,
+    paddingTop: 0,
   },
   row: {
     flexDirection: "row",
     width: "100%",
     justifyContent: "space-between",
     alignItems: "center",
+    marginTop: 16,
   },
   leftColumn: {
     flex: 1,
