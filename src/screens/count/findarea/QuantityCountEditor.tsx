@@ -1,7 +1,7 @@
 import {StyleSheet, Text, TextInput, View} from "react-native";
 import {CountIntent, QUANTITY_CHANGED} from "../CountIntent";
 import {Typography} from "../../../theme/typography";
-import {DarkGray, Gray, LightGray, VeryDarkGray} from "../../../theme/colors";
+import {Black, Gray} from "../../../theme/colors";
 
 type Props = {
   label: string;
@@ -37,26 +37,26 @@ export const QuantityCountEditor: React.FC<Props> = ({
 
 const styles = StyleSheet.create({
   container: {
-    width: 80,
-    paddingLeft: 8,
+    marginHorizontal: 24,
+    width: 130,
+    height: 75,
     justifyContent: "center",
   },
   label: {
-    ...Typography.bodyLarge,
-    fontSize: 13,
-    fontStyle: "italic",
-    color: Gray,
+    ...Typography.bodyNormal,
+    color: Black,
+    fontSize: 14,
     marginBottom: 4,
   },
   input: {
     ...Typography.bodyNormal,
-    borderWidth: 0.5,
-    borderColor: DarkGray,
+    height: 40,
+    color: Black,
+    borderWidth: 1,
+    borderColor: Gray,
     borderRadius: 4,
+    paddingHorizontal: 8,
     paddingVertical: 4,
-    paddingHorizontal: 6,
-    fontSize: 14,
-    color: VeryDarkGray,
-    fontStyle: "italic",
+    fontSize: 16,
   },
 });
