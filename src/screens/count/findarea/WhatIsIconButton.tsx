@@ -1,5 +1,6 @@
 import {Pressable} from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import {PrimaryBlue} from "../../../theme/colors";
 
 type Props = {
   processIntent: () => void;
@@ -20,7 +21,7 @@ export const WhatIsIconButton: React.FC<Props> = ({
         justifyContent: "center",
         alignItems: "center",
       }}>
-      <Icon name="help-circle-outline" size={36} color="#007AFF" />
+      <Icon name="help-circle-outline" size={36} color={PrimaryBlue} />
     </Pressable>
   );
 };
