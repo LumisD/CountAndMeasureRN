@@ -1,6 +1,6 @@
 import {StyleSheet, Text, TextInput, View} from "react-native";
 import {CountIntent, SIZE_CHANGED} from "../CountIntent";
-import {DarkGray, Gray} from "../../../theme/colors";
+import {Black, Gray} from "../../../theme/colors";
 import {Typography} from "../../../theme/typography";
 
 type Props = {
@@ -41,22 +41,24 @@ export const SizeCountEditor: React.FC<Props> = ({
 const styles = StyleSheet.create({
   container: {
     width: 130,
-    height: 70,
+    height: 75,
     justifyContent: "center",
   },
   label: {
     ...Typography.bodyNormal,
+    color: Black,
     fontSize: 14,
-    color: Gray,
     marginBottom: 4,
   },
   input: {
+    ...Typography.bodyNormal,
+    height: 40,
+    color: Black,
     borderWidth: 1,
-    borderColor: DarkGray,
-    borderRadius: 4,
+    borderColor: Gray,
     paddingHorizontal: 8,
-    paddingVertical: 6,
+    paddingVertical: 4,
     fontSize: 16,
-    backgroundColor: "transparent",
+    borderRadius: 4,
   },
 });
