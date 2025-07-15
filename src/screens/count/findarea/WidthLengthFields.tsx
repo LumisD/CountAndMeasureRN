@@ -46,7 +46,11 @@ export const WidthLengthFields: React.FC<Props> = ({
         return (
           <View key={dim} style={styles.outerRow}>
             <View style={styles.arrowRow}>
-              {isDirection ? <UpArrowIcon /> : <View style={styles.spacer} />}
+              {isDirection ? (
+                <UpArrowIcon style={{marginBottom: 18}} />
+              ) : (
+                <View style={styles.spacer} />
+              )}
 
               <View style={styles.inputsRow}>
                 <View style={{alignSelf: "flex-end"}}>
@@ -96,8 +100,6 @@ export const WidthLengthFields: React.FC<Props> = ({
                 </View>
               )}
             </View>
-
-            <View style={styles.verticalSpacer} />
           </View>
         );
       })}
@@ -111,7 +113,7 @@ const styles = StyleSheet.create({
   },
   arrowRow: {
     flexDirection: "row",
-    alignItems: "center",
+    alignItems: "flex-end",
   },
   inputsRow: {
     flexDirection: "row",
