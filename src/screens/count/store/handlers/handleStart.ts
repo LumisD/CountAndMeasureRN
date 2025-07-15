@@ -70,6 +70,10 @@ export async function handleStart(
   newState = {
     ...newState,
     unionOfChipboards: unionUI,
+    chipboardToFind: {
+      ...newState.chipboardToFind,
+      unionId: unionUI.id,
+    },
     messageForEmptyList: null,
   };
 
@@ -87,7 +91,6 @@ export async function handleStart(
       return {newState: newState, effect: undefined};
     }
 
-    //let isInitialChipboardSetForCurrentUnion = false;
     const unsub = repo.subscribeToChipboardsByUnionId(objectId, chipboards => {
       console.log(
         "MaC handleStart: repo.subscribeToChipboardsByUnionId called with chipboards.length:",
@@ -133,26 +136,12 @@ export async function handleStart(
         messageForEmptyList: null,
       };
 
-      //if (!isInitialChipboardSetForCurrentUnion) {
-      const initialChipboard = getChipboardWithInitialValuesAndCharacteristics(
-        updated[0],
-        unionUI.dimensions,
-        unionUI.direction,
-      );
-      //isInitialChipboardSetForCurrentUnion = true;
       set(store => ({
         ...store,
         state: {
           ...updatedState,
-          chipboardToFind: initialChipboard,
         },
       }));
-      // } else {
-      //   set(store => ({
-      //     ...store,
-      //     state: updatedState,
-      //   }));
-      // }
     });
     saveUnsubscribe(unsub);
   }
