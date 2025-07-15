@@ -29,12 +29,6 @@ export const QuantityField: React.FC<Props> = ({
 };
 
 const styles = StyleSheet.create({
-  row: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginTop: 16,
-    marginHorizontal: 24,
-  },
   editorContainer: {
     marginHorizontal: 24,
     width: 150,
