@@ -93,8 +93,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     width: "100%",
     justifyContent: "space-between",
-    alignItems: "center",
-    marginTop: 16,
+    alignItems: "flex-start",
+    marginTop: 0,
   },
   leftColumn: {
     flex: 1,
@@ -103,5 +103,6 @@ const styles = StyleSheet.create({
   rightColumn: {
     flex: 1,
     justifyContent: "flex-start",
+    marginTop: 16,
   },
 });
