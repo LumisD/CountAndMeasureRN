@@ -97,6 +97,7 @@ export default function CountScreen({navigation, route}: Props) {
 
         <ExpandHideCountField
           isFoundAreaOpen={state.isFoundAreaOpen}
+          isRestoreIconShown={state.unionOfChipboards.isMarkedAsDeleted}
           processIntent={processIntent}
         />
 

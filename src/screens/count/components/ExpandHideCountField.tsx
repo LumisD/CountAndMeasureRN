@@ -9,17 +9,19 @@ import {
 
 type Props = {
   isFoundAreaOpen: boolean;
+  isRestoreIconShown: boolean;
   processIntent: (intent: CountIntent) => void;
 };
 
 export const ExpandHideCountField: React.FC<Props> = ({
   isFoundAreaOpen,
+  isRestoreIconShown,
   processIntent,
 }) => {
   return (
     <ExpandHideFieldInternal
       isAreaOpen={isFoundAreaOpen}
-      isRestoreIconShown={false}
+      isRestoreIconShown={isRestoreIconShown}
       processIntent={processIntent}
       intentFactory={() => ({type: TOGGLE_FIND_AREA_VISIBILITY})}
       onShareClick={processIntent}
