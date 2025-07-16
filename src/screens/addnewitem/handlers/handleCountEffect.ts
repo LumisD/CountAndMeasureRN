@@ -307,12 +307,14 @@ export function handleCountEffects(
       navigation.navigate(SCREENS.Tabs, {
         screen: SCREENS.Lists,
       });
+      break;
     }
 
     case NAVIGATE_TO_NEW_SCREEN: {
       navigation.navigate(SCREENS.Tabs, {
         screen: SCREENS.New,
       });
+      break;
     }
 
     case SHOW_SHARE_UNION_DIALOG: {
