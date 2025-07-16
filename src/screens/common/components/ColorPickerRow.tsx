@@ -13,6 +13,8 @@ type Props = {
 
 import {Portal} from "react-native-paper";
 import {t} from "i18next";
+import {Black} from "../../../theme/colors";
+import {Typography} from "../../../theme/typography";
 
 export const ColorPickerRow: React.FC<Props> = ({
   selectedColor,
@@ -95,7 +97,9 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
   },
   label: {
-    fontSize: 16,
+    ...Typography.bodyNormal,
+    color: Black,
+    fontSize: 14,
     marginRight: 8,
   },
   dropdownItem: {
