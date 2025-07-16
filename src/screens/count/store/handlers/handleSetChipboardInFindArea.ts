@@ -25,7 +25,7 @@ export async function handleSetChipboardInFindArea(
   console.log("MaC handleSetChipboardInFindArea started");
 
   if (chipboard.state === 0) {
-    return await logicForState0(chipboard, repo, get);
+    return await logicForState0(chipboard, get);
   } else if (chipboard.state === 2) {
     return await logicForState2(chipboard, repo, get);
   }
@@ -36,7 +36,6 @@ export async function handleSetChipboardInFindArea(
 
 async function logicForState0(
   chipboard: ChipboardUI,
-  repo: MeasureAndCountRepository,
   get: () => {state: CountState},
 ): Promise<{newState: CountState; effect?: CountEffect}> {
   const currentState = get().state;
