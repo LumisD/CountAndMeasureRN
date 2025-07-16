@@ -24,12 +24,12 @@ export class ChipboardSchema extends Realm.Object {
       quantity: "int",
       colorName: "string",
       color: "string",
-      size1: {type: "string", default: "0"},
-      realSize1: {type: "string", default: "0"}, // diff between real measured size and size1
-      size2: {type: "string", default: "0"},
-      realSize2: {type: "string", default: "0"},
-      size3: {type: "string", default: "0"},
-      realSize3: {type: "string", default: "0"},
+      size1: {type: "string", default: ""},
+      realSize1: {type: "string", default: ""}, // diff between real measured size and size1
+      size2: {type: "string", default: ""},
+      realSize2: {type: "string", default: ""},
+      size3: {type: "string", default: ""},
+      realSize3: {type: "string", default: ""},
     },
   };
 }

@@ -48,11 +48,11 @@ export function mapChipboardUIToChipboard(ui: ChipboardUI): Chipboard {
     colorName: ui.colorName,
     color: ui.color,
     size1: ui.size1,
-    realSize1: "0",
+    realSize1: "",
     size2: ui.size2,
-    realSize2: "0",
+    realSize2: "",
     size3: ui.size3,
-    realSize3: "0",
+    realSize3: "",
   };
 }
 
