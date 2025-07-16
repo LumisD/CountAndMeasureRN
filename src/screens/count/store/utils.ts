@@ -44,18 +44,18 @@ export function getAllRealsAsString(
       builder += " ";
     }
 
-    const sizeString = (() => {
+    const size = (() => {
       switch (i) {
         case 1:
-          return chipboard.size1.toString();
+          return chipboard.size1;
         case 2:
-          return chipboard.size2.toString();
+          return chipboard.size2;
         case 3:
-          return chipboard.size3.toString();
+          return chipboard.size3;
         default:
           return "";
       }
-    })();
+    })().trim();
 
     const realSize = (() => {
       switch (i) {
@@ -68,18 +68,27 @@ export function getAllRealsAsString(
         default:
           return "0";
       }
-    })();
+    })().trim();
 
-    if (realSize !== "0" && realSize.trim() !== "") {
+    if (realSize !== "0" && realSize !== "0.0" && realSize !== "") {
       isAllRealsEmpty = false;
       const realSizeString = realSize;
       builder += realSizeString;
 
-      if (sizeString.length > realSizeString.length) {
-        builder += " ".repeat(sizeString.length - realSizeString.length);
+      if (size.length > realSizeString.length) {
+        builder += " ".repeat(size.length - realSizeString.length);
       }
     } else {
-      builder += " ".repeat(sizeString.length);
+      builder += " ".repeat(size.length);
+    }
+
+    //as real sizes have smaller font add additional spaces
+    if (size.length > 5) {
+      builder += "    ";
+    } else if (size.length > 2) {
+      builder += "  ";
+    } else {
+      builder += " ";
     }
 
     if (i < dimensions) {
