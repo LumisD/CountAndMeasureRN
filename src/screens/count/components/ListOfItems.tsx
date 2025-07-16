@@ -50,15 +50,23 @@ export const ListOfItems: React.FC<Props> = ({
             <View style={[styles.row, {backgroundColor}]}>
               <View style={styles.innerRow}>
                 <View style={styles.textBox}>
-                  <Text style={styles.chipboardText}>
+                  <Text
+                    style={[
+                      styles.chipboardText,
+                      {
+                        transform: [
+                          {translateY: item.allRealsAsString ? -17 : -12},
+                        ],
+                      },
+                    ]}>
                     {item.chipboardAsString}
                   </Text>
+
+                  <Text style={styles.realSizes}>{item.allRealsAsString}</Text>
 
                   {item.isUnderReview && (
                     <Text style={styles.underReview}>{t("under_review")}</Text>
                   )}
-
-                  <Text style={styles.realSizes}>{item.allRealsAsString}</Text>
                 </View>
 
                 {hasColor && (
@@ -128,7 +136,16 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: "50%",
     left: 0,
-    transform: [{translateY: -10}],
+    transform: [{translateY: -12}],
+  },
+  realSizes: {
+    ...Typography.bodyNormal,
+    color: "red",
+    fontSize: 14,
+    fontStyle: "italic",
+    position: "absolute",
+    bottom: 0,
+    left: 0,
   },
   underReview: {
     ...Typography.bodyLarge,
@@ -143,15 +160,6 @@ const styles = StyleSheet.create({
     position: "absolute",
     left: "25%",
     transform: [{rotate: "-10deg"}],
-  },
-  realSizes: {
-    ...Typography.bodyNormal,
-    color: "red",
-    fontSize: 14,
-    fontStyle: "italic",
-    position: "absolute",
-    bottom: 0,
-    left: 0,
   },
   colorBox: {
     width: 36,
