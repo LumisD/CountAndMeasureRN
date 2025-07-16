@@ -35,7 +35,7 @@ export const RealSizeInput: React.FC<Props> = ({
         editable={isEnabled}
         keyboardType="numeric"
         style={[styles.input, !isEnabled && styles.disabledInput]}
-        placeholder="0"
+        placeholder=""
         placeholderTextColor="#ccc"
       />
     </View>
