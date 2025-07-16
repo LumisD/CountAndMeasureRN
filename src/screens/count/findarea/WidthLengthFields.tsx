@@ -152,11 +152,11 @@ function getRealSizeForIndex(
   if (!chipboard) return "";
   switch (index) {
     case 1:
-      return chipboard.realSize1;
+      return chipboard.real1AsString;
     case 2:
-      return chipboard.realSize2;
+      return chipboard.real2AsString;
     case 3:
-      return chipboard.realSize3;
+      return chipboard.real3AsString;
     default:
       return "";
   }
