@@ -1,5 +1,9 @@
 import {useTranslation} from "react-i18next";
-import {CountIntent, PRESS_ON_ITEM_IN_LIST} from "../CountIntent";
+import {
+  CountIntent,
+  LIST_SCROLLED_BY_USER,
+  PRESS_ON_ITEM_IN_LIST,
+} from "../CountIntent";
 import {ChipboardUI} from "../models/ChipboardUI";
 import {FlatList, Pressable, StyleSheet, Text, View} from "react-native";
 import {
@@ -32,6 +36,7 @@ export const ListOfItems: React.FC<Props> = ({
       ItemSeparatorComponent={() => (
         <View style={{height: 4, backgroundColor: Purple80}} />
       )}
+      onScrollBeginDrag={() => processIntent({type: LIST_SCROLLED_BY_USER})}
       renderItem={({item}) => {
         let backgroundColor = "transparent";
         if (item.isUnderReview) {
