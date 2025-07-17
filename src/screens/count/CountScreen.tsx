@@ -1,6 +1,6 @@
 import {StackScreenProps} from "@react-navigation/stack";
 import React, {useEffect, useLayoutEffect, useMemo, useState} from "react";
-import {View, Text, StyleSheet, Pressable, TextInput} from "react-native";
+import {View, StyleSheet, Pressable, TextInput} from "react-native";
 import {RootStackParamList} from "../../navigation/types";
 import {useRealm} from "../../data/db/RealmContext";
 import {provideMeasureAndCountRepository} from "../../data/db/dao/provideRepository";
@@ -43,6 +43,7 @@ export default function CountScreen({navigation, route}: Props) {
   const [snackbarMessage, setSnackbarMessage] = useState("");
 
   const [shouldFlash, setShouldFlash] = useState(false);
+  const [shouldScrollToTop, setShouldScrollToTop] = useState(false);
 
   useEffect(() => {
     processIntent({type: START, unionId: unionId});
@@ -59,6 +60,7 @@ export default function CountScreen({navigation, route}: Props) {
       setSnackbarMessage,
       setSnackbarVisible,
       setShouldFlash,
+      setShouldScrollToTop,
       navigation,
       processIntent,
     );
@@ -105,6 +107,8 @@ export default function CountScreen({navigation, route}: Props) {
           <ListOfItems
             hasColor={state.unionOfChipboards.hasColor}
             chipboards={state.chipboards}
+            shouldScrollToTop={shouldScrollToTop}
+            setShouldScrollToTop={setShouldScrollToTop}
             processIntent={processIntent}
           />
         </View>

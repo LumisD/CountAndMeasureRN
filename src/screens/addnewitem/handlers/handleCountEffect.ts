@@ -44,6 +44,7 @@ export function handleCountEffects(
   setSnackbarMessage: React.Dispatch<React.SetStateAction<string>>,
   setSnackbarVisible: React.Dispatch<React.SetStateAction<boolean>>,
   setShouldFlash: React.Dispatch<React.SetStateAction<boolean>>,
+  setShouldScrollToTop: React.Dispatch<React.SetStateAction<boolean>>,
   navigation: StackNavigationProp<RootStackParamList>,
   processIntent: (intent: CountIntent) => void,
 ) {
@@ -289,12 +290,12 @@ export function handleCountEffects(
 
     case FLASH_AND_SCROLL: {
       setShouldFlash(true);
-      //listState.animateScrollToItem(0) - TODO: fix later
+      setShouldScrollToTop(true);
       break;
     }
 
     case SCROLL_TO_TOP: {
-      //listState.animateScrollToItem(0) - TODO: fix later
+      setShouldScrollToTop(true);
       break;
     }
 

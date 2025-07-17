@@ -15,28 +15,54 @@ import {
 } from "../../../theme/colors";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import {Typography} from "../../../theme/typography";
+import {useEffect, useRef} from "react";
 
 interface Props {
   chipboards: ChipboardUI[];
   hasColor: boolean;
+  shouldScrollToTop: boolean;
+  setShouldScrollToTop: React.Dispatch<React.SetStateAction<boolean>>;
   processIntent: (intent: CountIntent) => void;
 }
 
 export const ListOfItems: React.FC<Props> = ({
   chipboards,
   hasColor,
+  shouldScrollToTop,
+  setShouldScrollToTop,
   processIntent,
 }) => {
   const {t} = useTranslation();
 
+  const flatListRef = useRef<FlatList<ChipboardUI>>(null);
+  const isProgrammaticScroll = useRef(false);
+
+  useEffect(() => {
+    if (shouldScrollToTop) {
+      isProgrammaticScroll.current = true;
+      flatListRef.current?.scrollToOffset({offset: 0, animated: true});
+      setTimeout(() => {
+        isProgrammaticScroll.current = false;
+        setShouldScrollToTop(false);
+      }, 500);
+    }
+  }, [shouldScrollToTop]);
+
+  const handleScrollStart = () => {
+    if (!isProgrammaticScroll.current) {
+      processIntent({type: LIST_SCROLLED_BY_USER});
+    }
+  };
+
   return (
     <FlatList
+      ref={flatListRef}
       data={chipboards}
       keyExtractor={item => item.id.toString()}
       ItemSeparatorComponent={() => (
         <View style={{height: 4, backgroundColor: Purple80}} />
       )}
-      onScrollBeginDrag={() => processIntent({type: LIST_SCROLLED_BY_USER})}
+      onScrollBeginDrag={handleScrollStart}
       renderItem={({item}) => {
         let backgroundColor = "transparent";
         if (item.isUnderReview) {
