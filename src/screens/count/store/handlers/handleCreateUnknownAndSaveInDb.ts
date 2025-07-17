@@ -1,5 +1,6 @@
 import {toObjectIdOrUndefined} from "../../../../data/db/utils";
 import {MeasureAndCountRepository} from "../../../../data/repository/MeasureAndCountRepository";
+import {colorListWithNames} from "../../../common/screenData";
 import {CountEffect} from "../../CountEffect";
 import {CountState} from "../../CountState";
 import {getChipboardWithInitialValuesAndCharacteristics} from "../utils";
@@ -25,6 +26,14 @@ export async function handleCreateUnknownAndSaveInDb(
       `MaC handleCreateUnknownAndSaveInDb: Invalid unionId:, ${chipboardToFind.unionId}`,
     );
     return {newState: currentState, effect: undefined};
+  }
+
+  const hasColor = currentState.unionOfChipboards.hasColor;
+  if (hasColor) {
+    if (!chipboardToFind.color || !chipboardToFind.colorName) {
+      chipboardToFind.colorName = colorListWithNames[0].name;
+      chipboardToFind.color = colorListWithNames[0].color;
+    }
   }
 
   const unknownChipboard = {
