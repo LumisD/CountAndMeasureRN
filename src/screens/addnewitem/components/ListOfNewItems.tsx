@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  FlatList,
-  Text,
-  View,
-  Pressable,
-  StyleSheet,
-  GestureResponderEvent,
-} from "react-native";
+import {FlatList, Text, View, Pressable, StyleSheet} from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import {AddNewItemIntent} from "../AddNewItemIntent";
 import {ChipboardUI} from "../models/ChipboardUI";
@@ -59,6 +52,7 @@ export const ListOfNewItems: React.FC<Props> = ({
 const styles = StyleSheet.create({
   row: {
     flexDirection: "row",
+    minHeight: 50,
     justifyContent: "space-between",
     alignItems: "center",
     paddingVertical: 4,
