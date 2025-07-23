@@ -5,9 +5,10 @@ import {
   FlatList,
   Pressable,
   StyleSheet,
-  SafeAreaView,
 } from "react-native";
-import {NavigationProp, useNavigation} from "@react-navigation/native";
+import { SafeAreaView } from 'react-native-safe-area-context'
+
+import {useNavigation} from "@react-navigation/native";
 import {StackNavigationProp} from "@react-navigation/stack";
 import {RootStackParamList} from "../navigation/types";
 import {NewScreenType} from "./models/NewScreenType";
@@ -28,19 +29,19 @@ const NewScreen = ({navigation}: NewScreenProps) => {
     });
   }, [navigation]);
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <View style={styles.safeArea}>
       {/* important to set background color for the screen */}
       <View style={styles.container}>
         <ListOfNewScreenTypes />
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 
 function TopBar() {
   const {t} = useTranslation();
   return (
-    <SafeAreaView style={styles.topBar}>
+    <SafeAreaView style={styles.topBar} edges={['top']}>
       {/* important to set background color for the topBar */}
       <Text style={Typography.titleLarge}>
         {t("choose_type_of_measurement")}

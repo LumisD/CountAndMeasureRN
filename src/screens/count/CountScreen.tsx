@@ -24,6 +24,7 @@ import {ExpandHideCountField} from "./components/ExpandHideCountField";
 import {FindArea} from "./findarea/FindArea";
 import {Snackbar} from "react-native-paper";
 import {ListOfItems} from "./components/ListOfItems";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 type Props = StackScreenProps<RootStackParamList, "Count">;
 
@@ -136,7 +137,7 @@ export function TopBar({title, isFinished, processIntent}: TopBarProps) {
   const iconName = isFinished ? "undo" : "check";
   const accessibilityLabel = isFinished ? t("undone") : t("done");
   return (
-    <View style={styles.wrapper}>
+    <SafeAreaView style={styles.wrapper}>
       <View style={styles.row}>
         <Pressable onPress={() => processIntent({type: BACK})}>
           <Icon name="arrow-left" size={32} />
@@ -161,7 +162,7 @@ export function TopBar({title, isFinished, processIntent}: TopBarProps) {
         </Pressable>
       </View>
       <View style={styles.divider} />
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -184,7 +185,7 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: 0,
+    marginBottom: 10,
   },
   input: {
     ...Typography.titleLarge,

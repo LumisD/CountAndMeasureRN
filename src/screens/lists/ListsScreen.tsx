@@ -1,6 +1,7 @@
 import {StackNavigationProp} from "@react-navigation/stack";
 import {useNavigation} from "@react-navigation/native";
 import {StyleSheet, Text, View} from "react-native";
+import { SafeAreaView } from 'react-native-safe-area-context'
 import {useEffect, useLayoutEffect, useMemo} from "react";
 import {RootStackParamList, TabsParamList} from "../../navigation/types";
 import {useRealm} from "../../data/db/RealmContext";
@@ -65,12 +66,12 @@ type TopBarProps = {
 
 export function TopBar({title}: TopBarProps) {
   return (
-    <View style={styles.wrapper}>
+    <SafeAreaView style={styles.wrapper} edges={['top']}>
       <View style={styles.row}>
         <Text style={styles.title}>{title}</Text>
       </View>
       <View style={styles.divider} />
-    </View>
+    </SafeAreaView>
   );
 }
 

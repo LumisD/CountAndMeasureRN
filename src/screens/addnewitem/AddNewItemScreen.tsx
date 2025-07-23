@@ -5,6 +5,7 @@ import {RootStackParamList} from "../../navigation/types";
 import {Gray, MainBg} from "../../theme/colors";
 import {Typography} from "../../theme/typography";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import { SafeAreaView } from 'react-native-safe-area-context'
 import {
   AddNewItemIntent,
   BACK,
@@ -125,7 +126,7 @@ type TopBarProps = {
 
 export function TopBar({title, processIntent}: TopBarProps) {
   return (
-    <View style={styles.wrapper}>
+    <SafeAreaView style={styles.wrapper} edges={['top']}>
       <View style={styles.row}>
         <Pressable onPress={() => processIntent({type: BACK})}>
           <Icon name="arrow-left" size={32} />
@@ -143,9 +144,10 @@ export function TopBar({title, processIntent}: TopBarProps) {
         />
       </View>
       <View style={styles.divider} />
-    </View>
+    </SafeAreaView>
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {
@@ -166,7 +168,7 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: 0,
+    marginBottom: 10,
   },
   input: {
     ...Typography.titleLarge,
